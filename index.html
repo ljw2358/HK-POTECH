@@ -21,14 +21,14 @@
             color: #ffffff;
             font-family: 'Pretendard', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
-            justify-content: center; /* PC에서 중앙 정렬 */
+            justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px; /* PC에서 너무 퍼지지 않게 제한 */
+            max-width: 1200px;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -73,6 +73,7 @@
             border: 1px solid #333;
         }
 
+        /* 30개국 언어 선택창 */
         .lang-select {
             background: #1a1a1a;
             border: 1px solid var(--primary-orange);
@@ -80,19 +81,20 @@
             border-radius: 5px;
             color: white;
             font-size: 0.85rem;
-            width: 180px;
+            width: 220px;
             cursor: pointer;
+            outline: none;
         }
 
-        /* 메인 레이아웃: PC에서는 가로(2컬럼), 모바일은 세로 */
+        /* 메인 레이아웃: PC 2컬럼 / 모바일 1컬럼 */
         .main-content {
             display: grid;
-            grid-template-columns: 1.5fr 1fr; /* PC 기본 2컬럼 */
+            grid-template-columns: 1.6fr 1fr;
             gap: 20px;
         }
 
-        @media (max-width: 900px) {
-            .main-content { grid-template-columns: 1fr; } /* 모바일 세로 전환 */
+        @media (max-width: 950px) {
+            .main-content { grid-template-columns: 1fr; }
         }
 
         .card {
@@ -102,28 +104,28 @@
             border: 1px solid var(--border-color);
         }
 
-        /* 유동성 풀 */
+        /* 유동성 풀 (한글화) */
         .pool-title { color: var(--cyan-blue); font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; }
-        .pool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .pool-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .pool-item { border: 1px solid rgba(0,209,255,0.2); padding: 20px; border-radius: 12px; }
 
-        /* 주요 자산 원장 */
+        /* 메인자산원장 (한글화) */
         .ledger-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .main-balance { font-size: clamp(3rem, 8vw, 5rem); color: var(--pi-yellow); font-weight: 800; margin: 30px 0 5px 0; font-family: 'monospace'; }
-        .gcv-valuation { color: var(--neon-green); font-size: clamp(1.2rem, 4vw, 2.2rem); font-weight: bold; border-bottom: 3px solid var(--neon-green); display: inline-block; margin-bottom: 30px; }
+        .main-balance { font-size: clamp(3rem, 9vw, 5.5rem); color: var(--pi-yellow); font-weight: 800; margin: 30px 0 5px 0; font-family: 'monospace'; }
+        .gcv-valuation { color: var(--neon-green); font-size: clamp(1.3rem, 4vw, 2.3rem); font-weight: bold; border-bottom: 3px solid var(--neon-green); display: inline-block; margin-bottom: 30px; }
 
         /* 메뉴 버튼 그리드 */
         .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        @media (max-width: 500px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 550px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
 
-        .menu-item { background: #1a1a1a; padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 0.8rem; display: flex; flex-direction: column; gap: 8px; border: 1px solid transparent; cursor: pointer; }
-        .menu-item i { color: var(--primary-orange); font-size: 1.5rem; }
+        .menu-item { background: #1a1a1a; padding: 18px 5px; border-radius: 12px; text-align: center; font-size: 0.85rem; display: flex; flex-direction: column; gap: 10px; border: 1px solid transparent; }
+        .menu-item i { color: var(--primary-orange); font-size: 1.6rem; }
         .menu-item.active { border: 1px solid var(--primary-orange); }
         .menu-item.main-action { background: var(--primary-orange); grid-column: span 2; }
         .menu-item.main-action i { color: white; }
 
-        /* 보안 로그 (PC에서 우측에 보임) */
-        .security-log { font-family: 'monospace'; font-size: 0.8rem; color: var(--neon-green); line-height: 1.5; }
+        /* 보안 로그 */
+        .security-log { font-family: 'monospace'; font-size: 0.85rem; color: var(--neon-green); line-height: 1.6; }
 
         /* 푸터 */
         .footer-social {
@@ -132,12 +134,12 @@
             border-top: 1px solid #222;
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: clamp(20px, 10vw, 60px);
             flex-wrap: wrap;
         }
 
         .social-link { display: flex; align-items: center; gap: 12px; color: #ffffff; text-decoration: none; font-size: 1.1rem; font-weight: bold; }
-        .social-link i { font-size: 2rem; }
+        .social-link i { font-size: 2.2rem; }
     </style>
 </head>
 <body>
@@ -146,7 +148,7 @@
     <div class="header">
         <div class="brand-logo">
             <h1>HK<br>WORLD<br>BANK</h1>
-            <div class="node-status">GLOBAL SERVER NODE: <span style="text-decoration:underline;">ULSAN_HQ_ACTIVE</span></div>
+            <div class="node-status">GLOBAL SERVER NODE: ULSAN_HQ_ACTIVE</div>
         </div>
 
         <div class="top-right">
@@ -164,6 +166,26 @@
                 <option value="ru">🇷🇺 Русский</option>
                 <option value="es">🇪🇸 Español</option>
                 <option value="it">🇮🇹 Italiano</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="th">🇹🇭 ไทย</option>
+                <option value="id">🇮🇩 Indonesia</option>
+                <option value="ph">🇵🇭 Filipino</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="pt">🇧🇷 Português</option>
+                <option value="ms">🇲🇾 Melayu</option>
+                <option value="nl">🇳🇱 Nederlands</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="uk">🇺🇦 Українська</option>
+                <option value="fa">🇮🇷 فارسی</option>
+                <option value="cs">🇨🇿 Čeština</option>
+                <option value="el">🇬🇷 Ελληνικά</option>
+                <option value="hu">🇭🇺 Magyar</option>
+                <option value="ro">🇷🇴 Română</option>
+                <option value="fi">🇫🇮 Suomi</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="da">🇩🇰 Dansk</option>
             </select>
         </div>
     </div>
@@ -171,12 +193,12 @@
     <div class="main-content">
         <div class="card">
             <div class="ledger-header">
-                <div style="font-size:1.4rem; font-weight:bold; color:var(--pi-yellow);"><i class="fas fa-database"></i> MAIN ASSET LEDGER</div>
-                <div style="text-align:right; font-size:0.8rem; color:var(--neon-green)">● SECURE ACCESS</div>
+                <div style="font-size:1.5rem; font-weight:bold; color:var(--pi-yellow);"><i class="fas fa-database"></i> 메인자산원장</div>
+                <div style="text-align:right; font-size:0.85rem; color:var(--neon-green)">● SECURE ACCESS</div>
             </div>
 
             <div class="main-balance">400.0000</div>
-            <div style="color:var(--pi-yellow); font-weight:bold; font-size:1.5rem; margin-bottom:15px;">Pi</div>
+            <div style="color:var(--pi-yellow); font-weight:bold; font-size:1.6rem; margin-bottom:15px;">Pi</div>
             <div class="gcv-valuation">≈ $ 12,566,360.00 (GCV)</div>
 
             <div class="menu-grid">
@@ -190,24 +212,24 @@
             </div>
         </div>
 
-        <div class="side-layout" style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
             <div class="card">
-                <div class="pool-title"><i class="fas fa-water"></i> LIQUIDITY POOL</div>
+                <div class="pool-title"><i class="fas fa-water"></i> 유동성 풀</div>
                 <div class="pool-grid">
                     <div class="pool-item">
-                        <div style="font-size:0.9rem; color:#888;">PI / GCV <span style="background:var(--cyan-blue); color:black; padding:2px 6px; border-radius:4px; font-size:0.7rem; font-weight:bold;">APR 24.5%</span></div>
-                        <div style="font-size:1.8rem; margin-top:12px; font-weight:bold;">12,450.88 LP</div>
+                        <div style="font-size:1rem; color:#888;">PI / GCV <span style="background:var(--cyan-blue); color:black; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:bold;">APR 24.5%</span></div>
+                        <div style="font-size:2rem; margin-top:15px; font-weight:bold;">12,450.88 LP</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <div style="color:var(--neon-green); font-size:0.9rem; margin-bottom:15px; font-weight:bold;"><i class="fas fa-terminal"></i> SECURITY LOG</div>
+                <div style="color:var(--neon-green); font-size:0.95rem; margin-bottom:15px; font-weight:bold;"><i class="fas fa-terminal"></i> SECURITY LOG</div>
                 <div class="security-log">
-                    > 오전 11:00:12: Liquidity added<br>
-                    > 오전 11:00:08: Bridge syncing<br>
-                    > 오전 11:00:04: Node verification success<br>
-                    > 오전 11:00:00: 시스템 정상 작동 중...
+                    > Liquidity added: 24.5% APR<br>
+                    > Bridge syncing... OK<br>
+                    > Node verification success<br>
+                    > 시스템 정상 가동 중
                 </div>
             </div>
         </div>
