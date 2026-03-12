@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL NODE</title>
+    <title>HK WORLD BANK - 글로벌 노드</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,7 +19,7 @@
         body {
             background-color: var(--bg-dark);
             color: #ffffff;
-            font-family: 'Pretendard', sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -27,7 +27,7 @@
             flex-direction: column;
         }
 
-        /* 헤더 */
+        /* 헤더 섹션 */
         .header {
             display: flex;
             justify-content: space-between;
@@ -65,9 +65,9 @@
             border: 1px solid #333;
         }
 
-        /* 언어 선택창 - 30개국 리스트 포함 */
+        /* 언어 선택창 (표준 select 태그로 작동 보장) */
         .lang-select {
-            background: #1a1a1a;
+            background-color: #1a1a1a;
             border: 1px solid var(--primary-orange);
             padding: 10px 15px;
             border-radius: 5px;
@@ -76,6 +76,7 @@
             cursor: pointer;
             width: 220px;
             outline: none;
+            display: block !important; /* 항상 보이게 고정 */
         }
 
         .card {
@@ -104,7 +105,7 @@
         .menu-item.main-action { background: var(--primary-orange); }
         .menu-item.main-action i { color: white; }
 
-        /* 푸터 - 소셜 링크 */
+        /* 푸터 - 소셜 네트워크 */
         .footer-social {
             margin-top: auto;
             padding: 30px;
@@ -139,7 +140,7 @@
             <i class="fas fa-envelope" style="color:var(--primary-orange)"></i> info@hkwb.com
         </div>
         <select class="lang-select">
-            <option value="ko">🇰🇷 한국어</option>
+            <option value="ko" selected>🇰🇷 한국어 (선택됨)</option>
             <option value="en">🇺🇸 English</option>
             <option value="zh">🇨🇳 中文</option>
             <option value="ja">🇯🇵 日本語</option>
@@ -191,7 +192,7 @@
     <div class="card">
         <div class="ledger-header">
             <div style="font-size:1.4rem; font-weight:bold; color:var(--pi-yellow);"><i class="fas fa-database"></i> 주요 자산 원장 (MAIN ASSET LEDGER)</div>
-            <div style="text-align:right; font-size:0.8rem; color:#888;">회장 이재완<br><span style="color:var(--neon-green)">● 보안 접속 완료</span></div>
+            <div style="text-align:right; font-size:0.8rem; color:#888;">상태: <span style="color:var(--neon-green)">보안 접속 중</span></div>
         </div>
 
         <div class="main-balance">400.0000</div>
