@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Global Asset Ledger</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <title>HK WORLD BANK | Global Asset Ledger System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-gold: #FFD700;
@@ -14,9 +14,10 @@
             --card-surface: #121212;
             --border-color: #262626;
             --text-dim: #888888;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        /* 1. 기본 베이스 및 레이아웃 */
+        /* 1. 글로벌 레이아웃 설정 */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body {
             background-color: var(--bg-deep);
@@ -24,210 +25,217 @@
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
             display: flex;
             justify-content: center;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .main-app {
+        .main-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             min-height: 100vh;
-            padding: 16px;
-            background: radial-gradient(circle at top, #111111 0%, #000 80%);
+            padding: 20px;
+            background: radial-gradient(circle at top, #151515 0%, #000 85%);
             display: flex;
             flex-direction: column;
         }
 
-        /* 2. 헤더 섹션: 한 줄로 작게 배치 */
+        /* 2. 최상단 헤더: 한 줄로 아주 작고 품격있게 */
         header {
-            padding: 12px 0;
+            padding: 15px 0;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .header-brand {
+        .brand-identity {
             font-size: 14px;
             font-weight: 800;
             color: var(--accent-orange);
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
         }
-        .node-tag {
+        .system-status {
             font-family: 'JetBrains Mono', monospace;
             font-size: 8px;
             color: var(--secure-green);
-            margin-top: 4px;
+            margin-top: 6px;
             letter-spacing: 1px;
+            opacity: 0.8;
         }
 
-        /* 3. 다국어 선택 시스템 (35개국 이상 지원 구조) */
-        .language-module { margin-bottom: 24px; position: relative; }
-        .lang-select {
+        /* 3. 다국어 모듈 (35개국 이상 대응 데이터 포함) */
+        .language-wrapper { margin-bottom: 25px; }
+        .lang-selector {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px;
             background: var(--card-surface);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            color: #ccc;
+            color: #bbb;
             font-size: 13px;
-            appearance: none;
             cursor: pointer;
+            outline: none;
         }
 
-        /* 4. 메인 자산 원장 카드 */
-        .ledger-card {
+        /* 4. 메인 자산 원장 카드 섹션 */
+        .asset-ledger-card {
             background: var(--card-surface);
-            border-radius: 24px;
-            padding: 32px 20px;
+            border-radius: 28px;
+            padding: 40px 24px;
             text-align: center;
             border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            margin-bottom: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            margin-bottom: 25px;
             position: relative;
+            overflow: hidden;
         }
-        .ledger-header {
+        .ledger-title-line {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-size: 14px;
             color: var(--text-dim);
-            margin-bottom: 28px;
+            margin-bottom: 30px;
             font-weight: 400;
         }
-        .status-pulse {
-            width: 6px;
-            height: 6px;
+        .secure-pulse {
+            width: 7px;
+            height: 7px;
             background: var(--secure-green);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 12px var(--secure-green);
+            animation: pulse-ring 2s infinite;
         }
 
-        /* 잔액 표시: 숫자 크기 최적화 및 한 줄 정렬 */
-        .balance-display {
+        /* 잔액 표시: 숫자 크기 최적화 및 세련된 폰트 적용 */
+        .balance-line {
             display: flex;
             justify-content: center;
             align-items: baseline;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
-        .val-num {
+        .balance-num {
             font-family: 'JetBrains Mono', monospace;
             font-size: 36px;
             font-weight: 600;
             color: var(--primary-gold);
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
-        .val-unit {
+        .balance-pi {
             font-size: 20px;
             font-weight: 400;
             color: var(--primary-gold);
         }
 
-        .gcv-indicator {
+        .gcv-display {
             color: var(--secure-green);
             font-size: 16px;
             font-weight: 700;
             border-top: 1px solid #222;
-            padding-top: 16px;
+            padding-top: 20px;
             display: inline-block;
-            width: 80%;
+            width: 85%;
             font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
         }
 
-        /* 5. 7대 핵심 기능 그리드 (송금, 결재, 예치, 리워드, 기본소득, DEX스왑, 고객센터) */
-        .function-grid {
+        /* 5. 7대 핵심 금융 서비스 그리드 */
+        .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 25px;
         }
-        .func-btn {
-            background: var(--card-surface);
+        .service-item {
+            background: var(--glass);
             border: 1px solid var(--border-color);
-            padding: 20px 8px;
-            border-radius: 16px;
+            padding: 22px 10px;
+            border-radius: 18px;
             text-align: center;
-            transition: all 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
-        .func-btn:active { transform: scale(0.95); background: #1a1a1a; }
-        .func-icon { font-size: 22px; margin-bottom: 8px; display: block; }
-        .func-label { font-size: 11px; color: #aaa; font-weight: 400; }
+        .service-item:active { transform: scale(0.92); background: #1a1a1a; }
+        .service-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+        .service-label { font-size: 11.5px; color: #aaa; font-weight: 400; }
 
-        /* 6. DEX 리퀴디티 및 스왑 모듈 */
-        .dex-container {
+        /* 6. DEX 리퀴디티 스왑 상세 모듈 */
+        .dex-swap-module {
             background: #080808;
             border: 1px solid #1a1a1a;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 24px;
+            border-radius: 22px;
+            padding: 22px;
+            margin-bottom: 25px;
         }
-        .dex-title { font-size: 10px; color: #555; text-transform: uppercase; margin-bottom: 15px; display: flex; justify-content: space-between; }
-        .swap-field {
-            background: #151515;
-            padding: 12px 16px;
-            border-radius: 12px;
+        .dex-meta { font-size: 10px; color: #444; text-transform: uppercase; margin-bottom: 18px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; }
+        .input-group {
+            background: #141414;
+            padding: 14px 18px;
+            border-radius: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            border: 1px solid transparent;
         }
-        .swap-input { background: none; border: none; color: #fff; font-size: 18px; width: 60%; outline: none; font-family: 'JetBrains Mono'; }
-        .token-tag { font-size: 12px; font-weight: 800; color: var(--primary-gold); }
+        .input-group:focus-within { border-color: #333; }
+        .coin-input { background: none; border: none; color: #fff; font-size: 18px; width: 65%; outline: none; font-family: 'JetBrains Mono'; }
+        .coin-symbol { font-size: 13px; font-weight: 800; color: var(--primary-gold); }
 
-        /* 7. 실시간 보안 로그 및 시스템 상태 (400줄 분량을 위한 데이터 정밀화) */
-        .system-logs {
+        /* 7. 실시간 시스템 보안 로그 (볼륨 보강) */
+        .security-logs {
             background: #050505;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 14px;
+            padding: 18px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 10px;
-            color: #444;
-            max-height: 120px;
+            color: #3d3d3d;
+            height: 140px;
             overflow-y: hidden;
+            border-left: 2px solid #111;
         }
-        .log-line { display: flex; justify-content: space-between; margin-bottom: 4px; }
-        .log-tag { color: #666; }
+        .log-entry { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        .log-type { color: #555; }
 
-        /* 8. 글로벌 고객센터 채널 */
-        .support-channel {
-            background: var(--accent-orange);
+        /* 8. 글로벌 고객지원 채널 */
+        .customer-support {
+            background: linear-gradient(90deg, var(--accent-orange), #FF4500);
             color: #000;
-            padding: 16px;
-            border-radius: 16px;
+            padding: 18px;
+            border-radius: 18px;
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 14px;
             margin-top: auto;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+            box-shadow: 0 12px 24px rgba(255, 140, 0, 0.25);
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(0.9); opacity: 1; }
         }
 
         footer {
-            margin-top: 32px;
+            margin-top: 35px;
             text-align: center;
             font-size: 9px;
-            color: #333;
-            padding-bottom: 20px;
-            line-height: 1.8;
+            color: #2a2a2a;
+            padding-bottom: 25px;
+            line-height: 2;
         }
     </style>
 </head>
 <body>
-    <div class="main-app">
+    <div class="main-container">
         <header>
-            <div class="header-brand">HK WORLD BANK</div>
-            <div class="node-tag">● GLOBAL_HQ_ULSAN_SERVER_ACTIVE</div>
+            <div class="brand-identity">HK WORLD BANK</div>
+            <div class="system-status">● GLOBAL_HQ_ULSAN_SERVER_CONNECTED_ENCRYPTED</div>
         </header>
 
-        <section class="language-module">
-            <select class="lang-select">
+        <section class="language-wrapper">
+            <select class="lang-selector">
                 <option>🇰🇷 한국어 (Korean)</option>
                 <option>🇺🇸 English (United States)</option>
                 <option>🇨🇳 中文 (Simplified Chinese)</option>
@@ -242,127 +250,135 @@
                 <option>🇵🇹 Português (Portuguese)</option>
                 <option>🇮🇳 हिन्दी (Hindi)</option>
                 <option>🇸🇦 العربية (Arabic)</option>
-                <option>🇺🇦 Українська (Ukrainian)</option>
                 <option>🇵🇭 Filipino (Tagalog)</option>
                 <option>🇹🇭 ไทย (Thai)</option>
                 <option>🇮🇩 Indonesia (Indonesian)</option>
                 <option>🇲🇾 Melayu (Malay)</option>
+                <option>🇺🇦 Українська (Ukrainian)</option>
                 <option>🇳🇱 Nederlands (Dutch)</option>
                 <option>🇵🇱 Polski (Polish)</option>
                 <option>🇸🇪 Svenska (Swedish)</option>
-                <option>🇨🇿 Čeština (Czech)</option>
-                <option>🇬🇷 Ελληνικά (Greek)</option>
-                <option>🇭🇺 Magyar (Hungarian)</option>
-                <option>🇷🇴 Română (Romanian)</option>
-                <option>🇫🇮 Suomi (Finnish)</option>
                 <option>🇳🇴 Norsk (Norwegian)</option>
                 <option>🇩🇰 Dansk (Danish)</option>
+                <option>🇫🇮 Suomi (Finnish)</option>
+                <option>🇬🇷 Ελληνικά (Greek)</option>
+                <option>🇨🇿 Čeština (Czech)</option>
+                <option>🇭🇺 Magyar (Hungarian)</option>
+                <option>🇷🇴 Română (Romanian)</option>
                 <option>🇧🇬 Български (Bulgarian)</option>
                 <option>🇮🇷 فارسی (Persian)</option>
                 <option>🇮🇱 עברית (Hebrew)</option>
-                <option>🇰🇿 Қазақ тілі (Kazakh)</option>
+                <option>🇰🇿 Қาзақ тілі (Kazakh)</option>
                 <option>🇺🇿 Oʻzbekcha (Uzbek)</option>
                 <option>🇦🇿 Azərbaycanca (Azerbaijani)</option>
             </select>
         </section>
 
-        <main class="ledger-card">
-            <div class="ledger-header">
-                <span class="status-pulse"></span>
+        <main class="asset-ledger-card">
+            <div class="ledger-title-line">
+                <span class="secure-pulse"></span>
                 <span>메인자산원장</span>
-                <span style="font-size: 9px; opacity: 0.6; letter-spacing: 1px;">[MASTER_NODE]</span>
+                <span style="font-size: 8px; opacity: 0.5; letter-spacing: 1px;">[MASTER_VAULT]</span>
             </div>
             
-            <div class="balance-display">
-                <span class="val-num">400.0000</span>
-                <span class="val-unit">Pi</span>
+            <div class="balance-line">
+                <span class="balance-num">400.0000</span>
+                <span class="balance-pi">Pi</span>
             </div>
 
-            <div class="gcv-indicator">≈ $ 12,566,360.00 (GCV)</div>
+            <div class="gcv-display">≈ $ 12,566,360.00 (GCV)</div>
         </main>
 
-        <section class="function-grid">
-            <div class="func-btn">
-                <span class="func-icon">💸</span>
-                <span class="func-label">송금</span>
+        <section class="service-grid">
+            <div class="service-item">
+                <span class="service-icon">💸</span>
+                <span class="service-label">송금</span>
             </div>
-            <div class="func-btn">
-                <span class="func-icon">🛍️</span>
-                <span class="func-label">결재</span>
+            <div class="service-item">
+                <span class="service-icon">🛍️</span>
+                <span class="service-label">결재</span>
             </div>
-            <div class="func-btn">
-                <span class="func-icon">🏛️</span>
-                <span class="func-label">예치</span>
+            <div class="service-item">
+                <span class="service-icon">🏛️</span>
+                <span class="service-label">예치</span>
             </div>
-            <div class="func-btn">
-                <span class="func-icon">🎁</span>
-                <span class="func-label">리워드</span>
+            <div class="service-item">
+                <span class="service-icon">🎁</span>
+                <span class="service-label">리워드</span>
             </div>
-            <div class="func-btn">
-                <span class="func-icon">⚖️</span>
-                <span class="func-label">기본소득</span>
+            <div class="service-item">
+                <span class="service-icon">⚖️</span>
+                <span class="service-label">기본소득</span>
             </div>
-            <div class="func-btn">
-                <span class="func-icon">🔄</span>
-                <span class="func-label">DEX스왑</span>
-            </div>
-        </section>
-
-        <section class="dex-container">
-            <div class="dex-title">
-                <span>DEX LIQUIDITY SWAP</span>
-                <span>Slippage: 0.1%</span>
-            </div>
-            <div class="swap-field">
-                <input type="text" class="swap-input" placeholder="0.00">
-                <span class="token-tag">PI</span>
-            </div>
-            <div style="text-align: center; color: #333; font-size: 14px; margin: 4px 0;">⇅</div>
-            <div class="swap-field">
-                <input type="text" class="swap-input" placeholder="0.00">
-                <span class="token-tag">USDT</span>
+            <div class="service-item">
+                <span class="service-icon">🔄</span>
+                <span class="service-label">DEX스왑</span>
             </div>
         </section>
 
-        <section class="system-logs">
-            <div class="log-line"><span>[SYS] HK-MAINNET PROTOCOL v3.0</span><span>ONLINE</span></div>
-            <div class="log-line"><span>[SEC] SSL_256_BIT_ENCRYPTION</span><span>ACTIVE</span></div>
-            <div class="log-line"><span>[DEX] LIQUIDITY POOL SYNCED</span><span>SUCCESS</span></div>
-            <div class="log-line"><span>[NOD] ULSAN_HQ_PRIMARY_NODE</span><span>STABLE</span></div>
-            <div class="log-line"><span>[UBI] BASIC_INCOME_ALGORITHM</span><span>READY</span></div>
-            <div class="log-line"><span>[KYB] HK-HOLDINGS CORP VERIFIED</span><span>DONE</span></div>
+        <section class="dex-swap-module">
+            <div class="dex-meta">
+                <span>DEX SWAP PROTOCOL</span>
+                <span>Slip: 0.05%</span>
+            </div>
+            <div class="input-group">
+                <input type="text" class="coin-input" placeholder="0.0000">
+                <span class="coin-symbol">PI</span>
+            </div>
+            <div style="text-align: center; color: #222; font-size: 16px; margin: 6px 0;">⇅</div>
+            <div class="input-group">
+                <input type="text" class="coin-input" placeholder="0.0000">
+                <span class="coin-symbol">USDT</span>
+            </div>
         </section>
 
-        <div class="support-channel">
+        <section class="security-logs">
+            <div class="log-entry"><span>[SYS] HK-MAINNET v3.2 KERNEL</span><span>OK</span></div>
+            <div class="log-entry"><span>[SEC] AES-256 QUANTUM SHIELD</span><span>ACTIVE</span></div>
+            <div class="log-entry"><span>[DEX] LIQUIDITY POOL_01 SYNC</span><span>SUCCESS</span></div>
+            <div class="log-entry"><span>[NOD] HQ_ULSAN_PRIMARY_CLUSTER</span><span>ONLINE</span></div>
+            <div class="log-entry"><span>[UBI] GLOBAL_INCOME_ALGORITHM</span><span>RUNNING</span></div>
+            <div class="log-entry"><span>[KYB] HK-HOLDINGS CORP ENTITY</span><span>VERIFIED</span></div>
+            <div class="log-entry"><span>[NET] GLOBAL GATEWAY PEERING</span><span>STABLE</span></div>
+            <div class="log-entry"><span>[DB] ASSET_LEDGER_REPLICATION</span><span>SYNCED</span></div>
+        </section>
+
+        <div class="customer-support">
             🎧 24/7 글로벌 고객센터 연결
         </div>
 
         <footer>
             &copy; 2026 HK-HOLDINGS GROUP. ALL RIGHTS RESERVED.<br>
             CHAIRMAN & FOUNDER: LEE JAE-WAN (HYEKONG)<br>
-            <span style="opacity: 0.5;">DECENTRALIZED GLOBAL BANKING INFRASTRUCTURE</span>
+            <span style="opacity: 0.4;">INTEGRATED GLOBAL FINANCIAL INFRASTRUCTURE</span>
         </footer>
     </div>
 
     <script>
-        // 1. 다국어 선택 이벤트
-        document.querySelector('.lang-select').addEventListener('change', (e) => {
-            console.log("Language changed to: " + e.target.value);
-            // 향후 언어별 텍스트 매핑 로직 추가 가능
-        });
-
-        // 2. DEX 스왑 간단 시뮬레이션
-        const inputs = document.querySelectorAll('.swap-input');
-        inputs.forEach(input => {
-            input.addEventListener('input', (e) => {
-                // 실시간 환율 계산 로직 자리
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("HK WORLD BANK System Initialized.");
+            
+            // 1. 다국어 선택 핸들러
+            const langSelect = document.querySelector('.lang-selector');
+            langSelect.addEventListener('change', (e) => {
+                alert(e.target.value + " 언어 팩을 로드합니다.");
             });
-        });
 
-        // 3. 보안 로그 실시간 업데이트 연출
-        setInterval(() => {
-            console.log("Master Node Heartbeat: Stable");
-        }, 5000);
+            // 2. DEX 스왑 로직 시뮬레이션
+            const inputs = document.querySelectorAll('.coin-input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.borderColor = '#FFD700';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.borderColor = 'transparent';
+                });
+            });
+
+            // 3. 보안 로그 갱신 연출
+            setInterval(() => {
+                console.log("HK-Secure: Master Node Heartbeat Stable.");
+            }, 10000);
+        });
     </script>
 </body>
-</html>
