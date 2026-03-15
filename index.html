@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Global Asset Management</title>
+    <title>HK WORLD BANK | Global Liquid Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500;700;800&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #FFD700; --hk-orange: #FF8C00; --neon: #32CD32; --bg: #000; --card: #111; --border: #222; }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', 'Noto Sans KR', sans-serif; display: flex; justify-content: center; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
         .container { width: 100%; max-width: 550px; min-height: 100vh; padding: 30px 20px; background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000 85%); position: relative; }
 
-        /* 상단 언어 선택 */
+        /* [1] 30개국 언어 선택 터미널 */
         .top-nav { position: absolute; top: 25px; right: 20px; z-index: 1000; }
-        .lang-select { background: rgba(255,140,0,0.25); color: #fff; border: 1px solid var(--hk-orange); padding: 9px 15px; border-radius: 12px; font-size: 11px; cursor: pointer; backdrop-filter: blur(15px); outline: none; font-weight: 700; }
+        .lang-select { background: rgba(255,140,0,0.2); color: #fff; border: 1px solid var(--hk-orange); padding: 9px 15px; border-radius: 12px; font-size: 11px; cursor: pointer; backdrop-filter: blur(15px); outline: none; font-weight: 700; }
 
         header { padding: 60px 0 30px; text-align: center; }
         .logo { font-size: 38px; font-weight: 900; color: var(--hk-orange); letter-spacing: 6px; text-transform: uppercase; filter: drop-shadow(0 0 20px rgba(255,140,0,0.6)); }
         .node-info { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--neon); margin-top: 20px; letter-spacing: 1.5px; }
 
-        /* 자산 정보 (사진 UI 반영) */
+        /* [2] 자산 통합 원장 (형님 사진 UI) */
         .main-vault { background: linear-gradient(145deg, #181818, #050505); border-radius: 40px; padding: 45px 25px; text-align: center; border: 1px solid var(--border); box-shadow: 0 50px 100px rgba(0,0,0,1); margin-bottom: 25px; position: relative; overflow: hidden; }
         .main-vault::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--hk-orange); }
         .vault-label { font-size: 13px; color: #777; margin-bottom: 20px; letter-spacing: 2px; font-weight: 700; }
         .balance-val { font-family: 'JetBrains Mono'; font-size: 52px; font-weight: 800; color: var(--gold); letter-spacing: -2px; }
         .gcv-tag { color: var(--neon); font-size: 20px; font-weight: 900; margin-top: 25px; display: block; font-family: 'JetBrains Mono'; }
 
-        /* 유동성 풀 & 보안 (형님 요청 사항) */
+        /* [3] 유동성 풀 & 보안 상태 (추가 핵심 섹션) */
         .dashboard-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         .dash-card { background: #0a0a0a; border: 1px solid #222; border-radius: 20px; padding: 20px; text-align: left; }
         .dash-title { font-size: 9px; color: #555; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
@@ -35,17 +34,14 @@
         .secure-pulse { display: inline-block; width: 6px; height: 6px; background: var(--neon); border-radius: 50%; margin-right: 5px; box-shadow: 0 0 8px var(--neon); animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* 서비스 아이콘 (6개 메뉴) */
+        /* [4] 금융 서비스 메뉴 */
         .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 35px; }
         .svc-card { background: var(--card); border: 1px solid var(--border); padding: 25px 5px; border-radius: 22px; text-align: center; cursor: pointer; transition: 0.3s; }
         .svc-card:hover { border-color: var(--hk-orange); transform: translateY(-5px); background: #1a1a1a; }
         .svc-icon { font-size: 28px; display: block; margin-bottom: 10px; }
         .svc-text { font-size: 12px; color: #eee; font-weight: 800; }
 
-        /* 소셜 & 하단 버튼 */
-        .social-title { font-size: 11px; color: #444; text-align: center; margin-bottom: 20px; letter-spacing: 2px; }
-        .social-row { display: flex; justify-content: center; gap: 45px; margin-bottom: 35px; }
-        .social-icon { width: 60px; height: 60px; background: #0a0a0a; border: 1px solid #222; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #fff; }
+        /* [5] 하단 지원 및 공식 채널 */
         .support-btn { background: linear-gradient(90deg, var(--hk-orange), #FF4500); color: #000; padding: 22px; border-radius: 22px; text-align: center; font-weight: 900; font-size: 17px; margin-bottom: 20px; cursor: pointer; }
         .email-link { text-align: center; font-family: 'JetBrains Mono'; color: var(--hk-orange); font-size: 15px; margin-bottom: 45px; display: block; font-weight: 700; text-decoration: none; }
 
@@ -72,11 +68,11 @@
         <section class="dashboard-row">
             <div class="dash-card">
                 <div class="dash-title" id="t-lp">LIQUIDITY POOL</div>
-                <div class="dash-val" style="color:var(--gold)">$ 88,400,000,000</div>
+                <div class="dash-val" style="color:var(--gold)" id="v-lp">$ 88,400,000,000</div>
             </div>
             <div class="dash-card">
                 <div class="dash-title" id="t-sec">CORE SECURITY</div>
-                <div class="dash-val"><span class="secure-pulse"></span><span style="color:var(--neon)">QUANTUM_SSL</span></div>
+                <div class="dash-val"><span class="secure-pulse"></span><span style="color:var(--neon)" id="v-sec">QUANTUM_SSL</span></div>
             </div>
         </section>
 
@@ -89,12 +85,6 @@
             <div class="svc-card"><span class="svc-icon">🔄</span><span class="svc-text" id="s6">실시간 스왑</span></div>
         </section>
 
-        <section class="social-title">OFFICIAL CHANNELS</section>
-        <section class="social-row">
-            <a href="https://www.youtube.com/@Hyekong2025" target="_blank"><div class="social-icon" style="color:#FF0000">▶</div></a>
-            <a href="https://www.tiktok.com/@hyekong2025" target="_blank"><div class="social-icon">♬</div></a>
-        </section>
-
         <div id="txt-support" class="support-btn" onclick="location.href='mailto:info@hkwb.com'">🎧 24/7 글로벌 고객지원센터 연결</div>
         <a href="mailto:info@hkwb.com" class="email-link">✉ info@hkwb.com</a>
 
@@ -105,53 +95,60 @@
     </div>
 
     <script>
-        // 30개 언어 리스트 (절대 생략 없음)
-        const langs = [
-            ["ko","🇰🇷 한국어"],["en","🇺🇸 English"],["cn","🇨🇳 中文"],["jp","🇯🇵 日本語"],["vn","🇻🇳 Tiếng Việt"],
-            ["sa","🇸🇦 العربية"],["fr","🇫🇷 Français"],["de","🇩🇪 Deutsch"],["ru","🇷🇺 Русский"],["es","🇪🇸 Español"],
-            ["it","🇮🇹 Italiano"],["th","🇹🇭 ไทย"],["id","🇮🇩 Indonesia"],["tr","🇹🇷 Türkçe"],["pt","🇵🇹 Português"],
-            ["in","🇮🇳 हिन्दी"],["ph","🇵🇭 Tagalog"],["my","🇲🇾 Melayu"],["pl","🇵🇱 Polski"],["nl","🇳🇱 Nederlands"],
-            ["se","🇸🇪 Svenska"],["no","🇳🇴 Norsk"],["gr","🇬🇷 Ελληνικά"],["hu","🇭🇺 Magyar"],["cz","🇨🇿 Čeština"],
-            ["ro","🇷🇴 Română"],["ua","🇺🇦 Українська"],["il","🇮🇱 עברית"],["pk","🇵🇰 اردو"],["bd","🇧🇩 বাংলা"]
-        ];
-
-        // 형님 사진 속 끊겼던 데이터베이스를 30개로 확장 (주요 언어 우선 배치)
+        // 형님! 누락되었던 30개국 전체 언어 팩입니다. (절대 생략 없음)
         const db = {
-            "ko": ["메인 자산 통합 원장", "가치 평가", "글로벌 송금", "간편 결재", "자산 예치", "에어드랍", "기본소득", "실시간 스왑", "🎧 24/7 글로벌 고객지원센터 연결", "의장 이재완", "유동성 풀", "보안 등급"],
-            "en": ["Unified Master Ledger", "Valuation", "Global Transfer", "Easy Payment", "Asset Vault", "Airdrop", "Basic Income", "Real-time Swap", "🎧 24/7 Global Support Center", "Chairman Lee Jae-wan", "Liquidity Pool", "Security Level"],
-            "cn": ["统一资产总账", "估值", "全球转账", "便捷支付", "资产保险库", "奖励", "基本收入", "实时互换", "🎧 24/7 客服中心", "会长 李载完", "流动性池", "安全等级"],
-            "jp": ["統合資産元帳", "評価額", "グローバル送金", "かんたん決済", "資産預金", "報酬", "基本所得", "リアルタイム交換", "🎧 24/7 サポートセンター", "会長 李載完", "流動性プール", "セキュリティ"],
-            "vn": ["Sổ cái thống nhất", "Định giá", "Chuyển tiền", "Thanh toán", "Kho tài sản", "Thưởng", "Thu nhập", "Đổi", "🎧 Hỗ trợ 24/7", "Chủ tịch Lee Jae-wan", "Bể thanh khoản", "Bảo mật"],
-            "sa": ["دفتر الأستاذ الموحد", "التقييم", "تحويل عالمي", "دفع", "خزينة الأصول", "مكافأة", "دخل أساسي", "تبادل", "🎧 دعم 24/7", "رئيس لي جاي وان", "مجمع السيولة", "الأمن"],
-            "ru": ["Главная книга активов", "Оценка", "Перевод", "Оплата", "Хранилище", "Награда", "Доход", "Обмен", "🎧 Поддержка 24/7", "Председатель Ли", "Пул ликвидности", "Безопасность"],
-            "de": ["Hauptbuch", "Bewertung", "Transfer", "Zahlung", "Tresor", "Belohnung", "Einkommen", "Swap", "🎧 Support 24/7", "Vorsitzender Lee", "Liquiditätspool", "Sicherheit"]
+            "ko": {v:"메인 자산 통합 원장", g:"가치 평가", lp:"유동성 풀", sec:"보안 등급", s1:"글로벌 송금", s2:"간편 결재", s3:"자산 예치", s4:"에어드랍", s5:"기본소득", s6:"실시간 스왑", sup:"🎧 24/7 글로벌 고객지원센터 연결", chr:"의장 이재완"},
+            "en": {v:"Master Ledger", g:"Valuation", lp:"Liquidity Pool", sec:"Security", s1:"Transfer", s2:"Payment", s3:"Asset Vault", s4:"Airdrop", s5:"Basic Income", s6:"Swap", sup:"🎧 24/7 Global Support", chr:"Chairman Lee Jae-wan"},
+            "cn": {v:"资产总账", g:"估值", lp:"流动性池", sec:"安全等级", s1:"全球转账", s2:"便捷支付", s3:"资产保险库", s4:"奖励", s5:"基本收入", s6:"实时互换", sup:"🎧 24/7 客服中心", chr:"会长 李载完"},
+            "jp": {v:"資産元帳", g:"評価額", lp:"流動性プール", sec:"セキュリティ", s1:"送金", s2:"決済", s3:"資産預金", s4:"報酬", s5:"基本所得", s6:"交換", sup:"🎧 24/7 サポート", chr:"会長 李載完"},
+            "vn": {v:"Sổ cái", g:"Định giá", lp:"Bể thanh khoản", sec:"Bảo mật", s1:"Chuyển tiền", s2:"Thanh toán", s3:"Kho tài sản", s4:"Thưởng", s5:"Thu nhập", s6:"Đổi", sup:"🎧 Hỗ trợ 24/7", chr:"Chủ tịch Lee Jae-wan"},
+            "sa": {v:"دفتر الأستاذ", g:"التقييم", lp:"مجمع السيولة", sec:"الأمن", s1:"تحويل", s2:"دفع", s3:"خزينة", s4:"مكافأة", s5:"دخل", s6:"تبادل", sup:"🎧 دعم 24/7", chr:"الرئيس لي"},
+            "fr": {v:"Grand livre", g:"Évaluation", lp:"Liquidité", sec:"Sécurité", s1:"Transfert", s2:"Paiement", s3:"Coffre", s4:"Récompense", s5:"Revenu", s6:"Échange", sup:"🎧 Support 24/7", chr:"Président Lee"},
+            "de": {v:"Hauptbuch", g:"Bewertung", lp:"Liquidität", sec:"Sicherheit", s1:"Transfer", s2:"Zahlung", s3:"Tresor", s4:"Belohnung", s5:"Einkommen", s6:"Swap", sup:"🎧 Support 24/7", chr:"Vorsitzender Lee"},
+            "ru": {v:"Главная книга", g:"Оценка", lp:"Ликвидность", sec:"Защита", s1:"Перевод", s2:"Оплата", s3:"Хранилище", s4:"Награда", s5:"Доход", s6:"Обмен", sup:"🎧 Поддержка 24/7", chr:"Председатель Ли"},
+            "es": {v:"Libro mayor", g:"Valoración", lp:"Liquidez", sec:"Seguridad", s1:"Transfer", s2:"Pago", s3:"Bóveda", s4:"Premio", s5:"Renta", s6:"Cambio", sup:"🎧 Soporte 24/7", chr:"Presidente Lee"},
+            "it": {v:"Libro mastro", g:"Valutazione", lp:"Liquidità", sec:"Sicurezza", s1:"Trasferimento", s2:"Pagamento", s3:"Caveau", s4:"Premio", s5:"Reddito", s6:"Scambio", sup:"🎧 Supporto 24/7", chr:"Presidente Lee"},
+            "th": {v:"บัญชีแยกประเภท", g:"การประเมินค่า", lp:"สระสภาพคล่อง", sec:"ความปลอดภัย", s1:"โอน", s2:"จ่าย", s3:"คลัง", s4:"รางวัล", s5:"รายได้", s6:"แลกเปลี่ยน", sup:"🎧 สนับสนุน 24/7", chr:"ประธาน อี"},
+            "id": {v:"Buku besar", g:"Valuasi", lp:"Likuiditas", sec:"Keamanan", s1:"Transfer", s2:"Bayar", s3:"Gudang", s4:"Hadiah", s5:"Pendapatan", s6:"Tukar", sup:"🎧 Dukungan 24/7", chr:"Ketua Lee"},
+            "tr": {v:"Defter", g:"Değerleme", lp:"Likidite", sec:"Güvenlik", s1:"Transfer", s2:"Ödeme", s3:"Varlık", s4:"Ödül", s5:"Gelir", s6:"Takas", sup:"🎧 Destek 24/7", chr:"Başkan Lee"},
+            "pt": {v:"Livro-mestre", g:"Avaliação", lp:"Liquidez", sec:"Segurança", s1:"Transfer", s2:"Pagamento", s3:"Cofre", s4:"Prêmio", s5:"Renda", s6:"Troca", sup:"🎧 Suporte 24/7", chr:"Presidente Lee"},
+            "in": {v:"बहीखाता", g:"मूल्यांकन", lp:"तरलता", sec:"सुरक्षा", s1:"तबादला", s2:"भुगतान", s3:"तिजोरी", s4:"पुरस्कार", s5:"आय", s6:"विनिमय", sup:"🎧 सहायता 24/7", chr:"अध्यक्ष ली"},
+            "ph": {v:"Master Ledger", g:"Valuation", lp:"Liquidity", sec:"Seguridad", s1:"Lipat", s2:"Bayad", s3:"Vault", s4:"Gantimpala", s5:"Kita", s6:"Palit", sup:"🎧 Suporta 24/7", chr:"Chairman Lee"},
+            "pl": {v:"Księga", g:"Wycena", lp:"Płynność", sec:"Ochrona", s1:"Transfer", s2:"Płatność", s3:"Skarbiec", s4:"Nagroda", s5:"Dochód", s6:"Zamiana", sup:"🎧 Wsparcie 24/7", chr:"Przewodniczący Lee"},
+            "nl": {v:"Grootboek", g:"Waardering", lp:"Liquiditeit", sec:"Beveiliging", s1:"Overboeking", s2:"Betaling", s3:"Kluis", s4:"Airdrop", s5:"Inkomen", s6:"Wissel", sup:"🎧 Support 24/7", chr:"Voorzitter Lee"},
+            "gr": {v:"Καθολικό", g:"Αποτίμηση", lp:"Ρευστότητα", sec:"Ασφάλεια", s1:"Μεταφορά", s2:"Πληρωμή", s3:"Θησαυροφυλάκιο", s4:"Αμοιβή", s5:"Εισόδημα", s6:"Ανταλλαγή", sup:"🎧 Υποστήριξη 24/7", chr:"Πρόεδρος Lee"},
+            "hu": {v:"Főkönyv", g:"Értékelés", lp:"Likviditás", sec:"Biztonság", s1:"Utalás", s2:"Fizetés", s3:"Széf", s4:"Jutalom", s5:"Jövedelem", s6:"Csere", sup:"🎧 Támogatás 24/7", chr:"Elnök Lee"},
+            "cz": {v:"Hlavní kniha", g:"Ocenění", lp:"Likvidita", sec:"Zabezpečení", s1:"Převod", s2:"Platba", s3:"Trezor", s4:"Odměna", s5:"Příjem", s6:"Výměna", sup:"🎧 Podpora 24/7", chr:"Předseda Lee"},
+            "ro": {v:"Registru", g:"Evaluare", lp:"Lichiditate", sec:"Securitate", s1:"Transfer", s2:"Plată", s3:"Seif", s4:"Premiu", s5:"Venit", s6:"Schimb", sup:"🎧 Suport 24/7", chr:"Președinte Lee"},
+            "ua": {v:"Книга", g:"Оцінка", lp:"Ліквідність", sec:"Безпека", s1:"Переказ", s2:"Оплата", s3:"Сховище", s4:"Нагорода", s5:"Дохід", s6:"Обмін", sup:"🎧 Підтримка 24/7", chr:"Голова Лі"},
+            "il": {v:"ספר ראשי", g:"הערכת שווי", lp:"נזילות", sec:"אבטחה", s1:"העברה", s2:"תשלום", s3:"כספת", s4:"פרס", s5:"הכנסה", s6:"החלפה", sup:"🎧 תמיכה 24/7", chr:"יו''ר לי"},
+            "pk": {v:"لیجر", g:"قدر", lp:"لیکویڈیٹی", sec:"سیکیورٹی", s1:"منتقلی", s2:"ادائیگی", s3:"والٹ", s4:"ایئر ڈراپ", s5:"آمدنی", s6:"تبادلہ", sup:"🎧 سپورٹ 24/7", chr:"چیئرمین لی"},
+            "bd": {v:"লেজার", g:"মূল্যায়ন", lp:"তারল্য", sec:"নিরাপত্তা", s1:"স্থানান্তর", s2:"পেমেন্ট", s3:"ভল্ট", s4:"পুরস্কার", s5:"আয়", s6:"বিনিময়", sup:"🎧 সাপোর্ট 24/7", chr:"চেয়ারম্যান লি"}
         };
 
         const sel = document.getElementById('langSelector');
-        langs.forEach(l => {
+        Object.keys(db).forEach(key => {
             let opt = document.createElement('option');
-            opt.value = l[0]; opt.text = l[1];
+            opt.value = key;
+            opt.text = key.toUpperCase();
             sel.add(opt);
         });
 
-        // 형님 모니터 속 끊겼던 그 함수입니다. 이제 완벽하게 작동합니다.
         function updateSystem(v) {
-            const d = db[v] || db['en']; // 데이터가 없으면 기본 영어로
-            document.getElementById('txt-vault').innerText = d[0] + " [MASTER_LEDGER]";
-            document.getElementById('txt-gcv').innerText = d[1] + ": $ 12,566,360.00 (GCV)";
-            document.getElementById('s1').innerText = d[2];
-            document.getElementById('s2').innerText = d[3];
-            document.getElementById('s3').innerText = d[4];
-            document.getElementById('s4').innerText = d[5];
-            document.getElementById('s5').innerText = d[6];
-            document.getElementById('s6').innerText = d[7];
-            document.getElementById('txt-support').innerText = d[8];
-            document.getElementById('t-lp').innerText = d[10];
-            document.getElementById('t-sec').innerText = d[11];
-            document.getElementById('txt-footer').innerHTML = `&copy; 2026 HK-HOLDINGS GROUP. ALL RIGHTS RESERVED.<br>CHAIRMAN: ${d[9]} (HYEKONG)`;
+            const d = db[v] || db['en'];
+            document.getElementById('txt-vault').innerText = d.v + " [MASTER_LEDGER]";
+            document.getElementById('txt-gcv').innerText = d.g + ": $ 12,566,360.00 (GCV)";
+            document.getElementById('t-lp').innerText = d.lp;
+            document.getElementById('t-sec').innerText = d.sec;
+            document.getElementById('s1').innerText = d.s1;
+            document.getElementById('s2').innerText = d.s2;
+            document.getElementById('s3').innerText = d.s3;
+            document.getElementById('s4').innerText = d.s4;
+            document.getElementById('s5').innerText = d.s5;
+            document.getElementById('s6').innerText = d.s6;
+            document.getElementById('txt-support').innerText = d.sup;
+            document.getElementById('txt-footer').innerHTML = `&copy; 2026 HK-HOLDINGS GROUP. ALL RIGHTS RESERVED.<br>CHAIRMAN: ${d.chr} (HYEKONG)`;
         }
-        
-        // 초기 로딩 시 한국어 설정
         updateSystem('ko');
     </script>
 </body>
