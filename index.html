@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Global 30-Language Multi-Ledger</title>
+    <title>HK WORLD BANK | Global Master Ledger v5.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,7 +12,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { background: var(--deep-black); color: #fff; font-family: 'Inter', 'Noto Sans KR', sans-serif; display: flex; justify-content: center; }
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; outline: none; }
 
         .container {
             width: 100%; max-width: 550px; min-height: 100vh; padding: 30px 20px;
@@ -20,71 +20,72 @@
             display: flex; flex-direction: column; position: relative;
         }
 
-        /* 1. 언어 선택창: 우상단 고정 */
+        /* 1. 언어 선택창 (우상단 고정) */
         .top-nav { position: absolute; top: 25px; right: 20px; z-index: 1000; }
         .lang-select {
             background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--hk-orange);
-            padding: 8px 12px; border-radius: 12px; font-size: 11px; cursor: pointer; outline: none; backdrop-filter: blur(10px);
+            padding: 8px 12px; border-radius: 12px; font-size: 11px; cursor: pointer; backdrop-filter: blur(10px);
         }
 
-        /* 2. 헤더: HK WORLD BANK (초대형 한 줄) */
+        /* 2. 헤더: HK WORLD BANK */
         header { padding: 50px 0 10px; text-align: center; }
-        .logo { font-size: 34px; font-weight: 900; color: var(--hk-orange); letter-spacing: 6px; text-transform: uppercase; filter: drop-shadow(0 0 15px rgba(255,140,0,0.4)); }
-        .node-status { font-family: 'JetBrains Mono'; font-size: 9px; color: var(--neon-green); margin-top: 12px; letter-spacing: 1px; }
+        .logo { font-size: 36px; font-weight: 900; color: var(--hk-orange); letter-spacing: 5px; text-transform: uppercase; filter: drop-shadow(0 0 15px rgba(255,140,0,0.4)); }
+        .node-status { font-family: 'JetBrains Mono'; font-size: 9px; color: var(--neon-green); margin-top: 15px; letter-spacing: 1px; }
 
-        /* 3. 공식 이메일 (info@hkwb.com - 클릭 시 연결) */
-        .info-bar { text-align: center; margin-bottom: 30px; }
+        /* 3. 공식 이메일 (info@hkwb.com 활성화) */
+        .info-bar { text-align: center; margin-bottom: 35px; }
         .email-tag { 
-            display: inline-block; font-family: 'JetBrains Mono'; font-size: 13px; color: var(--hk-orange); 
-            border: 1px solid var(--hk-orange); padding: 8px 18px; border-radius: 50px; 
-            background: rgba(255,140,0,0.05); transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono'; font-size: 14px; 
+            color: var(--hk-orange); border: 1px solid var(--hk-orange); padding: 10px 22px; border-radius: 50px; 
+            background: rgba(255,140,0,0.05); transition: 0.3s; cursor: pointer;
         }
-        .email-tag:hover { background: var(--hk-orange); color: #000; }
+        .email-tag:hover { background: var(--hk-orange); color: #000; box-shadow: 0 0 20px rgba(255,140,0,0.4); }
 
         /* 4. 메인 자산 카드 */
         .main-vault {
             background: linear-gradient(145deg, #151515, #050505);
-            border-radius: 35px; padding: 45px 20px; text-align: center;
-            border: 1px solid var(--border); box-shadow: 0 40px 100px rgba(0,0,0,1); margin-bottom: 25px;
+            border-radius: 35px; padding: 50px 20px; text-align: center;
+            border: 1px solid var(--border); box-shadow: 0 40px 100px rgba(0,0,0,1); margin-bottom: 30px;
         }
-        .vault-label { font-size: 13px; color: #666; margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 8px; letter-spacing: 1px; }
-        .pulse { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 15px var(--neon-green); animation: pulse 2s infinite; }
-        .balance-val { font-family: 'JetBrains Mono'; font-size: 44px; font-weight: 700; color: var(--gold); letter-spacing: -2px; }
-        .gcv-val { color: var(--neon-green); font-size: 18px; font-weight: 800; margin-top: 20px; display: block; font-family: 'JetBrains Mono'; }
+        .vault-label { font-size: 14px; color: #666; margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 10px; letter-spacing: 1px; }
+        .pulse { width: 10px; height: 10px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 15px var(--neon-green); animation: pulse 2s infinite; }
+        .balance-val { font-family: 'JetBrains Mono'; font-size: 48px; font-weight: 700; color: var(--gold); letter-spacing: -2px; }
+        .gcv-val { color: var(--neon-green); font-size: 20px; font-weight: 800; margin-top: 25px; display: block; font-family: 'JetBrains Mono'; }
 
         /* 5. 6대 서비스 그리드 */
-        .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
-        .svc-card { background: var(--surface); border: 1px solid var(--border); padding: 22px 5px; border-radius: 20px; text-align: center; cursor: pointer; }
-        .svc-icon { font-size: 24px; margin-bottom: 8px; display: block; }
-        .svc-text { font-size: 11px; color: #bbb; font-weight: 700; }
+        .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .svc-card { background: var(--surface); border: 1px solid var(--border); padding: 25px 5px; border-radius: 20px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .svc-card:active { transform: scale(0.95); }
+        .svc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+        .svc-text { font-size: 12px; color: #ccc; font-weight: 700; }
 
         /* 6. 유동성 풀 */
-        .pool-module { background: #080808; border-radius: 25px; padding: 25px; border: 1px dashed #333; margin-bottom: 25px; }
-        .pool-title { font-size: 11px; color: #555; text-transform: uppercase; margin-bottom: 15px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; }
-        .pool-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
-        .pool-val { color: var(--gold); font-weight: bold; }
+        .pool-module { background: #080808; border-radius: 25px; padding: 30px; border: 1px dashed #333; margin-bottom: 30px; }
+        .pool-title { font-size: 12px; color: #555; text-transform: uppercase; margin-bottom: 20px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; }
+        .pool-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px; }
+        .pool-val { color: var(--gold); font-weight: bold; font-family: 'JetBrains Mono'; }
 
         /* 7. 보안 로그 */
-        .sec-console { background: #050505; border-radius: 20px; padding: 22px; border-left: 4px solid var(--neon-green); margin-bottom: 25px; text-align: left; }
-        .sec-header { color: var(--neon-green); font-size: 11px; font-weight: 900; margin-bottom: 12px; letter-spacing: 1px; }
-        .log-area { font-family: 'JetBrains Mono'; font-size: 10px; color: #444; line-height: 1.6; }
+        .sec-console { background: #050505; border-radius: 20px; padding: 25px; border-left: 4px solid var(--neon-green); margin-bottom: 30px; text-align: left; }
+        .sec-header { color: var(--neon-green); font-size: 13px; font-weight: 900; margin-bottom: 15px; letter-spacing: 2px; }
+        .log-area { font-family: 'JetBrains Mono'; font-size: 11px; color: #444; line-height: 1.8; }
 
-        /* 8. 고객센터 (진짜로 클릭하면 메시지 뜨게 수정) */
+        /* 8. 고객센터 */
         .support-btn {
             background: linear-gradient(90deg, var(--hk-orange), #FF4500);
-            color: #000; padding: 18px; border-radius: 18px; text-align: center;
-            font-weight: 900; font-size: 15px; margin-bottom: 30px; cursor: pointer;
-            transition: 0.3s;
+            color: #000; padding: 20px; border-radius: 20px; text-align: center;
+            font-weight: 900; font-size: 17px; margin-bottom: 40px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3); transition: 0.3s;
         }
-        .support-btn:active { transform: scale(0.95); opacity: 0.8; }
 
-        /* 9. 소셜 채널 (유튜브 & 틱톡 연결) */
-        .social-row { display: flex; justify-content: center; gap: 35px; margin-bottom: 40px; }
+        /* 9. 유튜브 & 틱톡 */
+        .social-row { display: flex; justify-content: center; gap: 45px; margin-bottom: 50px; }
         .social-item { text-align: center; cursor: pointer; }
-        .social-icon { width: 50px; height: 50px; background: #111; border: 1px solid #222; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 8px; transition: 0.3s; }
-        .social-item:hover .social-icon { border-color: var(--hk-orange); }
+        .social-icon { width: 55px; height: 55px; background: #111; border: 1px solid #222; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 10px; transition: 0.3s; }
+        .yt { color: #FF0000; }
+        .tt { color: #fff; }
 
-        footer { text-align: center; font-size: 10px; color: #333; padding-bottom: 40px; line-height: 2; border-top: 1px solid #111; padding-top: 25px; }
+        footer { text-align: center; font-size: 11px; color: #333; padding-bottom: 50px; line-height: 2.5; border-top: 1px solid #111; padding-top: 30px; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
@@ -101,23 +102,23 @@
 
         <div class="info-bar">
             <a href="mailto:info@hkwb.com">
-                <span class="email-tag">✉ info@hkwb.com</span>
+                <div class="email-tag">✉ info@hkwb.com</div>
             </a>
         </div>
 
-        <main class="main-vault" onclick="alert('Asset Master Node Security: Verified')">
+        <main class="main-vault" onclick="sysAlert('ledger')">
             <div class="vault-label"><div class="pulse"></div><span id="txt-vault">메인자산원장 [MASTER_LEDGER]</span></div>
-            <div class="balance-val">400.0000<span style="font-size:22px; margin-left:5px;">Pi</span></div>
+            <div class="balance-val">400.0000<span style="font-size:24px; margin-left:8px;">Pi</span></div>
             <span class="gcv-val" id="txt-gcv">가치: $ 12,566,360.00 (GCV)</span>
         </main>
 
         <section class="svc-grid">
-            <div class="svc-card" onclick="alert('Preparing Transfer...')"><span class="svc-icon">💸</span><span class="svc-text" id="svc1">송금</span></div>
-            <div class="svc-card" onclick="alert('Initializing Payment...')"><span class="svc-icon">🛍️</span><span class="svc-text" id="svc2">결재</span></div>
-            <div class="svc-card" onclick="alert('Vault Access...')"><span class="svc-icon">🏛️</span><span class="svc-text" id="svc3">예치</span></div>
-            <div class="svc-card" onclick="alert('Checking Rewards...')"><span class="svc-icon">🎁</span><span class="svc-text" id="svc4">리워드</span></div>
-            <div class="svc-card" onclick="alert('Calculating Income...')"><span class="svc-icon">⚖️</span><span class="svc-text" id="svc5">기본소득</span></div>
-            <div class="svc-card" onclick="alert('Connecting to DEX...')"><span class="svc-icon">🔄</span><span class="svc-text" id="svc6">DEX 스왑</span></div>
+            <div class="svc-card" onclick="sysAlert('transfer')"><span class="svc-icon">💸</span><span class="svc-text" id="svc1">송금</span></div>
+            <div class="svc-card" onclick="sysAlert('pay')"><span class="svc-icon">🛍️</span><span class="svc-text" id="svc2">결재</span></div>
+            <div class="svc-card" onclick="sysAlert('vault')"><span class="svc-icon">🏛️</span><span class="svc-text" id="svc3">예치</span></div>
+            <div class="svc-card" onclick="sysAlert('reward')"><span class="svc-icon">🎁</span><span class="svc-text" id="svc4">리워드</span></div>
+            <div class="svc-card" onclick="sysAlert('income')"><span class="svc-icon">⚖️</span><span class="svc-text" id="svc5">기본소득</span></div>
+            <div class="svc-card" onclick="sysAlert('dex')"><span class="svc-icon">🔄</span><span class="svc-text" id="svc6">DEX 스왑</span></div>
         </section>
 
         <section class="pool-module">
@@ -139,10 +140,10 @@
 
         <section class="social-row">
             <a href="https://www.youtube.com/@Ljw2358" target="_blank" class="social-item">
-                <div class="social-icon" style="color:#ff0000;">▶</div><span>YouTube</span>
+                <div class="social-icon yt">▶</div><span>YouTube</span>
             </a>
-            <a href="https://www.tiktok.com" target="_blank" class="social-item">
-                <div class="social-icon">♬</div><span>TikTok</span>
+            <a href="https://www.tiktok.com/@hyekong_hk" target="_blank" class="social-item">
+                <div class="social-icon tt">♬</div><span>TikTok</span>
             </a>
         </section>
 
@@ -153,48 +154,41 @@
     </div>
 
     <script>
-        // 언어 데이터 (중략 - 30개국 데이터 유지)
-        const langConfig = {
-            "ko": ["KOREA", "🇰🇷 한국어", "메인자산원장", "가치", "송금", "결재", "예치", "리워드", "기본소득", "DEX 스왑", "DEX 유동성 풀", "총 예치 자산(TVL)", "연이율(APR)", "🎧 24/7 글로벌 고객센터 연결", "의장 이재완", "동기화 완료", "상담원에게 연결하시겠습니까?"],
-            "en": ["USA", "🇺🇸 English", "Master Ledger", "Value", "Transfer", "Payment", "Deposit", "Rewards", "Income", "DEX Swap", "DEX Pool", "TVL", "APR", "🎧 24/7 Global Support", "Chairman Lee Jae-wan", "Sync Complete", "Connect to Support?"],
-            "jp": ["JAPAN", "🇯🇵 日本語", "主資産元帳", "価値", "送金", "決済", "預金", "報酬", "基本所得", "DEX交換", "流動性プール", "預かり資産", "利率", "🎧 24/7 サポート中心", "会長 李載完", "同期完了", "サポートに接続しますか？"],
-            "cn": ["CHINA", "🇨🇳 中文", "主资产账本", "价值", "转账", "支付", "存款", "奖励", "基本收入", "DEX互换", "流动性池", "资产总额", "年化", "🎧 24/7 客服中心", "会长 李载完", "同步完成", "是否联系客服？"]
-            // ... (나머지 26개국 데이터는 이전과 동일)
+        const langDB = {
+            "ko": { name: "🇰🇷 한국어", vault: "메인자산원장", val: "가치", s1: "송금", s2: "결재", s3: "예치", s4: "리워드", s5: "기본소득", s6: "DEX 스왑", pool: "DEX 유동성 풀", tvl: "총 예치 자산(TVL)", apr: "연이율(APR)", support: "🎧 24/7 글로벌 고객센터 연결", chair: "의장 이재완", sync: "동기화 완료", alert: "시스템 준비 중입니다.", ask: "고객센터로 연결하시겠습니까?" },
+            "en": { name: "🇺🇸 English", vault: "Master Ledger", val: "Value", s1: "Transfer", s2: "Payment", s3: "Vault", s4: "Rewards", s5: "Basic Income", s6: "DEX Swap", pool: "DEX Liquidity Pool", tvl: "Total Value Locked", apr: "APR", support: "🎧 24/7 Global Support Center", chair: "Chairman Lee Jae-wan", sync: "Sync Complete", alert: "System initializing.", ask: "Connect to Support Center?" },
+            "jp": { name: "🇯🇵 日本語", vault: "メイン資産元帳", val: "価値", s1: "送금", s2: "決済", s3: "預金", s4: "報酬", s5: "基本所得", s6: "DEX交換", pool: "DEX流動性プール", tvl: "預かり資産", apr: "年利", support: "🎧 24/7 サポートセンター", chair: "会長 李載完", sync: "同期完了", alert: "準備中です。", ask: "サポートに接続しますか？" },
+            "cn": { name: "🇨🇳 中文", vault: "主资产账本", val: "价值", s1: "转账", s2: "支付", s3: "存款", s4: "奖励", s5: "基本收入", s6: "DEX互换", pool: "流动性池", tvl: "资产总额", apr: "年化", support: "🎧 24/7 全球客服中心", chair: "会长 李载完", sync: "同步完成", alert: "系统准备中。", ask: "联系客服？" },
+            "vn": { name: "🇻🇳 Tiếng Việt", vault: "Sổ cái chính", val: "Giá trị", s1: "Chuyển tiền", s2: "Thanh toán", s3: "Gửi tiền", s4: "Thưởng", s5: "Thu nhập", s6: "DEX Swap", pool: "Pool thanh khoản", tvl: "Tổng tài sản", apr: "APR", support: "🎧 Hỗ trợ 24/7", chair: "Chủ tịch Lee Jae-wan", sync: "Xong", alert: "Đang chuẩn bị.", ask: "Kết nối hỗ trợ?" },
+            "fr": { name: "🇫🇷 Français", vault: "Grand Livre", val: "Valeur", s1: "Transfert", s2: "Paiement", s3: "Dépôt", s4: "Primes", s5: "Revenu", s6: "DEX Swap", pool: "Pool de liquidité", tvl: "TVL", apr: "APR", support: "🎧 Support 24/7", chair: "Président Lee Jae-wan", sync: "Sync terminé", alert: "Système en cours.", ask: "Contacter le support?" },
+            "de": { name: "🇩🇪 Deutsch", vault: "Hauptbuch", val: "Wert", s1: "Transfer", s2: "Zahlung", s3: "Einzahlung", s4: "Prämien", s5: "Einkommen", s6: "DEX Swap", pool: "Liquiditätspool", tvl: "TVL", apr: "APR", support: "🎧 24/7 Support", chair: "Vorsitzender Lee Jae-wan", sync: "Sync fertig", alert: "System bereit.", ask: "Support kontaktieren?" },
+            "sa": { name: "🇸🇦 العربية", vault: "دفتر الأستاذ", val: "القيمة", s1: "تحويل", s2: "دفع", s3: "إيداع", s4: "مكافآت", s5: "دخل", s6: "DEX Swap", pool: "مجمع السيولة", tvl: "TVL", apr: "APR", support: "🎧 دعم 24/7", chair: "رئيس لي جاي وان", sync: "مزامنة", alert: "نظام جاهز.", ask: "اتصل بالدعم؟" }
         };
 
         const sel = document.getElementById('langSelector');
-        Object.keys(langConfig).forEach(k => {
+        Object.keys(langDB).forEach(k => {
             let opt = document.createElement('option');
-            opt.value = k; opt.innerHTML = langConfig[k][1];
+            opt.value = k; opt.innerHTML = langDB[k].name;
             sel.appendChild(opt);
         });
 
-        let currentMsg = langConfig["ko"][16];
-
-        function changeLanguage(lang) {
-            const d = langConfig[lang];
-            document.getElementById('txt-vault').innerText = `${d[2]} [MASTER_LEDGER]`;
-            document.getElementById('txt-gcv').innerText = `${d[3]}: $ 12,566,360.00 (GCV)`;
-            document.getElementById('svc1').innerText = d[4];
-            document.getElementById('svc2').innerText = d[5];
-            document.getElementById('svc3').innerText = d[6];
-            document.getElementById('svc4').innerText = d[7];
-            document.getElementById('svc5').innerText = d[8];
-            document.getElementById('svc6').innerText = d[9];
-            document.getElementById('txt-pool').innerText = d[10];
-            document.getElementById('txt-tvl').innerText = d[11];
-            document.getElementById('txt-apr').innerText = d[12];
-            document.getElementById('txt-support').innerText = d[13];
-            document.getElementById('txt-footer').innerHTML = `&copy; 2026 HK-HOLDINGS GROUP. ALL RIGHTS RESERVED.<br>CHAIRMAN: ${d[14]} (HYEKONG)`;
-            document.getElementById('txt-sync').innerText = d[15];
-            currentMsg = d[16];
+        let curLang = "ko";
+        function changeLanguage(l) {
+            curLang = l; const d = langDB[l];
+            document.getElementById('txt-vault').innerText = d.vault + " [MASTER_LEDGER]";
+            document.getElementById('txt-gcv').innerText = d.val + ": $ 12,566,360.00 (GCV)";
+            document.getElementById('svc1').innerText = d.s1; document.getElementById('svc2').innerText = d.s2;
+            document.getElementById('svc3').innerText = d.s3; document.getElementById('svc4').innerText = d.s4;
+            document.getElementById('svc5').innerText = d.s5; document.getElementById('svc6').innerText = d.s6;
+            document.getElementById('txt-pool').innerText = d.pool; document.getElementById('txt-tvl').innerText = d.tvl;
+            document.getElementById('txt-apr').innerText = d.apr; document.getElementById('txt-support').innerText = d.support;
+            document.getElementById('txt-sync').innerText = d.sync;
+            document.getElementById('txt-footer').innerHTML = `&copy; 2026 HK-HOLDINGS GROUP. ALL RIGHTS RESERVED.<br>CHAIRMAN: ${d.chair} (HYEKONG)`;
+            document.getElementById('log-area').innerHTML = `>> HK-SHIELD PROTECTION: ACTIVE<br>>> IDENTITY VERIFIED: ${d.chair}<br>>> STATUS: ${d.sync}`;
         }
 
-        function contactSupport() {
-            if(confirm(currentMsg)) {
-                window.location.href = "mailto:info@hkwb.com?subject=Global Support Request";
-            }
-        }
+        function sysAlert(t) { alert(langDB[curLang].alert + " [" + t.toUpperCase() + "]"); }
+        function contactSupport() { if(confirm(langDB[curLang].ask)) { window.location.href = "mailto:info@hkwb.com"; } }
     </script>
 </body>
 </html>
