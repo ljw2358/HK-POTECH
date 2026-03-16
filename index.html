@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLDBANK | Global Hegemony Frontier</title>
+    <title>HK WORLDBANK | Global Digital Asset Super-Node</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -13,229 +13,206 @@
             --hk-orange: #FF8C00;
             --hk-neon: #39FF14;
             --hk-red: #FF4500;
-            --bg-deep: #020202;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-deep: #050505;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
         }
 
-        /* 초기화 및 기본 설정 */
+        /* 폰트 크기 및 배열 초기화 */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
             background-color: var(--bg-deep);
             color: #ffffff;
             font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
-            letter-spacing: -0.5px;
+            word-break: keep-all;
+            line-height: 1.4;
         }
 
-        /* 폰트 크기 자동 조절 컨테이너 */
-        .wrapper {
+        /* 메인 컨테이너 - 폰 너비에 딱 맞춤 */
+        .hk-wrapper {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: env(safe-area-inset-top) 15px 120px;
-            display: flex;
-            flex-direction: column;
+            padding: 20px 15px 120px;
         }
 
-        /* 웅장한 상단 바 */
-        .top-nav {
+        /* 상단 유틸리티 바 */
+        .top-utility {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 30px;
         }
 
-        .lang-switcher {
-            background: rgba(255,255,255,0.05);
+        .hk-group-label {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--hk-gold);
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* 30개 언어 스위처 (실제 작동 로직 포함) */
+        .lang-select-box {
+            background: rgba(255,255,255,0.07);
             color: var(--hk-gold);
             border: 1px solid var(--hk-gold);
-            padding: 6px 15px;
-            border-radius: 50px;
+            padding: 5px 10px;
+            border-radius: 5px;
             font-size: 11px;
-            font-weight: 900;
-            font-family: 'Orbitron';
+            font-weight: bold;
             outline: none;
-            cursor: pointer;
         }
 
-        /* 메인 로고 섹션 */
-        .brand-section {
+        /* 로고 구역 - 줄 배열 수정 */
+        .brand-header {
             text-align: center;
-            padding: 40px 0;
+            margin-bottom: 40px;
         }
 
-        .main-logo {
+        .main-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.2rem; /* 폰 화면에 맞춰 크기 조정 */
             font-weight: 900;
-            background: linear-gradient(to bottom, #FFD700 0%, #FF8C00 100%);
+            display: block;
+            line-height: 1.1;
+            background: linear-gradient(to bottom, #FFD700, #FF8C00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            letter-spacing: 1px;
         }
 
-        .status-tag {
+        .sub-node-status {
             font-family: 'Roboto Mono', monospace;
             font-size: 10px;
             color: var(--hk-neon);
+            margin-top: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        /* 자산 대시보드 - 모바일 최적화 */
-        .asset-card {
-            background: linear-gradient(165deg, #111 0%, #050505 100%);
-            border-radius: 30px;
-            padding: 35px 20px;
+        /* 자산 원장 섹션 - 글자 안 잘리게 조정 */
+        .ledger-card {
+            background: linear-gradient(145deg, #111, #000);
+            border-radius: 25px;
+            padding: 30px 15px;
             text-align: center;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--border-glass);
             margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
         }
 
         /* 요청하신 글자 컬러: 골드 */
-        .ledger-label {
+        .ledger-title {
             color: var(--hk-gold);
-            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             display: block;
         }
 
-        /* 400글자 짤림 방지 핵심: 가변 폰트 */
-        .asset-val {
+        /* 400.0000 Pi 크기 자동 축소 (안 짤림) */
+        .asset-amount {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.2rem, 11vw, 3.5rem);
+            font-size: clamp(1.8rem, 9vw, 2.5rem); 
             font-weight: 900;
             color: #fff;
-            margin-bottom: 10px;
             white-space: nowrap;
+            letter-spacing: -1px;
         }
+        .pi-symbol { color: var(--hk-orange); font-size: 0.7em; }
 
-        .unit { color: var(--hk-orange); font-size: 0.6em; }
-
-        .valuation-badge {
-            display: inline-block;
-            background: rgba(57, 255, 20, 0.08);
+        .gcv-valuation {
+            margin-top: 15px;
             color: var(--hk-neon);
-            padding: 10px 20px;
-            border-radius: 50px;
             font-size: 14px;
             font-weight: 600;
-            border: 1px solid rgba(57, 255, 20, 0.2);
+            background: rgba(57, 255, 20, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            display: inline-block;
         }
 
-        /* 서비스 메뉴 그리드 */
-        .menu-grid {
+        /* 서비스 아이콘 그리드 */
+        .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 30px;
         }
 
-        .menu-box {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            padding: 22px 5px;
-            border-radius: 20px;
+        .service-box {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            padding: 20px 5px;
+            border-radius: 15px;
             text-align: center;
-            transition: 0.3s;
         }
 
-        .menu-box i {
-            font-size: 2rem;
+        .service-box i {
+            font-size: 1.8rem;
             color: var(--hk-gold);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
         }
 
-        .menu-box span { font-size: 0.9rem; font-weight: 500; color: #eee; }
+        .service-box span { font-size: 0.85rem; font-weight: 500; display: block; }
+        .apr-tag { font-size: 10px; color: var(--hk-neon); font-weight: 800; margin-top: 4px; display: block; }
 
-        .apr-info {
-            font-size: 10px;
-            color: var(--hk-neon);
-            margin-top: 6px;
-            font-weight: 700;
-            display: block;
-        }
-
-        /* 하단 상세 리스트 섹션 */
-        .detail-panel {
+        /* 하단 상세 정보 리스트 - 요청 컬러 반영 */
+        .info-panel {
             background: rgba(255,255,255,0.02);
-            border-radius: 25px;
-            padding: 25px;
-            border-left: 5px solid var(--hk-orange);
+            border-radius: 20px;
+            padding: 20px;
             margin-bottom: 40px;
         }
 
-        .detail-row {
+        .info-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .detail-row:last-child { border: none; }
+        .info-row:last-child { border: none; }
 
         /* 요청하신 컬러 포인트들 */
-        .color-gold { color: var(--hk-gold); font-weight: 700; }
-        .color-neon { color: var(--hk-neon); font-weight: 700; }
-        .color-orange { color: var(--hk-orange); font-weight: 700; }
-
-        .data-val { font-family: 'Roboto Mono', monospace; font-size: 0.95rem; }
+        .lbl-gold { color: var(--hk-gold); font-weight: 700; }
+        .lbl-neon { color: var(--hk-neon); font-weight: 700; }
+        .lbl-orange { color: var(--hk-orange); font-weight: 700; }
+        
+        .val-data { font-family: 'Roboto Mono', monospace; font-size: 0.9rem; }
 
         /* 고객지원 및 메일 버튼 */
-        .footer-btns { display: flex; flex-direction: column; gap: 15px; }
+        .action-btns { display: flex; flex-direction: column; gap: 15px; }
 
-        .btn-large {
+        .btn-full {
             width: 100%;
-            padding: 22px;
-            border-radius: 20px;
+            padding: 18px;
+            border-radius: 15px;
             text-align: center;
             font-weight: 800;
-            font-size: 1.1rem;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
-            transition: 0.3s;
+            gap: 10px;
         }
 
-        .btn-gradient {
-            background: linear-gradient(90deg, var(--hk-red), var(--hk-orange));
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.3);
-        }
+        .btn-support { background: linear-gradient(90deg, #FF4500, #FF8C00); color: white; box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3); }
+        .btn-mail { background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: #fff; }
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: #aaa;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 11px;
-            color: #444;
-            line-height: 1.8;
-        }
+        footer { text-align: center; padding: 40px 0; font-size: 10px; color: #444; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <nav class="top-nav">
-        <div style="font-family: 'Orbitron'; color: var(--hk-gold); font-size: 14px; font-weight: 900;">HK GROUP</div>
-        <select class="lang-switcher" id="globalLang" onchange="applyGlobalLang(this.value)">
+<div class="hk-wrapper">
+    <div class="top-utility">
+        <div class="hk-group-label">HK GROUP</div>
+        <select class="lang-select-box" id="langPicker" onchange="switchGlobalLang(this.value)">
             <option value="ko">KOREAN</option>
             <option value="en">ENGLISH</option>
             <option value="zh">CHINESE</option>
@@ -247,92 +224,93 @@
             <option value="ru">RUSSIAN</option>
             <option value="ar">ARABIC</option>
         </select>
-    </nav>
+    </div>
 
-    <header class="brand-section">
-        <h1 class="main-logo">HK WORLDBANK</h1>
-        <div class="status-tag">
+    <header class="brand-header">
+        <span class="main-title">HK WORLD BANK</span>
+        <div class="sub-node-status">
             <i class="fas fa-circle" style="font-size: 8px; vertical-align: middle; margin-right: 5px;"></i>
-            Global Super-Node: HK-KO-Active
+            Global Super-Node: HK-KO-Terminal-Active
         </div>
     </header>
 
-    <div class="asset-card">
-        <span class="ledger-label" id="txt-ledger">메인 자산 통합 원장</span>
-        <div class="asset-val">400.0000 <span class="unit">Pi</span></div>
-        <div class="valuation-badge" id="txt-gcv">가치 평가: $ 12,566,360.00 (GCV)</div>
+    <div class="ledger-card">
+        <span class="ledger-title" id="L-ledger">메인 자산 통합 원장 (Unified Ledger)</span>
+        <div class="asset-amount">400.0000 <span class="pi-symbol">Pi</span></div>
+        <div class="gcv-valuation" id="L-gcv">가치 평가: $ 12,566,360.00 (GCV)</div>
     </div>
 
-    <div class="menu-grid">
-        <div class="menu-box"><i class="fas fa-paper-plane"></i><span id="txt-send">송금</span></div>
-        <div class="menu-box"><i class="fas fa-shopping-bag"></i><span id="txt-pay">결제</span></div>
-        <div class="menu-box">
-            <i class="fas fa-vault"></i><span id="txt-staking">스테이킹</span>
-            <span class="apr-info">APR 12.5%</span>
+    <div class="service-grid">
+        <div class="service-box"><i class="fas fa-paper-plane"></i><span id="L-send">송금</span></div>
+        <div class="service-box"><i class="fas fa-shopping-bag"></i><span id="L-pay">결제</span></div>
+        <div class="service-box">
+            <i class="fas fa-vault"></i><span id="L-staking">예치</span>
+            <span class="apr-tag">APR 12.5%</span>
         </div>
-        <div class="menu-box"><i class="fas fa-gift"></i><span id="txt-reward">보상</span></div>
-        <div class="menu-box"><i class="fas fa-balance-scale"></i><span id="txt-income">소득</span></div>
-        <div class="menu-box"><i class="fas fa-sync-alt"></i><span id="txt-swap">스왑</span></div>
+        <div class="service-box"><i class="fas fa-gift"></i><span id="L-reward">보상</span></div>
+        <div class="service-box"><i class="fas fa-balance-scale"></i><span id="L-income">소득</span></div>
+        <div class="service-box"><i class="fas fa-sync-alt"></i><span id="L-swap">스왑</span></div>
     </div>
 
-    <div class="detail-panel">
-        <div class="detail-row">
-            <span class="color-gold" id="txt-pool">유동성 풀 (Liquidity Pool)</span>
-            <span class="data-val" style="color:var(--hk-gold)">$ 88,401,753,753</span>
+    <div class="info-panel">
+        <div class="info-row">
+            <span class="lbl-gold" id="L-pool">유동성 풀 (Liquidity Pool)</span>
+            <span class="val-data" style="color:var(--hk-gold)">$ 88,401,753,753</span>
         </div>
-        <div class="detail-row">
-            <span class="color-neon" id="txt-pool-apr">풀 실시간 수익률 (APR)</span>
-            <span class="data-val" style="color:var(--hk-neon)">+ 24.8%</span>
+        <div class="info-row">
+            <span class="lbl-neon" id="L-poolapr">풀 실시간 수익률 (APR)</span>
+            <span class="val-data" style="color:var(--hk-neon)">+ 24.8%</span>
         </div>
-        <div class="detail-row">
-            <span class="color-orange" id="txt-security">보안 시스템</span>
-            <span class="data-val">HK_QUANTUM_SA</span>
+        <div class="info-row">
+            <span class="lbl-orange" id="L-security">보안 시스템</span>
+            <span class="val-data">HK_QUANTUM_SA</span>
         </div>
-        <div class="detail-row">
-            <span id="txt-kyb">기업 인증 (KYB)</span>
-            <span class="data-val" style="color:var(--hk-neon)">VERIFIED</span>
+        <div class="info-row">
+            <span id="L-kyb">기업 인증 (KYB)</span>
+            <span class="val-data" style="color:var(--hk-neon)">VERIFIED</span>
         </div>
     </div>
 
-    <div class="footer-btns">
-        <a href="#" class="btn-large btn-gradient">
-            <i class="fas fa-headset"></i> <span id="txt-cs">24/7 글로벌 고객지원센터</span>
+    <div class="action-btns">
+        <a href="#" class="btn-full btn-support">
+            <i class="fas fa-headset"></i> <span id="L-cs">24/7 글로벌 고객지원센터</span>
         </a>
-        <a href="mailto:info@hkwb.com" class="btn-large btn-outline">
+        <a href="mailto:info@hkwb.com" class="btn-full btn-mail">
             <i class="fas fa-envelope"></i> info@hkwb.com
         </a>
     </div>
 
     <footer>
         &copy; 2026 HK GROUP GLOBAL HEGEMONY. ALL RIGHTS RESERVED.<br>
-        POWERED BY PI NETWORK & HK QUANTUM COMPUTING.
+        CHAIRMAN: LEE JAEWAN | POWERED BY PI NETWORK & QUANTUM TECH.
     </footer>
 </div>
 
 <script>
-    // 30개 언어 지원을 위한 언어 맵 (핵심 3개 우선 구현, 구조 완비)
-    const langData = {
-        ko: { ledger: "메인 자산 통합 원장", gcv: "가치 평가: $ 12,566,360.00 (GCV)", send: "송금", pay: "결제", staking: "스테이킹", reward: "보상", income: "소득", swap: "스왑", pool: "유동성 풀 (Liquidity Pool)", poolapr: "풀 실시간 수익률 (APR)", security: "보안 시스템", kyb: "기업 인증 (KYB)", cs: "24/7 글로벌 고객지원센터" },
-        en: { ledger: "Main Unified Asset Ledger", gcv: "Valuation: $ 12,566,360.00 (GCV)", send: "Send", pay: "Pay", staking: "Staking", reward: "Reward", income: "Income", swap: "Swap", pool: "Liquidity Pool", poolapr: "Real-time APR", security: "Security System", kyb: "Corporate KYB", cs: "24/7 Global Support" },
-        zh: { ledger: "主资产统一账本", gcv: "估值: $ 12,566,360.00 (GCV)", send: "转账", pay: "支付", staking: "质押", reward: "奖励", income: "收入", swap: "兑换", pool: "流动性池", poolapr: "实时收益率", security: "安全系统", kyb: "企业KYB认证", cs: "24/7 全球客服" }
+    // 형님의 비전을 위한 30개국 언어 엔진 (주요 언어 우선 매핑)
+    const i18n = {
+        ko: { ledger: "메인 자산 통합 원장 (Unified Ledger)", gcv: "가치 평가: $ 12,566,360.00 (GCV)", send: "송금", pay: "결제", staking: "예치", reward: "보상", income: "소득", swap: "스왑", pool: "유동성 풀 (Liquidity Pool)", poolapr: "풀 실시간 수익률 (APR)", security: "보안 시스템", kyb: "기업 인증 (KYB)", cs: "24/7 글로벌 고객지원센터" },
+        en: { ledger: "Unified Asset Ledger", gcv: "Valuation: $ 12,566,360.00 (GCV)", send: "Send", pay: "Pay", staking: "Staking", reward: "Reward", income: "Income", swap: "Swap", pool: "Liquidity Pool", poolapr: "Real-time APR", security: "Security System", kyb: "Corporate KYB", cs: "24/7 Global Support Center" },
+        zh: { ledger: "主资产统一账本", gcv: "估值: $ 12,566,360.00 (GCV)", send: "转账", pay: "支付", staking: "质押", reward: "奖励", income: "收入", swap: "兑换", pool: "流动性池", poolapr: "实时收益率", security: "安全系统", kyb: "企业KYB认证", cs: "24/7 全球客服" },
+        ja: { ledger: "メイン資産統合台帳", gcv: "評価額: $ 12,566,360.00 (GCV)", send: "送金", pay: "決済", staking: "ステーキング", reward: "報酬", income: "所得", swap: "スワップ", pool: "流動性プール", poolapr: "リアルタイム収益率", security: "セキュリティシステム", kyb: "企業KYB認証", cs: "24/7 グローバルサポート" }
     };
 
-    function applyGlobalLang(code) {
-        const d = langData[code] || langData['en'];
-        document.getElementById('txt-ledger').innerText = d.ledger;
-        document.getElementById('txt-gcv').innerText = d.gcv;
-        document.getElementById('txt-send').innerText = d.send;
-        document.getElementById('txt-pay').innerText = d.pay;
-        document.getElementById('txt-staking').innerText = d.staking;
-        document.getElementById('txt-reward').innerText = d.reward;
-        document.getElementById('txt-income').innerText = d.income;
-        document.getElementById('txt-swap').innerText = d.swap;
-        document.getElementById('txt-pool').innerText = d.pool;
-        document.getElementById('txt-pool-apr').innerText = d.poolapr;
-        document.getElementById('txt-security').innerText = d.security;
-        document.getElementById('txt-kyb').innerText = d.kyb;
-        document.getElementById('txt-cs').innerText = d.cs;
-        console.log("System: Language Switched to " + code.toUpperCase());
+    function switchGlobalLang(code) {
+        const d = i18n[code] || i18n['en'];
+        document.getElementById('L-ledger').innerText = d.ledger;
+        document.getElementById('L-gcv').innerText = d.gcv;
+        document.getElementById('L-send').innerText = d.send;
+        document.getElementById('L-pay').innerText = d.pay;
+        document.getElementById('L-staking').innerText = d.staking;
+        document.getElementById('L-reward').innerText = d.reward;
+        document.getElementById('L-income').innerText = d.income;
+        document.getElementById('L-swap').innerText = d.swap;
+        document.getElementById('L-pool').innerText = d.pool;
+        document.getElementById('L-poolapr').innerText = d.poolapr;
+        document.getElementById('L-security').innerText = d.security;
+        document.getElementById('L-kyb').innerText = d.kyb;
+        document.getElementById('L-cs').innerText = d.cs;
+        console.log("HK-System: Language updated to " + code);
     }
 </script>
 
