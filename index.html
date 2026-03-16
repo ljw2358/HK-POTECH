@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLDBANK | Global Digital Asset Super-Node</title>
+    <title>HK WORLDBANK | GLOBAL HEGEMONY SYSTEM</title>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -13,290 +14,320 @@
             --hk-orange: #FF8C00;
             --hk-neon: #39FF14;
             --hk-red: #FF4500;
-            --bg-deep: #050505;
-            --card-glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --bg-black: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* 폰트 크기 및 배열 초기화 */
+        /* 전 영역 초기화: 폰 배열 엉킴 방지 */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-black);
             color: #ffffff;
             font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
             word-break: keep-all;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* 메인 컨테이너 - 폰 너비에 딱 맞춤 */
-        .hk-wrapper {
+        /* 최외곽 컨테이너 - 모바일 꽉 차게 */
+        .master-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 20px 15px 120px;
+            padding: env(safe-area-inset-top) 20px 150px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 상단 유틸리티 바 */
-        .top-utility {
+        /* 웅장한 헤더 네비게이션 */
+        .hk-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .hk-group-label {
-            font-family: 'Orbitron', sans-serif;
+        .hk-logo-small {
+            font-family: 'Orbitron';
             color: var(--hk-gold);
             font-weight: 900;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 16px;
+            letter-spacing: 2px;
         }
 
-        /* 30개 언어 스위처 (실제 작동 로직 포함) */
-        .lang-select-box {
-            background: rgba(255,255,255,0.07);
+        /* 언어 선택 - 폰에서도 잘 보이게 크게 */
+        .lang-control {
+            background: linear-gradient(145deg, #222, #000);
             color: var(--hk-gold);
-            border: 1px solid var(--hk-gold);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: bold;
+            border: 2px solid var(--hk-gold);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 900;
+            font-family: 'Orbitron';
             outline: none;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
 
-        /* 로고 구역 - 줄 배열 수정 */
-        .brand-header {
+        /* 메인 브랜드 섹션: 줄 배열 엉킴 방지 핵심 */
+        .brand-hero {
             text-align: center;
-            margin-bottom: 40px;
+            padding: 50px 0;
         }
 
-        .main-title {
+        .hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem; /* 폰 화면에 맞춰 크기 조정 */
+            font-size: clamp(2rem, 10vw, 3rem); /* 폰트 크기 자동 조절 */
             font-weight: 900;
-            display: block;
             line-height: 1.1;
+            margin-bottom: 15px;
             background: linear-gradient(to bottom, #FFD700, #FF8C00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .sub-node-status {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 10px;
-            color: var(--hk-neon);
-            margin-top: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* 자산 원장 섹션 - 글자 안 잘리게 조정 */
-        .ledger-card {
-            background: linear-gradient(145deg, #111, #000);
-            border-radius: 25px;
-            padding: 30px 15px;
-            text-align: center;
-            border: 1px solid var(--border-glass);
-            margin-bottom: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-        }
-
-        /* 요청하신 글자 컬러: 골드 */
-        .ledger-title {
-            color: var(--hk-gold);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* 400.0000 Pi 크기 자동 축소 (안 짤림) */
-        .asset-amount {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 9vw, 2.5rem); 
-            font-weight: 900;
-            color: #fff;
-            white-space: nowrap;
-            letter-spacing: -1px;
-        }
-        .pi-symbol { color: var(--hk-orange); font-size: 0.7em; }
-
-        .gcv-valuation {
-            margin-top: 15px;
+        .node-badge {
+            font-family: 'Roboto Mono', monospace;
             color: var(--hk-neon);
-            font-size: 14px;
-            font-weight: 600;
-            background: rgba(57, 255, 20, 0.1);
-            padding: 8px 15px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* 메인 원장 카드 - 장엄한 디자인 */
+        .asset-ledger-card {
+            background: linear-gradient(165deg, #151515 0%, #000 100%);
+            border-radius: 35px;
+            padding: 45px 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+        }
+
+        /* 요청 컬러: 메인 자산 통합 원장 (골드) */
+        .ledger-heading {
+            color: var(--hk-gold);
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            display: block;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* 400.0000 Pi 핵심: 절대 짤리지 않는 가변 폰트 */
+        .pi-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 9.5vw, 3rem); 
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            white-space: nowrap;
+        }
+        .pi-unit { color: var(--hk-orange); font-size: 0.7em; margin-left: 5px; }
+
+        .gcv-box {
+            background: rgba(57, 255, 20, 0.08);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            padding: 12px 20px;
             border-radius: 50px;
+            color: var(--hk-neon);
+            font-weight: 700;
+            font-size: 14px;
             display: inline-block;
         }
 
-        /* 서비스 아이콘 그리드 */
+        /* 3x2 서비스 센터 */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .service-box {
-            background: var(--card-glass);
-            border: 1px solid var(--border-glass);
-            padding: 20px 5px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .service-box i {
-            font-size: 1.8rem;
-            color: var(--hk-gold);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .service-box span { font-size: 0.85rem; font-weight: 500; display: block; }
-        .apr-tag { font-size: 10px; color: var(--hk-neon); font-weight: 800; margin-top: 4px; display: block; }
-
-        /* 하단 상세 정보 리스트 - 요청 컬러 반영 */
-        .info-panel {
-            background: rgba(255,255,255,0.02);
-            border-radius: 20px;
-            padding: 20px;
+            gap: 15px;
             margin-bottom: 40px;
         }
 
-        .info-row {
+        .service-item {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px 5px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .service-item i {
+            font-size: 2rem;
+            color: var(--hk-gold);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .service-item span { font-size: 0.9rem; font-weight: 700; color: #fff; }
+        .apr-neon { font-size: 10px; color: var(--hk-neon); font-weight: 900; margin-top: 5px; display: block; }
+
+        /* 하단 장엄한 데이터 리스트 - 요청 컬러 모두 적용 */
+        .imperial-data-list {
+            background: rgba(255,255,255,0.02);
+            border-radius: 30px;
+            padding: 30px;
+            border-left: 6px solid var(--hk-orange);
+            margin-bottom: 50px;
+        }
+
+        .data-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 18px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .info-row:last-child { border: none; }
+        .data-row:last-child { border: none; }
 
-        /* 요청하신 컬러 포인트들 */
-        .lbl-gold { color: var(--hk-gold); font-weight: 700; }
-        .lbl-neon { color: var(--hk-neon); font-weight: 700; }
-        .lbl-orange { color: var(--hk-orange); font-weight: 700; }
+        /* 요청 컬러 폰트 클래스 */
+        .c-gold { color: var(--hk-gold); font-weight: 900; }
+        .c-neon { color: var(--hk-neon); font-weight: 900; }
+        .c-orange { color: var(--hk-orange); font-weight: 900; }
         
-        .val-data { font-family: 'Roboto Mono', monospace; font-size: 0.9rem; }
+        .val-text { font-family: 'Roboto Mono', monospace; font-size: 0.95rem; }
 
-        /* 고객지원 및 메일 버튼 */
-        .action-btns { display: flex; flex-direction: column; gap: 15px; }
+        /* 대형 액션 버튼 */
+        .hk-actions { display: flex; flex-direction: column; gap: 15px; }
 
-        .btn-full {
+        .btn-mega {
             width: 100%;
-            padding: 18px;
-            border-radius: 15px;
-            text-align: center;
-            font-weight: 800;
+            padding: 24px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1.1rem;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            transition: 0.4s;
         }
 
-        .btn-support { background: linear-gradient(90deg, #FF4500, #FF8C00); color: white; box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3); }
-        .btn-mail { background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: #fff; }
+        .btn-gold-grad {
+            background: linear-gradient(90deg, #FF4500, #FF8C00);
+            color: #fff;
+            box-shadow: 0 15px 35px rgba(255, 69, 0, 0.4);
+        }
 
-        footer { text-align: center; padding: 40px 0; font-size: 10px; color: #444; }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: #888;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            font-size: 11px;
+            color: #333;
+            line-height: 2;
+        }
     </style>
 </head>
 <body>
 
-<div class="hk-wrapper">
-    <div class="top-utility">
-        <div class="hk-group-label">HK GROUP</div>
-        <select class="lang-select-box" id="langPicker" onchange="switchGlobalLang(this.value)">
-            <option value="ko">KOREAN</option>
-            <option value="en">ENGLISH</option>
-            <option value="zh">CHINESE</option>
-            <option value="ja">JAPANESE</option>
-            <option value="vi">VIETNAMESE</option>
-            <option value="de">GERMAN</option>
-            <option value="fr">FRENCH</option>
-            <option value="es">SPANISH</option>
-            <option value="ru">RUSSIAN</option>
-            <option value="ar">ARABIC</option>
+<div class="master-container">
+    <nav class="hk-nav">
+        <div class="hk-logo-small">HK GROUP SYSTEM</div>
+        <select class="lang-control" id="langEngine" onchange="runLanguageEngine(this.value)">
+            <option value="ko">KOREAN (KOR)</option>
+            <option value="en">ENGLISH (USA)</option>
+            <option value="zh">CHINESE (CHN)</option>
+            <option value="ja">JAPANESE (JPN)</option>
+            <option value="de">GERMAN (DEU)</option>
+            <option value="fr">FRENCH (FRA)</option>
+            <option value="es">SPANISH (ESP)</option>
+            <option value="ru">RUSSIAN (RUS)</option>
+            <option value="vi">VIETNAMESE (VNM)</option>
         </select>
-    </div>
+    </nav>
 
-    <header class="brand-header">
-        <span class="main-title">HK WORLD BANK</span>
-        <div class="sub-node-status">
-            <i class="fas fa-circle" style="font-size: 8px; vertical-align: middle; margin-right: 5px;"></i>
-            Global Super-Node: HK-KO-Terminal-Active
+    <header class="brand-hero">
+        <h1 class="hero-title">HK WORLD BANK</h1>
+        <div class="node-badge">
+            <i class="fas fa-circle blink"></i>
+            <span id="T-status">GLOBAL SUPER-NODE: HK-KO-ACTIVE</span>
         </div>
     </header>
 
-    <div class="ledger-card">
-        <span class="ledger-title" id="L-ledger">메인 자산 통합 원장 (Unified Ledger)</span>
-        <div class="asset-amount">400.0000 <span class="pi-symbol">Pi</span></div>
-        <div class="gcv-valuation" id="L-gcv">가치 평가: $ 12,566,360.00 (GCV)</div>
+    <div class="asset-ledger-card">
+        <span class="ledger-heading" id="L-ledger">메인 자산 통합 원장 (Unified Ledger)</span>
+        <div class="pi-amount">400.0000 <span class="pi-unit">Pi</span></div>
+        <div class="gcv-box" id="L-gcv">가치 평가: $ 12,566,360.00 (GCV)</div>
     </div>
 
     <div class="service-grid">
-        <div class="service-box"><i class="fas fa-paper-plane"></i><span id="L-send">송금</span></div>
-        <div class="service-box"><i class="fas fa-shopping-bag"></i><span id="L-pay">결제</span></div>
-        <div class="service-box">
+        <div class="service-item"><i class="fas fa-paper-plane"></i><span id="L-send">송금</span></div>
+        <div class="service-item"><i class="fas fa-shopping-bag"></i><span id="L-pay">결제</span></div>
+        <div class="service-item">
             <i class="fas fa-vault"></i><span id="L-staking">예치</span>
-            <span class="apr-tag">APR 12.5%</span>
+            <span class="apr-neon">APR 12.5%</span>
         </div>
-        <div class="service-box"><i class="fas fa-gift"></i><span id="L-reward">보상</span></div>
-        <div class="service-box"><i class="fas fa-balance-scale"></i><span id="L-income">소득</span></div>
-        <div class="service-box"><i class="fas fa-sync-alt"></i><span id="L-swap">스왑</span></div>
+        <div class="service-item"><i class="fas fa-gift"></i><span id="L-reward">보상</span></div>
+        <div class="service-item"><i class="fas fa-balance-scale"></i><span id="L-income">소득</span></div>
+        <div class="service-item"><i class="fas fa-sync-alt"></i><span id="L-swap">스왑</span></div>
     </div>
 
-    <div class="info-panel">
-        <div class="info-row">
-            <span class="lbl-gold" id="L-pool">유동성 풀 (Liquidity Pool)</span>
-            <span class="val-data" style="color:var(--hk-gold)">$ 88,401,753,753</span>
+    <div class="imperial-data-list">
+        <div class="data-row">
+            <span class="c-gold" id="L-pool">유동성 풀 (Liquidity Pool)</span>
+            <span class="val-text" style="color:var(--hk-gold)">$ 88,401,753,753</span>
         </div>
-        <div class="info-row">
-            <span class="lbl-neon" id="L-poolapr">풀 실시간 수익률 (APR)</span>
-            <span class="val-data" style="color:var(--hk-neon)">+ 24.8%</span>
+        <div class="data-row">
+            <span class="c-neon" id="L-poolapr">풀 실시간 수익률 (APR)</span>
+            <span class="val-text" style="color:var(--hk-neon)">+ 24.8%</span>
         </div>
-        <div class="info-row">
-            <span class="lbl-orange" id="L-security">보안 시스템</span>
-            <span class="val-data">HK_QUANTUM_SA</span>
+        <div class="data-row">
+            <span class="c-orange" id="L-security">보안 시스템</span>
+            <span class="val-text">HK_QUANTUM_GENESIS_SA</span>
         </div>
-        <div class="info-row">
+        <div class="data-row">
             <span id="L-kyb">기업 인증 (KYB)</span>
-            <span class="val-data" style="color:var(--hk-neon)">VERIFIED</span>
+            <span class="val-text" style="color:var(--hk-neon)">VERIFIED-100%</span>
         </div>
     </div>
 
-    <div class="action-btns">
-        <a href="#" class="btn-full btn-support">
+    <div class="hk-actions">
+        <a href="#" class="btn-mega btn-gold-grad">
             <i class="fas fa-headset"></i> <span id="L-cs">24/7 글로벌 고객지원센터</span>
         </a>
-        <a href="mailto:info@hkwb.com" class="btn-full btn-mail">
+        <a href="mailto:info@hkwb.com" class="btn-mega btn-outline">
             <i class="fas fa-envelope"></i> info@hkwb.com
         </a>
     </div>
 
     <footer>
-        &copy; 2026 HK GROUP GLOBAL HEGEMONY. ALL RIGHTS RESERVED.<br>
-        CHAIRMAN: LEE JAEWAN | POWERED BY PI NETWORK & QUANTUM TECH.
+        &copy; 2026 HK GROUP GLOBAL HEGEMONY.<br>
+        CHAIRMAN: LEE JAEWAN (HK) | POWERED BY QUANTUM INFRASTRUCTURE
     </footer>
 </div>
 
 <script>
-    // 형님의 비전을 위한 30개국 언어 엔진 (주요 언어 우선 매핑)
-    const i18n = {
-        ko: { ledger: "메인 자산 통합 원장 (Unified Ledger)", gcv: "가치 평가: $ 12,566,360.00 (GCV)", send: "송금", pay: "결제", staking: "예치", reward: "보상", income: "소득", swap: "스왑", pool: "유동성 풀 (Liquidity Pool)", poolapr: "풀 실시간 수익률 (APR)", security: "보안 시스템", kyb: "기업 인증 (KYB)", cs: "24/7 글로벌 고객지원센터" },
-        en: { ledger: "Unified Asset Ledger", gcv: "Valuation: $ 12,566,360.00 (GCV)", send: "Send", pay: "Pay", staking: "Staking", reward: "Reward", income: "Income", swap: "Swap", pool: "Liquidity Pool", poolapr: "Real-time APR", security: "Security System", kyb: "Corporate KYB", cs: "24/7 Global Support Center" },
-        zh: { ledger: "主资产统一账本", gcv: "估值: $ 12,566,360.00 (GCV)", send: "转账", pay: "支付", staking: "质押", reward: "奖励", income: "收入", swap: "兑换", pool: "流动性池", poolapr: "实时收益率", security: "安全系统", kyb: "企业KYB认证", cs: "24/7 全球客服" },
-        ja: { ledger: "メイン資産統合台帳", gcv: "評価額: $ 12,566,360.00 (GCV)", send: "送金", pay: "決済", staking: "ステーキング", reward: "報酬", income: "所得", swap: "スワップ", pool: "流動性プール", poolapr: "リアルタイム収益率", security: "セキュリティシステム", kyb: "企業KYB認証", cs: "24/7 グローバルサポート" }
+    // 형님의 30개국 글로벌 야망을 담은 다국어 데이터베이스
+    const langData = {
+        ko: { ledger: "메인 자산 통합 원장 (Unified Ledger)", gcv: "가치 평가: $ 12,566,360.00 (GCV)", send: "송금", pay: "결제", staking: "예치", reward: "보상", income: "소득", swap: "스왑", pool: "유동성 풀 (Liquidity Pool)", poolapr: "풀 실시간 수익률 (APR)", security: "보안 시스템", kyb: "기업 인증 (KYB)", cs: "24/7 글로벌 고객지원센터", status: "글로벌 슈퍼노드: HK-한국-활성화" },
+        en: { ledger: "Main Unified Asset Ledger", gcv: "Valuation: $ 12,566,360.00 (GCV)", send: "Send", pay: "Pay", staking: "Staking", reward: "Reward", income: "Income", swap: "Swap", pool: "Liquidity Pool", poolapr: "Real-time APR", security: "Security System", kyb: "Corporate KYB", cs: "24/7 Global Support Center", status: "GLOBAL SUPER-NODE: HK-USA-ACTIVE" },
+        zh: { ledger: "主资产统一账本", gcv: "资产估值: $ 12,566,360.00 (GCV)", send: "转账", pay: "支付", staking: "质押", reward: "奖励", income: "收入", swap: "兑换", pool: "流动性池", poolapr: "实时收益率", security: "安全系统", kyb: "企业KYB认证", cs: "24/7 全球客户服务中心", status: "全球超级节点: HK-中国-启动" }
     };
 
-    function switchGlobalLang(code) {
-        const d = i18n[code] || i18n['en'];
+    function runLanguageEngine(code) {
+        const d = langData[code] || langData['en'];
         document.getElementById('L-ledger').innerText = d.ledger;
         document.getElementById('L-gcv').innerText = d.gcv;
         document.getElementById('L-send').innerText = d.send;
@@ -310,7 +341,8 @@
         document.getElementById('L-security').innerText = d.security;
         document.getElementById('L-kyb').innerText = d.kyb;
         document.getElementById('L-cs').innerText = d.cs;
-        console.log("HK-System: Language updated to " + code);
+        document.getElementById('T-status').innerText = d.status;
+        console.log("HK-OS: Language synchronized to " + code.toUpperCase());
     }
 </script>
 
