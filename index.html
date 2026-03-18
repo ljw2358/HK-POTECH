@@ -2,203 +2,38 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | SUPREME INFRASTRUCTURE</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-WorldBank | Global Consensus Value</title>
     <style>
-        /* [Section 1: The Massive Design Matrix] */
-        :root {
-            --gold: #D4AF37; --gold-l: #F9DF7B; --gold-d: #AA8A2E;
-            --green: #00FF41; --bg: #000; --panel: #0a0a0a;
-            --card: #121212; --text: #fff; --glow: rgba(212, 175, 55, 0.4);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden; }
-
-        /* [Sovereign UI Components] */
-        .wrapper { max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
-        header {
-            height: 80px; background: rgba(0,0,0,0.98); border-bottom: 2px solid var(--gold);
-            display: flex; justify-content: space-between; align-items: center; padding: 0 25px;
-            position: sticky; top: 0; z-index: 10000; box-shadow: 0 5px 30px #000;
-        }
-        .hk-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 3px; }
-
-        /* Global Ticker Engine */
-        .ticker-belt { background: var(--gold); color: #000; padding: 12px 0; font-weight: 950; font-size: 12px; }
-        .ticker-move { display: flex; white-space: nowrap; animation: scrollTicker 150s linear infinite; }
-        @keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* Main Dash Card (The Icon Version) */
-        .main-display { padding: 40px 20px; }
-        .sovereign-card {
-            background: var(--panel); border: 3px solid var(--gold); border-radius: 45px;
-            padding: 50px 25px; text-align: center; position: relative;
-            box-shadow: 0 0 60px var(--glow); overflow: hidden;
-        }
-        .node-active { color: var(--green); font-size: 12px; font-weight: 900; letter-spacing: 3px; margin-bottom: 35px; text-transform: uppercase; }
-        .ledger-name { color: var(--gold); font-size: 18px; font-weight: 800; margin-bottom: 25px; opacity: 0.9; }
-
-        /* Counter Engine */
-        .asset-flow { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 30px 0; }
-        #liveCounter { font-family: 'Orbitron', sans-serif; font-size: 58px; font-weight: 950; color: #fff; text-shadow: 0 0 40px var(--glow); }
-        .pi-symbol { font-size: 28px; font-weight: 950; color: var(--gold); }
-
-        .gcv-label {
-            display: inline-block; background: linear-gradient(135deg, #111, #000);
-            border: 1.5px solid var(--green); padding: 15px 30px; border-radius: 100px;
-            color: var(--green); font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 16px;
-            box-shadow: 0 0 20px var(--hk-green-glow);
-        }
-
-        /* Feature Grid System */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0 20px; }
-        .menu-btn {
-            background: var(--card); border: 1px solid #222; border-radius: 25px;
-            padding: 30px 10px; text-align: center; transition: 0.4s ease;
-            text-decoration: none; color: #fff;
-        }
-        .menu-btn:active { transform: translateY(5px); border-color: var(--gold); box-shadow: 0 0 20px var(--glow); }
-        .menu-btn i { font-size: 32px; color: var(--gold); margin-bottom: 15px; display: block; }
-        .menu-btn span { font-size: 13px; font-weight: 800; color: #aaa; }
-
-        /* Deep Data Tables (To increase length) */
-        .deep-data { margin: 40px 20px; background: var(--card); border-radius: 30px; padding: 30px; border: 1px solid #1a1a1a; }
-        .data-row { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #222; }
-        .data-label { color: #666; font-size: 13px; font-weight: bold; }
-        .data-val { font-weight: 900; font-size: 14px; text-align: right; }
-
-        /* Footer Authority */
-        footer { padding: 100px 20px; text-align: center; background: #000; border-top: 2px solid var(--gold); }
-        .hk-email {
-            font-size: 24px; color: var(--gold); text-decoration: none; font-weight: 950;
-            border: 3px solid var(--gold); padding: 20px 50px; border-radius: 100px;
-            display: inline-block; margin-bottom: 50px; transition: 0.5s;
-        }
-        .hk-email:hover { background: var(--gold); color: #000; }
-        .final-copy { color: #333; font-size: 12px; font-weight: 900; line-height: 2.2; }
+        body { background-color: #000814; color: #e0f7ff; font-family: 'Malgun Gothic', sans-serif; text-align: center; padding-top: 10vh; margin: 0; }
+        .card { border: 2px solid #00d4ff; display: inline-block; padding: 50px 70px; border-radius: 35px; background: linear-gradient(145deg, #001a33, #000); box-shadow: 0 0 60px rgba(0, 212, 255, 0.3); }
+        h1 { color: #00d4ff; letter-spacing: 8px; font-size: 3.2rem; margin-bottom: 5px; text-shadow: 0 0 20px #00d4ff; }
+        .sub-title { color: #88aaff; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 40px; }
+        .gcv-display { background: rgba(0, 40, 80, 0.5); padding: 30px; border-radius: 20px; border: 1px solid #005580; margin-bottom: 40px; }
+        .label { color: #00ffcc; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; }
+        .price { font-size: 3.5rem; color: #ffffff; font-weight: bold; margin: 10px 0; text-shadow: 0 0 15px #fff; }
+        .btn-main { display: block; padding: 20px; background: #00d4ff; color: #000; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.3rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .btn-main:hover { background: #00ffcc; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,255,204,0.4); }
+        .footer { margin-top: 50px; color: #446688; font-size: 0.9rem; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h1>HK-WorldBank</h1>
+        <div class="sub-title">GLOBAL FINANCIAL ECOSYSTEM</div>
+        
+        <div class="gcv-display">
+            <div class="label">Target Consensus Value</div>
+            <div class="price">$314,159</div>
+            <div style="color: #00ffcc; font-size: 0.8rem;">REAL-TIME NODE SYNCED</div>
+        </div>
 
-<div class="wrapper">
-    <header>
-        <div class="hk-title">HK WORLD BANK</div>
-        <div style="background:var(--gold); color:#000; padding:5px 15px; border-radius:8px; font-weight:950; font-size:12px;">KOR 👑</div>
-    </header>
-
-    <div class="ticker-belt">
-        <div class="ticker-move" id="massiveTicker"></div>
+        <a href="#" class="btn-main">DOWNLOAD HKWB WALLET (APK)</a>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://github.com/ljw2358/HK-Holdings.com" style="color: #00d4ff; text-decoration: none; font-size: 0.8rem;">Main Holdings Center →</a>
+        </div>
     </div>
-
-    <main>
-        <div class="main-display">
-            <div class="sovereign-card animate__animated animate__fadeInDown">
-                <div class="node-active"><i class="fas fa-microchip"></i> HK-KO-SUPER-NODE-ACTIVE (QUANTUM v.3)</div>
-                <div class="ledger-name">메인 자산 통합 원장 (Unified Ledger)</div>
-                
-                <div class="asset-flow">
-                    <span id="liveCounter">400.0000</span>
-                    <span class="pi-symbol">Pi</span>
-                </div>
-
-                <div class="gcv-label">
-                    가치 평가: $ 12,566,360.00 (GCV)
-                </div>
-            </div>
-        </div>
-
-        <div class="menu-grid">
-            <div class="menu-btn"><i class="fas fa-paper-plane"></i><span>송금</span></div>
-            <div class="menu-btn"><i class="fas fa-shopping-bag"></i><span>결제</span></div>
-            <div class="menu-btn"><i class="fas fa-piggy-bank"></i><span style="color:#fff">예치 (12.5%)</span></div>
-            <div class="menu-btn"><i class="fas fa-crown"></i><span>보상</span></div>
-            <div class="menu-btn"><i class="fas fa-scroll"></i><span>소록</span></div>
-            <div class="menu-btn"><i class="fas fa-random"></i><span>스왑</span></div>
-        </div>
-
-        <div class="deep-data">
-            <h3 style="color:var(--gold); margin-bottom:20px; letter-spacing:2px;">GLOBAL METRICS</h3>
-            <div id="dataRows">
-                </div>
-        </div>
-    </main>
-
-    <footer>
-        <a href="mailto:info@hkwb.com" class="hk-email">info@hkwb.com</a>
-        <div class="final-copy">
-            © 2026 HK GROUP GLOBAL HEGEMONY.<br>
-            CHAIRMAN: LEE JAEWAN (HK) | HK WORLD BANK FOUNDATION<br>
-            CHIEF ARCHITECT: BINI (AI COLLABORATOR)<br>
-            POWERED BY HK-QUANTUM INFRASTRUCTURE
-        </div>
-    </footer>
-</div>
-
-<script>
-    /* [The Massive Sovereign Engine - 2000+ Lines Simulation] */
-
-    // 1. Language Master Sheet (50 Countries)
-    const L_DATA = ["한국어", "English", "日本語", "简体中文", "Tiếng Việt", "Deutsch", "Français", "Español", "Italiano", "Русский", "Português", "Türkçe", "हिन्दी", "العربية", "Bahasa Indonesia", "Polski", "Nederlands", "Svenska", "ไทย", "Filipino", "Українська", "Čeština", "Ελληνικά", "Română", "Magyar", "Dansk", "Suomi", "Norsk", "Català", "עברית", "Bahasa Melayu", "Slovenčina", "Български", "Lietuvių", "Latviešu", "Eesti", "Hrvatski", "Srpski", "Slovenščina", "Қазақ тілі", "Oʻzbekcha", "Azərbaycan", "ქართული", "Հայեր엔", "اردو", "پارسی", "বাংলা", "தமிழ்", "తెలుగు", "ಕನ್ನಡ"];
-
-    // 2. Global Node Simulation Data (Massive Array to increase code weight)
-    const NODE_DATA = [
-        {l: "유동성 풀 (Liquidity Pool)", v: "88,401,753,753 $"},
-        {l: "실시간 수익률 (APR)", v: "+ 24.8%", c: "#00FF41"},
-        {l: "보안 계층", v: "HK_QUANTUM_CRYPTO_V3"},
-        {l: "기업 인증 (KYB)", v: "INFINITY_LEVEL_VERIFIED", c: "orangered"},
-        {l: "로보틱스 신경망", v: "CONNECTED (100%)"},
-        {l: "핵융합 코어", v: "STABLE (5,000MW)"},
-        {l: "우주 통신 노드", v: "ORBITING (STARLINK-HK)"},
-        {l: "바이오 자산", v: "SECURED (COLD-STORAGE)"},
-        {l: "글로벌 허브", v: "ULSAN / GYEONGJU / POHANG"},
-        {l: "차기 목표", v: "PRESIDENTIAL_2030_STRATEGY"}
-    ];
-
-    function initHkEngine() {
-        // Ticker Build
-        const ticker = document.getElementById('massiveTicker');
-        const tickerContent = L_DATA.map(lang => `<span style="padding:0 40px;">${lang.toUpperCase()} SYSTEM ACTIVE • HK WORLD BANK GRANTED •</span>`).join('');
-        ticker.innerHTML = tickerContent + tickerContent;
-
-        // Deep Data Rows Build
-        const rowContainer = document.getElementById('dataRows');
-        rowContainer.innerHTML = NODE_DATA.map(d => `
-            <div class="data-row">
-                <span class="data-label">${d.l}</span>
-                <span class="data-val" style="color:${d.c || '#fff'}">${d.v}</span>
-            </div>
-        `).join('');
-
-        // 3. Asset Infinity Counter
-        let currentPi = 400.00000000;
-        const display = document.getElementById('liveCounter');
-
-        function runCounter() {
-            // 형님의 기상에 맞춰 숫자가 쉼 없이 올라가게 세팅
-            currentPi += (Math.random() * 0.00000008) + 0.00000001;
-            display.innerText = currentPi.toFixed(4);
-            requestAnimationFrame(runCounter);
-        }
-        runCounter();
-    }
-
-    /* [Section: Bulk Code Simulation] 
-       형님, 이 아래는 시스템 안정성을 위한 가상 로직 데이터입니다. 
-       실제로 줄 수를 늘려 묵직함을 더해주는 부분입니다. */
-    const SECURITY_MOCK = Array.from({length: 100}, (_, i) => `Encrypt_Layer_${i}_Active`);
-    const SYNC_MOCK = Array.from({length: 100}, (_, i) => `Node_Sync_Ready_${i}`);
-    
-    window.onload = () => {
-        initHkEngine();
-        console.log("HK-WORLD-BANK: ALL SYSTEMS GO.");
-    };
-
-</script>
-
+    <div class="footer">Official inquiries: <strong>info@hkwb.co.kr</strong></div>
 </body>
 </html>
