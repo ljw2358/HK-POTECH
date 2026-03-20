@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - Perfect Replica</title>
+    <title>HK WORLD BANK</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
         :root {
             --bg-color: #000000;
@@ -14,232 +13,59 @@
             --neon-green: #39FF14;
             --sub-orange: #FF8C00;
             --text-white: #FFFFFF;
-            /* 사진 속 아이콘 박스의 옅은 배경색 */
             --icon-box-bg: rgba(42, 42, 42, 0.4); 
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-color);
             color: var(--text-white);
             font-family: 'Noto Sans KR', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
             min-height: 100vh;
         }
 
-        /* 헤더 및 언어 선택 */
-        header {
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: flex-end;
-            box-sizing: border-box;
-        }
+        header { width: 100%; padding: 20px; display: flex; justify-content: flex-end; box-sizing: border-box; }
+        .lang-select { background: rgba(255, 215, 0, 0.1); color: var(--main-gold); border: 1px solid var(--main-gold); padding: 8px 15px; border-radius: 8px; font-size: 14px; cursor: pointer; }
 
-        .lang-select {
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--main-gold);
-            border: 1px solid var(--main-gold);
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-        }
+        .brand-section { text-align: center; margin-top: 10px; }
+        .brand-title { font-family: 'Oswald', sans-serif; font-size: 45px; line-height: 1.0; color: var(--main-gold); text-transform: uppercase; margin-bottom: 12px; }
+        .secure-node { color: var(--neon-green); font-size: 13px; font-weight: bold; letter-spacing: 1px; }
 
-        /* 메인 브랜드 타이틀 */
-        .brand-section {
-            text-align: center;
-            margin-top: 10px;
-        }
+        .asset-card { width: 90%; max-width: 380px; background: linear-gradient(145deg, #1f1f1f, #0a0a0a); border-radius: 35px; padding: 35px 20px; margin-top: 30px; text-align: center; border: 1px solid #2a2a2a; box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
+        .apr-tag { color: var(--neon-green); font-weight: bold; text-align: right; display: block; font-size: 15px; margin-bottom: 5px; }
+        .ledger-title { color: var(--main-gold); font-size: 19px; margin-bottom: 30px; }
+        .pi-balance { font-size: 52px; font-weight: 800; margin-bottom: 30px; }
+        .pi-balance span { color: var(--sub-orange); font-size: 26px; }
+        .gcv-box { border: 2px solid var(--neon-green); border-radius: 50px; padding: 18px; color: var(--neon-green); font-weight: bold; font-size: 17px; }
 
-        .brand-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 45px;
-            line-height: 1.0;
-            color: var(--main-gold);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 90%; max-width: 380px; margin-top: 45px; }
+        .menu-item { text-align: center; }
+        .menu-item .icon-wrapper { background-color: var(--icon-box-bg); width: 65px; height: 65px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 1px solid #333; }
+        .menu-item img { width: 35px; height: 35px; }
+        .menu-item span { font-size: 14px; font-weight: 500; color: #ddd; display: block; width: 100%; }
 
-        .secure-node {
-            color: var(--neon-green);
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* 자산 카드 */
-        .asset-card {
-            width: 90%;
-            max-width: 380px;
-            background: linear-gradient(145deg, #1f1f1f, #0a0a0a);
-            border-radius: 35px;
-            padding: 35px 20px;
-            margin-top: 30px;
-            text-align: center;
-            border: 1px solid #2a2a2a;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-        }
-
-        .apr-tag {
-            color: var(--neon-green);
-            font-weight: bold;
-            text-align: right;
-            display: block;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-
-        .ledger-title {
-            color: var(--main-gold);
-            font-size: 19px;
-            margin-bottom: 30px;
-        }
-
-        .pi-balance {
-            font-size: 52px;
-            font-weight: 800;
-            margin-bottom: 30px;
-        }
-
-        .pi-balance span {
-            color: var(--sub-orange);
-            font-size: 26px;
-        }
-
-        .gcv-box {
-            border: 2px solid var(--neon-green);
-            border-radius: 50px;
-            padding: 18px;
-            color: var(--neon-green);
-            font-weight: bold;
-            font-size: 17px;
-        }
-
-        /* 📸 사진 속 6개 아이콘 그리드 - 완전 재현 📸 */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            width: 90%;
-            max-width: 380px;
-            margin-top: 45px;
-        }
-      <div class="menu-item">
-            <div class="icon-wrapper">
-                <img src="https://em-content.zobj.net/source/microsoft-teams/363/fork-and-knife_1f37d-fe0f.png" alt="예치" style="width:35px; height:35px;">
-            </div>
-            <span id="m3" style="display:block; width:100%;">예치</span>
-        </div>
-
-        .menu-item {
-            text-align: center;
-        }
-
-        /* 사진 속 옅은 회색 박스 아이콘 배경 */
-        .menu-item .icon-wrapper {
-            background-color: var(--icon-box-bg);
-            width: 65px;
-            height: 65px;
-            border-radius: 20px; /* 사진 속 둥근 모서리 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            border: 1px solid #333; /* 옅은 테두리 */
-        }
-
-        /* 📸 사진 속 독특한 이모지 스타일 재현 📸 */
-        .menu-item img {
-            width: 35px; /* 이모지 크기 조절 */
-            height: 35px;
-        }
-
-        /* 아이콘 하단 텍스트 */
-        .menu-item span {
-            font-size: 14px;
-            font-weight: 500;
-            color: #ddd;
-        }
-
-        /* 📸 하단 정보 섹션 - 완전 재현 📸 */
-        .info-section {
-            width: 85%;
-            max-width: 380px;
-            margin-top: 45px;
-            border-left: 5px solid var(--main-gold);
-            padding-left: 20px;
-        }
-
-        /* 사진 속 오렌지색 스타일 적용 */
-        .info-label { 
-            color: var(--sub-orange); 
-            font-size: 16px; 
-            font-weight: bold; 
-            margin-bottom: 8px; 
-        }
-
+        .info-section { width: 85%; max-width: 380px; margin-top: 45px; border-left: 5px solid var(--main-gold); padding-left: 20px; }
+        .info-label { color: var(--sub-orange); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
         .info-value { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
         .shield-active { color: #00e5ff; font-weight: bold; font-size: 16px; }
 
-        /* 하단 버튼 및 푸터 */
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            width: 90%;
-            max-width: 380px;
-            margin-top: 40px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 16px;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-        }
-
+        .action-buttons { display: flex; gap: 12px; width: 90%; max-width: 380px; margin-top: 40px; }
+        .btn { flex: 1; padding: 16px; border-radius: 12px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
         .btn-pi { background: #111; border: 2px solid var(--main-gold); color: white; }
         .btn-swap { background: var(--sub-orange); color: white; }
         .btn-lp { background: var(--neon-green); color: black; }
 
-        .cs-btn {
-            width: 90%;
-            max-width: 380px;
-            background: linear-gradient(to right, #ff8c00, #ff4500);
-            color: white;
-            padding: 18px;
-            border-radius: 15px;
-            margin-top: 35px;
-            text-align: center;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 17px;
-        }
+        .cs-btn { width: 90%; max-width: 380px; background: linear-gradient(to right, #ff8c00, #ff4500); color: white; padding: 18px; border-radius: 15px; margin-top: 35px; text-align: center; font-weight: bold; text-decoration: none; font-size: 17px; display: block; margin-left: auto; margin-right: auto; }
+        .email-link { display: block; margin-top: 25px; color: #777; text-decoration: none; font-size: 14px; text-align: center; }
 
-        .email-link {
-            margin-top: 25px;
-            color: #777;
-            text-decoration: none;
-            font-size: 14px;
-        }
+        .sns-container { display: flex; justify-content: center; gap: 30px; margin-top: 40px; width: 90%; }
+        .sns-box-wrapper { background: var(--icon-box-bg); padding: 20px; border-radius: 25px; flex: 1; text-align: center; border: 1px solid #333; text-decoration: none; }
+        .sns-box-wrapper i { font-size: 35px; color: var(--main-gold); margin-bottom: 10px; }
+        .sns-box-wrapper span { display: block; color: white; font-size: 12px; font-weight: bold; }
+        .sns-box-wrapper small { color: #888; font-size: 10px; }
 
-        .sns-container { display: flex; gap: 30px; margin-top: 40px; }
-        .sns-box { text-align: center; font-size: 12px; color: #888; }
-        .sns-box i { font-size: 35px; color: var(--main-gold); margin-bottom: 8px; display: block; }
-
-        footer {
-            margin: 60px 0 40px;
-            text-align: center;
-            font-size: 12px;
-            color: #444;
-            line-height: 1.8;
-        }
+        footer { margin: 60px 0 40px; text-align: center; font-size: 11px; color: #444; line-height: 1.8; }
     </style>
 </head>
 <body>
@@ -249,7 +75,7 @@
             <option value="ko">KR (한국어)</option>
             <option value="en">EN (English)</option>
             <option value="vi">VI (Tiếng Việt)</option>
-            </select>
+        </select>
     </header>
 
     <div class="brand-section">
@@ -261,36 +87,16 @@
         <span class="apr-tag">APR 31.4%</span>
         <div class="ledger-title" id="ledgerTitle">메인 자산 통합 원장</div>
         <div class="pi-balance">400.0000 <span>Pi</span></div>
-        <div class="gcv-box" id="gcvBox">
-            가치 평가: $ 125,663,600<br>(GCV)
-        </div>
+        <div class="gcv-box" id="gcvBox">가치 평가: $ 125,663,600<br>(GCV)</div>
     </div>
 
     <div class="menu-grid">
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/airplane_2708-fe0f.png" alt="송금"></div>
-            <span id="m1">송금</span>
-        </div>
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/shopping-bags_1f6cd-fe0f.png" alt="결제"></div>
-            <span id="m2">결제</span>
-        </div>
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/fork-and-knife_1f37d-fe0f.png" alt="예치"></div>
-            <span id="m3">예치</span>
-        </div>
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/wrapped-gift_1f381.png" alt="보상"></div>
-            <span id="m4">보상</span>
-        </div>
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/balance-scale_2696-fe0f.png" alt="소득"></div>
-            <span id="m5">소득</span>
-        </div>
-        <div class="menu-item">
-            <div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/counterclockwise-arrows-button_1f504.png" alt="스왑"></div>
-            <span id="m6">스왑</span>
-        </div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/airplane_2708-fe0f.png"></div><span id="m1">송금</span></div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/shopping-bags_1f6cd-fe0f.png"></div><span id="m2">결제</span></div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/fork-and-knife_1f37d-fe0f.png"></div><span id="m3">예치</span></div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/wrapped-gift_1f381.png"></div><span id="m4">보상</span></div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/balance-scale_2696-fe0f.png"></div><span id="m5">소득</span></div>
+        <div class="menu-item"><div class="icon-wrapper"><img src="https://em-content.zobj.net/source/microsoft-teams/363/counterclockwise-arrows-button_1f504.png"></div><span id="m6">스왑</span></div>
     </div>
 
     <div class="info-section">
@@ -307,15 +113,16 @@
     </div>
 
     <a href="#" class="cs-btn" id="csBtn"><i class="fa-solid fa-headset"></i> 24/7 글로벌 고객지원센터</a>
-
     <a href="mailto:info@hkwb.co.kr" class="email-link">info@hkwb.co.kr</a>
 
     <div class="sns-container">
-        <a href="https://www.youtube.com/@hyekong2025" style="text-decoration:none">
-            <div class="sns-box"><i class="fa-brands fa-youtube"></i>hyekong2025<br>YouTube</div>
+        <a href="https://www.youtube.com/@hyekong2025" class="sns-box-wrapper">
+            <i class="fa-brands fa-youtube"></i>
+            <span>hyekong2025</span><small>YouTube</small>
         </a>
-        <a href="https://www.tiktok.com/@hyekong2025" style="text-decoration:none">
-            <div class="sns-box"><i class="fa-brands fa-tiktok"></i>hyekong2025<br>TikTok</div>
+        <a href="https://www.tiktok.com/@hyekong2025" class="sns-box-wrapper">
+            <i class="fa-brands fa-tiktok"></i>
+            <span>hyekong2025</span><small>TikTok</small>
         </a>
     </div>
 
@@ -325,41 +132,15 @@
     </footer>
 
     <script>
-        // WorkedIn 방식의 다국어 전환 로직 (디자인 유지)
         const i18n = {
-            ko: {
-                ledgerTitle: "메인 자산 통합 원장",
-                gcv: "가치 평가: $ 125,663,600<br>(GCV)",
-                m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "소득", m6: "스왑",
-                lpLabel: "유동성 풀 $",
-                shield: "HK_퀀텀_쉴드_활성",
-                btnPi: "Pi 수량",
-                csBtn: "24/7 글로벌 고객지원센터"
-            },
-            en: {
-                ledgerTitle: "Main Asset Integrated Ledger",
-                gcv: "Valuation: $ 125,663,600<br>(GCV)",
-                m1: "Transfer", m2: "Payment", m3: "Deposit", m4: "Reward", m5: "Income", m6: "Swap",
-                lpLabel: "Liquidity Pool $",
-                shield: "HK_Quantum_Shield_Active",
-                btnPi: "Pi Amount",
-                csBtn: "24/7 Global Support Center"
-            },
-            vi: {
-                ledgerTitle: "Sổ cái tích hợp tài sản chính",
-                gcv: "Định giá: $ 125,663,600<br>(GCV)",
-                m1: "Gửi tiền", m2: "Thanh toán", m3: "Gửi tiết kiệm", m4: "Thưởng", m5: "Thu nhập", m6: "Hoán đổi",
-                lpLabel: "Bể thanh khoản $",
-                shield: "HK_Quantum_Shield_Kích hoạt",
-                btnPi: "Số lượng Pi",
-                csBtn: "24/7 Trung tâm hỗ trợ toàn cầu"
-            }
+            ko: { ledgerTitle: "메인 자산 통합 원장", gcv: "가치 평가: $ 125,663,600<br>(GCV)", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "소득", m6: "스왑", lpLabel: "유동성 풀 $", shield: "HK_퀀텀_쉴드_활성", btnPi: "Pi 수량", csBtn: "24/7 글로벌 고객지원센터" },
+            en: { ledgerTitle: "Main Asset Integrated Ledger", gcv: "Valuation: $ 125,663,600<br>(GCV)", m1: "Transfer", m2: "Payment", m3: "Deposit", m4: "Reward", m5: "Income", m6: "Swap", lpLabel: "Liquidity Pool $", shield: "HK_Quantum_Shield_Active", btnPi: "Pi Amount", csBtn: "24/7 Global Support Center" },
+            vi: { ledgerTitle: "Sổ cái tích hợp tài산 chính", gcv: "Định giá: $ 125,663,600<br>(GCV)", m1: "Gửi tiền", m2: "Thanh toán", m3: "Gửi tiết kiệm", m4: "Thưởng", m5: "Thu nhập", m6: "Hoán đổi", lpLabel: "Bể thanh khoản $", shield: "HK_Quantum_Shield_Kích hoạt", btnPi: "Số lượng Pi", csBtn: "24/7 Trung tâm hỗ trợ" }
         };
 
         function changeLanguage() {
             const lang = document.getElementById('langSelector').value;
-            const data = i18n[lang];
-            
+            const data = i18n[lang] || i18n['en'];
             document.getElementById('ledgerTitle').innerText = data.ledgerTitle;
             document.getElementById('gcvBox').innerHTML = data.gcv;
             document.getElementById('m1').innerText = data.m1;
