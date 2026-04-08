@@ -6,7 +6,7 @@
     <title>HK-WorldBank Global</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* [CSS Section] 형님의 사진 속 스타일 100% 복구 (사진 1~3번 데이터) */
+        /* [CSS Section] 형님의 사진 속 스타일 100% 복구 */
         :root { 
             --gold: #FFD700; --hk-bg: #2D1B4D; --hk-card: #3B1B63; 
             --green: #00FFB2; --white: #FFFFFF; 
@@ -46,14 +46,12 @@
             animation: pulse-shield 1.5s infinite; 
         }
 
-        /* 다국어 선택기 (형님 사진 2번 스타일) */
+        /* 다국어 선택기 및 그리드 메뉴 스타일 */
         .lang-container { padding: 15px; text-align: right; }
         #langSel { 
             background: #333; color: white; border: 1px solid var(--gold); 
             padding: 8px 15px; border-radius: 8px; cursor: pointer; 
         }
-
-        /* 그리드 메뉴 (형님 사진 3, 5번 구조) */
         .hk-grid { 
             display: grid; grid-template-columns: repeat(3, 1fr); 
             gap: 15px; padding: 20px; 
@@ -61,9 +59,7 @@
         .hk-item { 
             background: var(--hk-card); padding: 20px 10px; 
             border-radius: 15px; text-align: center; border: 1px solid #555; 
-            transition: 0.3s ease;
         }
-        .hk-item:active { transform: scale(0.95); background: #4A2680; }
         .hk-item i { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
         .hk-item span { font-size: 13px; font-weight: bold; display: block; }
 
@@ -85,12 +81,27 @@
             <option value="de">GERMANY (Deutsch)</option>
             <option value="fr">FRANCE (Français)</option>
             <option value="es">SPAIN (Español)</option>
+            <option value="it">ITALY (Italiano)</option>
             <option value="pt">PORTUGAL (Português)</option>
             <option value="hi">INDIA (हिन्दी)</option>
             <option value="ar">ARAB (العربية)</option>
             <option value="bn">BANGLA (বাংলা)</option>
+            <option value="tr">TURKEY (Türkçe)</option>
+            <option value="pl">POLAND (Polski)</option>
+            <option value="nl">NETHERLANDS (Nederlands)</option>
+            <option value="sv">SWEDEN (Svenska)</option>
+            <option value="fi">FINLAND (Suomi)</option>
+            <option value="id">INDONESIA (Bahasa Indonesia)</option>
+            <option value="ms">MALAYSIA (Bahasa Melayu)</option>
             <option value="tl">TAGALOG (Tagalog)</option>
-            </select>
+            <option value="el">GREECE (Ελληνικά)</option>
+            <option value="hu">HUNGARY (Magyar)</option>
+            <option value="cs">CZECH (Čeština)</option>
+            <option value="ro">ROMANIA (Română)</option>
+            <option value="uk">UKRAINE (Українська)</option>
+            <option value="no">NORWAY (Norsk)</option>
+            <option value="da">DENMARK (Dansk)</option>
+        </select>
     </div>
 
     <div class="bank-header">
@@ -119,7 +130,7 @@
 
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>
-    // [Script Section] 형님의 사진 속 로직 100% 복구 및 확장 (사진 6~8번 데이터)
+    // [Script Section] 형님의 사진 속 로직 100% 복구 및 확장
 
     // 1. 회장님이 직접 관리하시는 마스터 장부 데이터 (보안 유지)
     const assetMaster = {
@@ -136,9 +147,30 @@
         "ja": { "ledger": "メイン資産台帳", "pay": "支払い", "reward": "報酬", "swap": "スワップ", "stake": "預け入れ", "sec": "シールド", "glo": "世界화" },
         "ru": { "ledger": "Главный реестр", "pay": "Оплата", "reward": "Награда", "swap": "Обмен", "stake": "Ставка", "sec": "Защита", "glo": "Мир" },
         "vi": { "ledger": "Sổ cái tài sản", "pay": "Thanh toán", "reward": "Thưởng", "swap": "Đổi", "stake": "Gửi", "sec": "Bảo mật", "glo": "Toàn cầu" },
+        "th": { "ledger": "บัญชีแยกประเภท", "pay": "การชำระเงิน", "reward": "รางวัล", "swap": "สลับ", "stake": "การปักหลัก", "sec": "ความปลอดภัย", "glo": "ทั่วโลก" },
         "de": { "ledger": "Hauptbuch", "pay": "Zahlung", "reward": "Belohnung", "swap": "Tausch", "stake": "Einsatz", "sec": "Sicherheit", "glo": "Global" },
-        "fr": { "ledger": "Grand Livre", "pay": "Paiement", "reward": "Récompense", "swap": "Échange", "stake": "Mise", "sec": "Sécurité", "glo": "Global" }
-        // 형님! 사진에 있는 나머지 22개 언어 데이터를 이 중괄호 안에 쉼표로 구분해서 쭉 채우시면 됩니다!
+        "fr": { "ledger": "Grand Livre", "pay": "Paiement", "reward": "Récompense", "swap": "Échange", "stake": "Mise", "sec": "Sécurité", "glo": "Global" },
+        "es": { "ledger": "Libro Mayor", "pay": "Pago", "reward": "Recompensa", "swap": "Intercambio", "stake": "Apuesta", "sec": "Seguridad", "glo": "Global" },
+        "it": { "ledger": "Libro Mastro", "pay": "Pagamento", "reward": "Premio", "swap": "Scambio", "stake": "Puntata", "sec": "Sicurezza", "glo": "Globale" },
+        "pt": { "ledger": "Livro Razão", "pay": "Pagamento", "reward": "Recompensa", "swap": "Troca", "stake": "Aposta", "sec": "Segurança", "glo": "Global" },
+        "hi": { "ledger": "मुख्य बही", "pay": "भुगतान", "reward": "पुरस्कार", "swap": "स्वैप", "stake": "स्टे킹", "sec": "सुरक्षा", "glo": "वैश्विक" },
+        "ar": { "ledger": "دفتر الاستاذ", "pay": "دفع", "reward": "مكافأة", "swap": "تبادل", "stake": "رهان", "sec": "أمان", "glo": "عالمي" },
+        "bn": { "ledger": "প্রধান খতিয়ান", "pay": "পেমেন্ট", "reward": "পুরস্কার", "swap": "অদলবদল", "stake": "স্টেকিং", "sec": "নিরাপত্তা", "glo": "বিশ্বব্যাপী" },
+        "tr": { "ledger": "Ana Defter", "pay": "Ödeme", "reward": "Ödül", "swap": "Takas", "stake": "Stake", "sec": "Güvenlik", "glo": "Küresel" },
+        "pl": { "ledger": "Księga Główna", "pay": "Płatność", "reward": "Nagroda", "swap": "Zamiana", "stake": "Staking", "sec": "Ochrona", "glo": "Globalny" },
+        "nl": { "ledger": "Grootboek", "pay": "Betaling", "reward": "Beloning", "swap": "Wissel", "stake": "Inzet", "sec": "Beveiliging", "glo": "Globaal" },
+        "sv": { "ledger": "Huvudbok", "pay": "Betalning", "reward": "Belöning", "swap": "Växla", "stake": "Staking", "sec": "Säkerhet", "glo": "Global" },
+        "fi": { "ledger": "Pääkirja", "pay": "Maksu", "reward": "Palkinto", "swap": "Vaihto", "stake": "Panostus", "sec": "Turvallisuus", "glo": "Globaali" },
+        "id": { "ledger": "Buku Besar", "pay": "Pembayaran", "reward": "Hadiah", "swap": "Tukar", "stake": "Taruhan", "sec": "Keamanan", "glo": "Global" },
+        "ms": { "ledger": "Buku Besar", "pay": "Pembayaran", "reward": "Ganjaran", "swap": "Tukar", "stake": "Staking", "sec": "Keselamatan", "glo": "Global" },
+        "tl": { "ledger": "Ledger ng Asset", "pay": "Pagbabayad", "reward": "Gantimpala", "swap": "Palitan", "stake": "Staking", "sec": "Seguridad", "glo": "Global" },
+        "el": { "ledger": "Καθολικό", "pay": "Πληρωμή", "reward": "Αμοιβή", "swap": "Ανταλλαγή", "stake": "Στοίχημα", "sec": "Ασφάλεια", "glo": "Παγκόσμιο" },
+        "hu": { "ledger": "Főkönyv", "pay": "Fizetés", "reward": "Jutalom", "swap": "Csere", "stake": "Tét", "sec": "Biztonság", "glo": "Globális" },
+        "cs": { "ledger": "Hlavní kniha", "pay": "Platba", "reward": "Odměna", "swap": "Výměna", "stake": "Sázka", "sec": "Zabezpečení", "glo": "Globální" },
+        "ro": { "ledger": "Registru", "pay": "Plată", "reward": "Recompensă", "swap": "Schimb", "stake": "Miză", "sec": "Securitate", "glo": "Global" },
+        "uk": { "ledger": "Головна книга", "pay": "Оплата", "reward": "Нагорода", "swap": "Обмін", "stake": "Ставка", "sec": "Безпека", "glo": "Глобальний" },
+        "no": { "ledger": "Hovedbok", "pay": "Betaling", "reward": "Belønning", "swap": "Bytte", "stake": "Innsats", "sec": "Sikkerhet", "glo": "Global" },
+        "da": { "ledger": "Hovedbog", "pay": "Betaling", "reward": "Belønning", "swap": "Bytte", "stake": "Indsats", "sec": "Sikkerhed", "glo": "Global" }
     };
 
     const Pi = window.Pi;
@@ -163,7 +195,6 @@
             const user = await Pi.authenticate(['username'], (p) => {});
             const username = user.user.username;
             
-            // 사용자를 인식하면 개인 계좌 섹션을 노출합니다.
             document.getElementById("personal-area").style.display = "block";
             document.getElementById("user-nm").innerText = username;
 
