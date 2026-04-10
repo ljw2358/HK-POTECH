@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -111,7 +111,18 @@
         <div class="grid-box"><i class="fas fa-balance-scale" style="color:#AF52DE"></i><span data-k="ubi">기본소득</span></div>
         <div class="grid-box"><i class="fas fa-rotate" style="color:var(--hk-cyan)"></i><span data-k="swap2">스왑</span></div>
     </div>
-<div id="shufflingFee" style="color: #ff4d4d; font-weight: bold; font-size: 1.1rem; margin: 15px 0; text-align: center; display: block !important; visibility: visible !important;">안전신탁관리비: 10% (QUANTUM SHIELD)</div>
+<div style="margin-bottom: 7px; font-weight: bold; color: #ff4d4d; font-size: 14px;">
+    <span id="txt-custody-fee">SAFE-CUSTODY FEE: 10% (QUANTUM SHIELD)</span>
+</div>
+<div class="stake-info">
+    <div class="stake-title" id="t-stk"></div>
+    <div class="stake-num">88,410,819,601</div>
+</div>
+
+<div class="action-btns">
+    <button class="act-btn white" id="b-pi"></button>
+    <button class="act-btn gold" id="b-swap"></button>
+    <button class="act-btn green" id="b-lp"></button>
 </div>
     <button class="cs-wide" id="t-cs" onclick="location.href='mailto:info@hkwb.world'"><i class="fas fa-headset"></i> 글로벌 고객지원센터</button>
 
@@ -241,21 +252,7 @@ function openPayModal() { document.getElementById('payModal').style.display = 'f
 
     window.onload = () => {
         applyLang();
-        if (!window.feeInterval) {
-        const feeTexts = ["안전신탁관리비: 10%", "Safe-Custody Fee: 10%", "安全托管费: 10%", "安全保護預かり手数料: 10%", "Phí ký gửi an toàn: 10%", "Biaya Penitipan Aman: 10%", "ค่าธรรมเนียมการดูแล: 10%", "सुरक्षित अभिरक्षा शुल्क: 10%", "Bayad sa Pag-iingat: 10%", "Tarifa de custodia: 10%", "Frais de garde: 10%", "Sichere Verwahrungsgebühr: 10%", "Плата за хранение: 10%", "Taxa de custódia: 10%", "Tariffa di custodia: 10%", "رسوم الحفظ الآمن: 10%", "Güvenli Saklama Ücreti: 10%", "Kosten voor bewaring: 10%", "Opłata za powiernictwo: 10%", "Yuran Simpanan:3 10%"];
-        let fIdx = 0;
-        window.feeInterval = setInterval(() => {
-            const el = document.getElementById('shufflingFee');
-            if (el) {
-                el.innerText = feeTexts[fIdx] + " (QUANTUM SHIELD)";
-                fIdx = (fIdx + 1) % feeTexts.length;
-            }
-        }, 2000);
-    }
- 
     };
-
-    }); 
 </script>
 </body>
 </html>
