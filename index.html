@@ -242,22 +242,23 @@ function openPayModal() { document.getElementById('payModal').style.display = 'f
     window.onload = () => {
         applyLang();
     };
-    // 여기서부터 복사해서 249번 줄에 붙여넣으세요
-    const fees = [
-        "안전신탁관리비: 10%", "Safe-Custody Fee: 10%", "安全托管费: 10%", "安全保護預かり手数料: 10%",
-        "Phí ký gửi an toàn: 10%", "Biaya Penitipan Aman: 10%", "ค่าธรรม네ียมการดูแล: 10%", "सुरक्षित अभिरक्षा शुल्क: 10%",
-        "Bayad sa Pag-iingat: 10%", "Tarifa de custodia: 10%", "Frais de garde: 10%", "Sichere Verwahrungsgebühr: 10%",
-        "Плата за хранение: 10%", "Taxa de custódia: 10%", "Tariffa di custodia: 10%", "رسوم الحفظ الآمن: 10%",
-        "Güvenli Saklama Ücreti: 10%", "Kosten voor bewaring: 10%", "Opłata za powiernictwo: 10%", "Yuran Simpanan: 10%"
-    ];
-    let feeIdx = 0;
-    setInterval(() => {
-        const el = document.getElementById('shufflingFee');
-        if(el) {
-            el.innerText = fees[feeIdx] + " (QUANTUM SHIELD)";
-            feeIdx = (feeIdx + 1) % fees.length;
-        }
-    }, 2000); // 2초마다 자동으로 돌아갑니다
+     window.addEventListener('load', () => {
+        const fees = [
+            "안전신탁관리비: 10%", "Safe-Custody Fee: 10%", "安全托管费: 10%", "安全保護預かり手数料: 10%",
+            "Phí ký gửi an toàn: 10%", "Biaya Penitipan Aman: 10%", "ค่าธรรมเนียมการดูแล: 10%", "सुरक्षित अभिरक्षा शुल्क: 10%",
+            "Bayad sa Pag-iingat: 10%", "Tarifa de custodia: 10%", "Frais de garde: 10%", "Sichere Verwahrungsgebühr: 10%",
+            "Плата за хранение: 10%", "Taxa de custódia: 10%", "Tariffa di custodia: 10%", "رسوم الحفظ الآمن: 10%",
+            "Güvenli Saklama Ücreti: 10%", "Kosten voor bewaring: 10%", "Opłata za powiernictwo: 10%", "Yuran Simpanan: 10%"
+        ];
+        let fIdx = 0;
+        setInterval(() => {
+            const el = document.getElementById('shufflingFee');
+            if (el) {
+                el.innerText = fees[fIdx] + " (QUANTUM SHIELD)";
+                fIdx = (fIdx + 1) % fees.length;
+            }
+        }, 2000);
+    }); 
 </script>
 </body>
 </html>
