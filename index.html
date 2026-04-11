@@ -112,9 +112,44 @@
         <div class="grid-box"><i class="fas fa-rotate" style="color:var(--hk-cyan)"></i><span data-k="swap2">스왑</span></div>
     </div>
 <div style="margin-bottom: 7px; font-weight: bold; color: #ff4d4d; font-size: 14px;">
-<div id="txt-custody-fee" style="margin-bottom: 7px; font-weight: bold; color: #ff4d4d; font-size: 11px; text-align: center;">
-    SAFE-CUSTODY FEE: 10% (QUANTUM SHIELD)
+<div id="safe-custody-box" style="margin-bottom: 15px; text-align: center; min-height: 50px;">
+    <div id="display-text" style="font-weight: bold; color: #ff4d4d; font-size: 13px;">
+        안전 신탁 보관료: 10% (QUANTUM SHIELD)
+    </div>
+    <div style="color: #00fbff; font-size: 10px; margin-top: 5px; letter-spacing: 1px;">
+        [ HK-QUANTUM SHIELD ACTIVE ]
+    </div>
 </div>
+
+<script>
+    const languages = [
+        "안전 신탁 보관료: 10% (QUANTUM SHIELD)",
+        "Safe Custody Fee: 10% (Quantum Shield)",
+        "安全信托保管费: 10% (量子屏蔽)",
+        "安全信託保管料: 10% (量子シールド)",
+        "Phí tín thác an toàn: 10%",
+        "Tarifa de custodia segura: 10%",
+        "Frais de garde sécurisée: 10%",
+        "Sicherheitsverwahrungsgebühr: 10%",
+        "Сбор за безопасное хранение: 10%",
+        "Taxa de custódia segura: 10%",
+        "Commissione di custodia sicura: 10%",
+        "Güvenli Saklama Ücreti: 10%",
+        "رسوم الحفظ الآمن: 10%",
+        "Bayad sa ligtas na pag-iingat: 10%",
+        "Yuran simpanan selamat: 10%",
+        "Veilige bewaringsvergoeding: 10%",
+        "Opłata za bezpieczne powiernictwo: 10%",
+        "Biaya Penitipan Aman: 10%",
+        "ค่าธรรม네ียมการดูแลที่ปลอดภัย: 10%",
+        "सुरक्षित अभिरक्षा शुल्क: 10%"
+    ];
+    let idx = 0;
+    setInterval(() => {
+        idx = (idx + 1) % languages.length;
+        document.getElementById('display-text').innerText = languages[idx];
+    }, 3000);
+</script>
 
 <div id="txt-custody-kr" style="margin-bottom: 20px; font-size: 11px; color: #888; text-align: center;">
     안전 신탁 보관료: 10% 가동 중
