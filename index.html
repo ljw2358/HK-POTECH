@@ -130,52 +130,7 @@
         <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-btn yt-bg"><i class="fab fa-youtube"></i> YOUTUBE</a>
         <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-btn tk-bg"><i class="fab fa-tiktok"></i> TIKTOK</a>
     </div>
-<div class="sns-row" style="margin-top: 15px; display: flex; gap: 8px;">
-    <div onclick="toggleHK('hk-robot-box')" style="cursor: pointer; background: linear-gradient(135deg, #1a1a1a, #333); flex: 1; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px; padding: 12px; font-weight: bold; font-size: 13px; border: 1px solid #444;">
-        <i class="fas fa-robot" style="margin-right: 8px;"></i> HK-ROBOT
-    </div>
-    <div onclick="toggleHK('hk-bio-box')" style="cursor: pointer; background: linear-gradient(135deg, #003366, #00d2ff); flex: 1; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px; padding: 12px; font-weight: bold; font-size: 13px; border: 1px solid #004080;">
-        <i class="fas fa-dna" style="margin-right: 8px;"></i> HK-QUANTUM BIO
-    </div>
-</div>
 
-<div id="hk-robot-box" style="display: none; background: rgba(20, 20, 20, 0.95); border: 1px solid #ffca28; border-radius: 8px; padding: 15px; margin-top: 10px; text-align: left;">
-    <h4 style="color: #ffca28; margin-top: 0;">[Humanoid Robotics]</h4>
-    <div style="color: #eee; font-size: 0.85rem; line-height: 1.6;">
-        • 휴머노이드 로봇 통합 제어 시스템<br>
-        • 지능형 자율주행 협동 로봇 설계<br>
-        • 스마트 팩토리 자동화 솔루션
-    </div>
-</div>
-
-<div id="hk-bio-box" style="display: none; background: rgba(20, 20, 20, 0.95); border: 1px solid #00d2ff; border-radius: 8px; padding: 15px; margin-top: 10px; text-align: left;">
-    <h4 style="color: #00d2ff; margin-top: 0;">[Quantum Bio-Technology]</h4>
-    <div style="color: #eee; font-size: 0.85rem; line-height: 1.6;">
-        • 양자 암호화 기반 의료 보안 체계<br>
-        • 퀀텀 시뮬레이션 유전체 분석<br>
-        • 차세대 정밀 의료 AI 플랫폼
-    </div>
-</div>
-        <li><i class="fas fa-check-circle" style="color: #6c757d;"></i> 유전체 기반 정밀 맞춤형 의료</li>
-        <li><i class="fas fa-check-circle" style="color: #6c757d;"></i> 줄기세포 및 재생 의학 연구</li>
-        <li><i class="fas fa-check-circle" style="color: #6c757d;"></i> 디지털 헬스케어 및 원격 진단 시스템</li>
-    </ul>
-</div>
-
-<div id="hk-quantum-content" style="display: none; background-color: #1a1a1a; border-radius: 8px; padding: 15px; margin-top: 5px; color: #ccc; font-size: 0.9rem; text-align: left;">
-    <p style="color: #00bcd4; font-weight: bold; margin-bottom: 10px;">[HK-QUANTUM] 양자 기술 산업 비전</p>
-    <ul style="list-style-type: none; padding-left: 0;">
-        <li><i class="fas fa-shield-alt" style="color: #00e5ff;"></i> 양자 암호 기반 보안 프로토콜</li>
-        <li><i class="fas fa-code-branch" style="color: #00e5ff;"></i> 초고속 양자 시뮬레이션 및 데이터 처리</li>
-        <li><i class="fas fa-network-wired" style="color: #00e5ff;"></i> 양자 센싱 및 정밀 측정 기술</li>
-    </ul>
-</div>
-        <i class="fas fa-robot" style="margin-right: 8px;"></i> HK-ROBOT
-    </a>
-    <a href="https://github.com/ljw2358/HK-QUANTUM-BIO" target="_blank" class="sns-btn" style="background: linear-gradient(135deg, #00d2ff, #3a7bd5); flex: 1; text-decoration: none; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px; padding: 10px; font-weight: bold; font-size: 13px;">
-        <i class="fas fa-dna" style="margin-right: 8px;"></i> HK-QUANTUM
-    </a>
-</div>
     <div class="security-deep">
         <div class="sec-title" id="t-sec-head"><i class="fas fa-shield-alt"></i> HK QUANTUM SHIELD ACTIVE</div>
         <ul class="sec-list">
@@ -298,22 +253,6 @@ function openPayModal() { document.getElementById('payModal').style.display = 'f
     window.onload = () => {
         applyLang();
     };
-function toggleHK(id) {
-    const target = document.getElementById(id);
-    const allBoxes = ['hk-robot-box', 'hk-bio-box'];
-    
-    // 클릭한 것 외에 다른 박스는 닫기
-    allBoxes.forEach(boxId => {
-        if (boxId !== id) document.getElementById(boxId).style.display = 'none';
-    });
-
-    // 클릭한 박스 열고 닫기
-    if (target.style.display === 'none') {
-        target.style.display = 'block';
-    } else {
-        target.style.display = 'none';
-    }
-}
 </script>
 </body>
 </html>
