@@ -298,6 +298,22 @@ function openPayModal() { document.getElementById('payModal').style.display = 'f
     window.onload = () => {
         applyLang();
     };
+function toggleHK(id) {
+    const target = document.getElementById(id);
+    const allBoxes = ['hk-robot-box', 'hk-bio-box'];
+    
+    // 클릭한 것 외에 다른 박스는 닫기
+    allBoxes.forEach(boxId => {
+        if (boxId !== id) document.getElementById(boxId).style.display = 'none';
+    });
+
+    // 클릭한 박스 열고 닫기
+    if (target.style.display === 'none') {
+        target.style.display = 'block';
+    } else {
+        target.style.display = 'none';
+    }
+}
 </script>
 </body>
 </html>
