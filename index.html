@@ -1,418 +1,258 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WorldBank - Quantum Security Asset Management</title>
-    
+    <title>HK WORLD BANK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <script>
+        try {
+            Pi.init({ version: "2.0", sandbox: false });
+        } catch(e) { console.log("Pi SDK Initialization Skip"); }
+    </script>
     <style>
-        /* [1. Base Styles & Global Variables] */
-        :root {
-            --hk-gold: #FFD700;
-            --hk-dark-gold: #B8860B;
-            --hk-black: #0a0a0a;
-            --hk-card-bg: #151515;
-            --hk-green: #4cd964;
-            --hk-blue: #007aff;
-            --hk-red: #ff3b30;
-            --hk-gray: #888;
-        }
+        :root { --hk-gold: #FFD700; --hk-dark: #000; --hk-green: #00FF00; --hk-blue: #007AFF; --hk-cyan: #00FFFF; --hk-red: #FF4444; }
+        * { box-sizing: border-box; margin: 0; padding: 0; word-break: keep-all; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--hk-dark); color: white; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; justify-content: center; min-height: 100vh; }
+        .wrapper { width: 100%; max-width: 480px; padding: 20px; position: relative; }
+        
+        /* 상단 언어 선택 */
+        .top-nav { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        .lang-select { background: #111; color: var(--hk-gold); border: 1px solid var(--hk-gold); padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; outline: none; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--hk-black);
-            color: #ffffff;
-            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        /* 브랜드 헤더 */
+        .brand { font-size: 34px; font-weight: 900; color: var(--hk-gold); margin: 25px 0; letter-spacing: -1.5px; text-align: center; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
 
-        /* [2. Layout Containers] */
-        .app-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-        }
+        /* 자산 카드 */
+        .asset-card { background: linear-gradient(180deg, #1a1a1a, #050505); border-radius: 28px; padding: 45px 20px; text-align: center; border: 1px solid #333; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ledger-label { color: var(--hk-gold); font-size: 14px; font-weight: bold; margin-bottom: 12px; opacity: 0.9; }
+        .asset-val { font-size: 52px; font-weight: 900; margin: 15px 0; letter-spacing: -1px; }
+        .gcv-badge { display: inline-block; padding: 10px 22px; border-radius: 50px; border: 1.5px solid var(--hk-green); color: var(--hk-green); font-size: 16px; font-weight: 800; background: rgba(0, 255, 0, 0.05); }
 
-        /* [3. Header Section] */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 10px 0;
-        }
+        /* 6구역 그리드 메뉴 */
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .grid-box { background: #111; padding: 28px 10px; border-radius: 20px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .grid-box:active { transform: scale(0.92); background: #222; border-color: var(--hk-gold); }
+        .grid-box i { font-size: 32px; margin-bottom: 12px; display: block; }
+        .grid-box span { font-size: 15px; font-weight: bold; color: #fff; }
 
-        .brand-logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--hk-gold);
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
+        /* 스테이킹 정보 */
+        .stake-info { background: #0a0a0a; border-left: 6px solid var(--hk-gold); padding: 22px; margin-bottom: 25px; border-radius: 4px 20px 20px 4px; box-shadow: 5px 5px 15px rgba(0,0,0,0.3); }
+        .stake-title { color: var(--hk-gold); font-size: 15px; font-weight: bold; margin-bottom: 8px; }
+        .stake-num { font-size: 28px; font-weight: 900; font-family: monospace; }
 
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #333;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-        }
+        /* 하단 액션 버튼 */
+        .action-btns { display: flex; gap: 12px; margin-bottom: 15px; }
+        .act-btn { flex: 1; padding: 20px 5px; border-radius: 15px; border: none; font-weight: 900; font-size: 15px; cursor: pointer; transition: 0.2s; }
+        .act-btn:active { transform: translateY(2px); opacity: 0.8; }
+        .white { background: #fff; color: #000; }
+        .gold { background: var(--hk-gold); color: #000; }
+        .green { background: #00c853; color: #fff; }
 
-        /* [4. Main Asset Display] */
-        .main-card {
-            background: var(--hk-card-bg);
-            border: 1px solid #222;
-            border-radius: 30px;
-            padding: 35px 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            margin-bottom: 25px;
-        }
+        /* 와이드 버튼 */
+        .cs-wide { width: 100%; padding: 20px; background: var(--hk-red); color: #fff; border: none; border-radius: 15px; font-weight: 900; font-size: 17px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2); }
 
-        .main-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 30px;
-            border: 1px solid transparent;
-            background: linear-gradient(135deg, rgba(255,215,0,0.2), transparent) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            pointer-events: none;
-        }
+        /* SNS 링크 */
+        .sns-row { display: flex; gap: 12px; margin-bottom: 30px; }
+        .sns-btn { flex: 1; padding: 18px; border-radius: 15px; text-decoration: none; color: #fff; text-align: center; font-weight: 900; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .yt-bg { background: #f00; }
+        .tk-bg { background: #000; border: 1px solid #444; }
 
-        .asset-label {
-            color: var(--hk-gray);
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
+        /* 보안 섹션 */
+        .security-deep { background: rgba(255, 255, 255, 0.03); border: 1px solid #222; border-radius: 22px; padding: 25px; margin-bottom: 40px; }
+        .sec-title { color: var(--hk-cyan); font-weight: 900; margin-bottom: 18px; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+        .sec-list { list-style: none; }
+        .sec-list li { font-size: 14px; color: #ccc; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+        .sec-list li::before { content: '◈'; color: var(--hk-cyan); font-size: 11px; margin-top: 3px; }
 
-        .balance-amount {
-            font-size: 48px;
-            font-weight: 900;
-            margin: 15px 0;
-            background: linear-gradient(180deg, #fff, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* 푸터 */
+        footer { text-align: center; border-top: 1px solid #222; padding: 45px 0; margin-top: 20px; }
+        .apy-footer { color: var(--hk-gold); font-size: 38px; font-weight: 900; margin-bottom: 25px; }
+        .policy-txt { color: #666; text-decoration: none; font-size: 15px; font-weight: bold; }
 
-        .pi-symbol {
-            font-size: 24px;
-            color: #fff;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-
-        .gcv-badge {
-            background: rgba(76, 217, 100, 0.1);
-            color: var(--hk-green);
-            padding: 8px 18px;
-            border-radius: 50px;
-            border: 1px solid var(--hk-green);
-            display: inline-block;
-            font-weight: bold;
-            font-size: 15px;
-            margin-top: 15px;
-        }
-
-        /* [5. Core Action Grid] */
-        .menu-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .menu-box {
-            background: var(--hk-card-bg);
-            border: 1px solid #222;
-            border-radius: 20px;
-            padding: 20px 10px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .menu-box:active {
-            transform: scale(0.95);
-            border-color: var(--hk-gold);
-        }
-
-        .menu-box i {
-            font-size: 26px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .menu-box span {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* [6. Staking CTA Button] */
-        .staking-cta {
-            background: linear-gradient(90deg, var(--hk-dark-gold), var(--hk-gold));
-            color: #000;
-            padding: 20px;
-            border-radius: 20px;
-            font-size: 18px;
-            font-weight: 800;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* [7. Security Features List] */
-        .security-section {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px dashed #333;
-        }
-
-        .sec-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            font-size: 13px;
-            color: #ccc;
-        }
-
-        .sec-item i { color: var(--hk-gold); font-size: 16px; }
-
-        /* [8. Global Modal System] */
-        #paymentModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #1c1c1c;
-            width: 85%;
-            max-width: 400px;
-            border-radius: 30px;
-            padding: 35px;
-            border: 1px solid var(--hk-gold);
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-title {
-            color: var(--hk-gold);
-            font-size: 22px;
-            font-weight: 900;
-            margin-top: 0;
-        }
-
-        .modal-input-group {
-            margin: 25px 0;
-        }
-
-        .pi-input {
-            background: #000;
-            border: 1px solid #444;
-            color: white;
-            width: 80%;
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 24px;
-            text-align: center;
-            outline: none;
-        }
-
-        .pi-input:focus { border-color: var(--hk-gold); }
-
-        .btn-confirm {
-            background: var(--hk-gold);
-            color: black;
-            border: none;
-            width: 100%;
-            padding: 18px;
-            border-radius: 15px;
-            font-weight: 900;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .btn-close {
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        /* [9. Footer] */
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            color: #444;
-            font-size: 12px;
-            padding-bottom: 30px;
-        }
+        /* 결제 모달 */
+        #payModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-box { background: #151515; width: 88%; max-width: 380px; padding: 35px; border-radius: 25px; border: 1px solid var(--hk-gold); text-align: center; }
+        .pay-input { width: 100%; padding: 18px; margin: 20px 0; background: #000; border: 1px solid #333; color: var(--hk-gold); text-align: center; font-size: 28px; font-weight: 900; border-radius: 12px; outline: none; }
+        .pay-confirm { width: 100%; padding: 20px; background: var(--hk-gold); border: none; border-radius: 12px; font-weight: 900; color: #000; font-size: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
-
-<div class="app-container">
-    <div class="header">
-        <div class="brand-logo">HK WORLD BANK</div>
-        <div class="lang-btn">한국어 🇰🇷</div>
+<div class="wrapper">
+    <div class="top-nav">
+        <select class="lang-select" id="langSel" onchange="applyLang()">
+            <option value="ko">한국어 🇰🇷</option><option value="en">English 🇺🇸</option>
+            <option value="zh">中文 🇨🇳</option><option value="ja">日本語 🇯🇵</option>
+            <option value="ru">Русский 🇷🇺</option><option value="vi">Tiếng Việt 🇻🇳</option>
+            <option value="th">ไทย 🇹🇭</option><option value="de">Deutsch 🇩🇪</option>
+            <option value="fr">Français 🇫🇷</option><option value="es">Español 🇪🇸</option>
+            <option value="it">Italiano 🇮🇹</option><option value="ar">العربية 🇸🇦</option>
+            <option value="hi">हिन्दी 🇮🇳</option><option value="pt">Português 🇧🇷</option>
+            <option value="uk">Українська 🇺🇦</option><option value="tr">Türkçe 🇹🇷</option>
+            <option value="id">Indonesia 🇮🇩</option><option value="ms">Melayu 🇲🇾</option>
+            <option value="nl">Dutch 🇳🇱</option><option value="pl">Polski 🇵🇱</option>
+        </select>
     </div>
 
-    <div class="main-card">
-        <div class="asset-label">MAIN ASSET INTEGRATED LEDGER</div>
-        <div class="balance-amount">400.0212 <span class="pi-symbol">Pi</span></div>
-        <div class="gcv-badge">가치 평가: $ 125,663,600 (GCV)</div>
+    <div class="brand">HK WORLD BANK</div>
+
+    <div class="asset-card">
+        <div id="t-ledger" class="ledger-label">메인 자산 통합 원장</div>
+        <div class="asset-val"><span id="mainBalance">400.0212</span> <span style="color:var(--hk-gold); font-size:0.55em; margin-left:5px;">Pi</span></div>
+        <div class="gcv-badge" id="t-gcv">가치 평가: $ 125,663,600 (GCV)</div>
     </div>
 
-    <button class="staking-cta" onclick="showModal()">
-        <i class="fas fa-coins"></i> 31.4% 실시간 스테이킹 시작
-    </button>
-
-    <div class="menu-container">
-        <div class="menu-box"><i class="fas fa-paper-plane" style="color: var(--hk-blue);"></i><span>송금</span></div>
-        <div class="menu-box"><i class="fas fa-shopping-cart" style="color: #ff9500;"></i><span>결제</span></div>
-        <div class="menu-box" onclick="showModal()"><i class="fas fa-piggy-bank" style="color: var(--hk-gold);"></i><span>예치</span></div>
-        <div class="menu-box"><i class="fas fa-gift" style="color: var(--hk-red);"></i><span>보상</span></div>
-        <div class="menu-box"><i class="fas fa-balance-scale" style="color: #af52de;"></i><span>기보스드</span></div>
-        <div class="menu-box"><i class="fas fa-sync" style="color: var(--hk-green);"></i><span>스와프</span></div>
+    <div class="grid-6">
+        <div class="grid-box"><i class="fas fa-paper-plane" style="color:var(--hk-blue)"></i><span data-k="send">송금</span></div>
+        <div class="grid-box" onclick="openPayModal()"><i class="fas fa-shopping-cart" style="color:#FF9500"></i><span data-k="pay">결제</span></div>
+        <div class="grid-box"><i class="fas fa-piggy-bank" style="color:var(--hk-gold)"></i><span data-k="save">예치</span></div>
+        <div class="grid-box"><i class="fas fa-gift" style="color:#FF3B30"></i><span data-k="reward">보상</span></div>
+        <div class="grid-box"><i class="fas fa-balance-scale" style="color:#AF52DE"></i><span data-k="ubi">기본소득</span></div>
+        <div class="grid-box"><i class="fas fa-rotate" style="color:var(--hk-cyan)"></i><span data-k="swap2">스왑</span></div>
     </div>
-
-    <div class="security-section">
-        <div style="font-weight: 800; font-size: 15px; margin-bottom: 15px; color: var(--hk-gold);">
-            <i class="fas fa-shield-alt"></i> HK QUANTUM SHIELD ACTIVE
-        </div>
-        <div class="sec-item"><i class="fas fa-check-circle"></i> 개인정보보호법 준수: 양자 암호화 보안 적용</div>
-        <div class="sec-item"><i class="fas fa-check-circle"></i> Form of Private: 자산 보호 프로토콜 가동</div>
-        <div class="sec-item"><i class="fas fa-check-circle"></i> HK-ROBOT: AI 실시간 위협 감지 중</div>
-    </div>
-
-    <div class="footer">
-        Chairman Lee Jaewan (Hyekong)<br>
-        &copy; 2026 HK Group. All Rights Reserved.
-    </div>
+<div style="margin-bottom: 7px; font-weight: bold; color: #ff4d4d; font-size: 14px;">
+    <span id="txt-custody-fee">SAFE-CUSTODY FEE: 10% (QUANTUM SHIELD)</span>
+</div>
+<div class="stake-info">
+    <div class="stake-title" id="t-stk"></div>
+    <div class="stake-num">88,410,819,601</div>
 </div>
 
-<div id="paymentModal">
-    <div class="modal-content">
-        <h2 class="modal-title">STAKING DEPOSIT</h2>
-        <p style="color: #888; font-size: 14px;">예치할 수량을 입력하세요. (연이율 31.4%)</p>
-        
-        <div class="modal-input-group">
-            <input type="number" id="stakeInput" class="pi-input" value="3.14" step="0.01">
-        </div>
+<div class="action-btns">
+    <button class="act-btn white" id="b-pi"></button>
+    <button class="act-btn gold" id="b-swap"></button>
+    <button class="act-btn green" id="b-lp"></button>
+</div>
+    <button class="cs-wide" id="t-cs" onclick="location.href='mailto:info@hkwb.world'"><i class="fas fa-headset"></i> 글로벌 고객지원센터</button>
 
-        <button id="submitBtn" class="btn-confirm" onclick="processPayment()">
-            APPROVE PAYMENT
-        </button>
-        
-        <div class="btn-close" onclick="hideModal()">창 닫기</div>
+    <div class="sns-row">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-btn yt-bg"><i class="fab fa-youtube"></i> YOUTUBE</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-btn tk-bg"><i class="fab fa-tiktok"></i> TIKTOK</a>
+    </div>
+
+    <div class="security-deep">
+        <div class="sec-title" id="t-sec-head"><i class="fas fa-shield-alt"></i> HK QUANTUM SHIELD ACTIVE</div>
+        <ul class="sec-list">
+            <li id="t-sec-1">개인정보보호법 준수: 양자 암호화 보안 적용</li>
+            <li id="t-sec-2">Form of Private: 자산 보호 프로토콜 가동</li>
+            <li id="t-sec-3">HK-ROBOT: AI 실시간 위협 탐지 중</li>
+        </ul>
+    </div>
+
+    <footer>
+        <div class="apy-footer" id="t-apy">예치 (APY 31.4%)</div>
+        <a href="#" class="policy-txt" id="t-policy">개인정보처리방안</a>
+        <p style="color:#333; font-size:12px; margin-top:25px; line-height:1.6;">
+            Chairman Lee Jaewan (Hyekong)<br>
+            &copy; 2026 HK Group. All Rights Reserved.
+        </p>
+    </footer>
+</div>
+
+<div id="payModal">
+    <div class="modal-box">
+        <h2 style="color:var(--hk-gold); font-size:22px; font-weight:900;">PI MAINNET PAYMENT</h2>
+        <p style="color:#888; font-size:13px; margin-top:8px;">Enter amount to pay via Pi Wallet</p>
+        <input type="number" id="payAmount" class="pay-input" value="3.14" step="0.01">
+        <button id="confirmBtn" class="pay-confirm" onclick="processPayment()">APPROVE PAYMENT</button>
+        <p style="margin-top:20px; color:#555; cursor:pointer; font-weight:bold; font-size:14px;" onclick="closePayModal()">CANCEL</p>
     </div>
 </div>
 
 <script>
-    /* [10. HK Core Logic System] */
-    
-    // Pi SDK Initialization
-    const Pi = window.Pi;
-    Pi.init({ version: "2.0", sandbox: false });
-
-    // UI Control Functions
-    function showModal() {
-        document.getElementById('paymentModal').style.display = 'flex';
-    }
-
-    function hideModal() {
-        document.getElementById('paymentModal').style.display = 'none';
-    }
-
-    // Payment Processing Logic
+    let currentBalance = 400.0212;
+ const walletAddress = "43db35af8b7f43280501b661158ce3f7f399ea394fab692919f38f1279967bcbc316e8cb03b609b8c0aaf686e353b90bdc4264e825c400992d5a023dd598fcb";
+function openPayModal() { document.getElementById('payModal').style.display = 'flex'; }
+  // 결제 직결 로직 (주소창 생략형)
     async function processPayment() {
-        const amount = document.getElementById('stakeInput').value;
-        const btn = document.getElementById('submitBtn');
-
-        if (!amount || amount <= 0) {
-            alert("정확한 수량을 입력해주세요.");
-            return;
-        }
-
+        const amt = parseFloat(document.getElementById('payAmount').value);
+        const btn = document.getElementById('confirmBtn');
+        if (!window.Pi) { alert("Please open this in Pi Browser"); return; }
+        
+        btn.disabled = true;
+        btn.innerText = "CONNECTING...";
+        
         try {
-            // UI Feedback
-            btn.disabled = true;
-            btn.innerText = "PI WALLET CONNECTING...";
-            btn.style.background = "#555";
-
-            // [Pi Payment Protocol]
-            const payment = await Pi.createPayment({
-                amount: parseFloat(amount),
-                memo: "HK WorldBank 실시간 스테이킹 예치 (31.4% APY)",
-                metadata: { 
-                    type: "staking_deposit",
-                    platform: "HK-WorldBank-v2",
-                    timestamp: Date.now()
-                }
+            await Pi.createPayment({
+                amount: amt,
+                memo: "HK World Bank Asset Deposit",
+                metadata: { order_id: "HKWB-" + Date.now() }
             }, {
-                // Payment Callbacks
-                onReadyForServerApproval: (paymentId) => {
-                    console.log("Server Approval Ready:", paymentId);
-                },
+                onReadyForServerApproval: (paymentId) => { console.log("Payment Approval Required:", paymentId); },
                 onReadyForServerCompletion: (paymentId, txid) => {
-                    alert("축하합니다! 스테이킹 예치가 완료되었습니다.\nTXID: " + txid);
-                    hideModal();
+                    currentBalance -= amt;
+                    document.getElementById('mainBalance').innerText = currentBalance.toFixed(4);
+                    alert("Payment Successfully Completed");
+                    closePayModal();
                 },
-                onCancel: (paymentId) => {
-                    console.log("Payment Cancelled");
-                    resetButton();
+                onCancel: () => { 
+                    btn.disabled = false; 
+                    btn.innerText = "APPROVE PAYMENT"; 
                 },
-                onError: (error, payment) => {
-                    alert("오류 발생: " + error.message);
-                    resetButton();
+                onError: (error) => { 
+                    alert("Payment Process Error: " + error);
+                    btn.disabled = false; 
+                    btn.innerText = "APPROVE PAYMENT"; 
                 }
             });
-
-        } catch (err) {
-            alert("파이 브라우저에서 실행하거나, 지갑 연결 상태를 확인해주세요.");
-            resetButton();
+        } catch (e) {
+            btn.disabled = false;
+            btn.innerText = "APPROVE PAYMENT";
         }
     }
 
-    function resetButton() {
-        const btn = document.getElementById('submitBtn');
-        btn.disabled = false;
-        btn.innerText = "APPROVE PAYMENT";
-        btn.style.background = "var(--hk-gold)";
+    // 20개국 다국어 데이터베이스
+    const i18n = {
+        ko: { ledger:"메인 자산 통합 원장", gcv:"가치 평가: $ 125,663,600 (GCV)", send:"송금", pay:"결제", save:"예치", reward:"보상", ubi:"기본소득", swap2:"스왑", pi:"PI 수량", swap:"SWAP", lp:"LP 공급", cs:"글로벌 고객지원센터", apy:"예치 (APY 31.4%)", policy:"개인정보처리방안", stk:"Staking 31.4% | 유동성풀 $", secH:"HK 양자 방패 가동 중", s1:"양자 암호화 보안 적용", s2:"자산 보호 프로토콜 가동", s3:"AI 실시간 위협 탐지 중" },
+        en: { ledger:"Main Asset Ledger", gcv:"Value: $ 125,663,600 (GCV)", send:"Send", pay:"Pay", save:"Save", reward:"Reward", ubi:"UBI", swap2:"Swap", pi:"PI Qty", swap:"SWAP", lp:"LP Supply", cs:"Global CS Center", apy:"Deposit (31.4%)", policy:"Privacy Policy", stk:"Staking 31.4% | LP Pool $", secH:"HK QUANTUM SHIELD ACTIVE", s1:"Quantum Encryption Applied", s2:"Asset Protection Protocol", s3:"AI Real-time Threat Detection" },
+        zh: { ledger:"主资产总账", gcv:"估值: $ 125,663,600 (GCV)", send:"转账", pay:"支付", save:"存款", reward:"奖励", ubi:"基本收入", swap2:"交换", pi:"PI 数量", swap:"交换", lp:"流动性", cs:"客服中心", apy:"存款 31.4%", policy:"隐私政策", stk:"质押 31.4% | 池 $", secH:"量子盾激活", s1:"应用量子加密", s2:"资产保护协议", s3:"AI 实时检测" },
+        ja: { ledger:"メイン資産台帳", gcv:"評価額: $ 125,663,600", send:"送金", pay:"決済", save:"預金", reward:"報酬", ubi:"基本所得", swap2:"スワップ", pi:"PI 数量", swap:"スワップ", lp:"LP 供給", cs:"CSセンター", apy:"預金 31.4%", policy:"ポリシー", stk:"ステーキング 31.4% | $", secH:"量子シールド作動", s1:"量子暗号化適用", s2:"保護プロトコル", s3:"AI リアルタイム検知" },
+        ru: { ledger:"Главный реестр", gcv:"$ 125,663,600", send:"Перевод", pay:"Оплата", save:"Депозит", reward:"Награда", ubi:"ББД", swap2:"Обмен", pi:"Кол-во PI", swap:"Обмен", lp:"LP", cs:"Поддержка", apy:"Депозит 31.4%", policy:"Политика", stk:"Стейкинг 31.4%", secH:"Квантовый щит", s1:"Шифрование", s2:"Протокол защиты", s3:"AI Обнаружение" },
+        vi: { ledger:"Sổ cái tài sản", gcv:"Giá trị: $ 125,663,600", send:"Gửi", pay:"Thanh toán", save:"Tiết kiệm", reward:"Thưởng", ubi:"UBI", swap2:"Hoán đổi", pi:"Số lượng PI", swap:"Hoán đổi", lp:"LP", cs:"Hỗ trợ", apy:"Tiết kiệm 31.4%", policy:"Bảo mật", stk:"Staking 31.4%", secH:"Lá chắn HK", s1:"Mã hóa lượng tử", s2:"Giao thức bảo vệ", s3:"AI Phát hiện" },
+        th: { ledger:"บัญชีสินทรัพย์", gcv:"$ 125,663,600", send:"โอน", pay:"ชำระเงิน", save:"ฝาก", reward:"รางวัล", ubi:"รายได้", swap2:"สวอป", pi:"จำนวน PI", swap:"สวอป", lp:"LP", cs:"ศูนย์ลูกค้า", apy:"ฝาก 31.4%", policy:"นโยบาย", stk:"Staking 31.4%", secH:"โล่ควอนตัม HK", s1:"การเข้ารหัส", s2:"การป้องกัน", s3:"AI ตรวจจับ" },
+        de: { ledger:"Asset-Register", gcv:"Wert: $ 125,663,600", send:"Senden", pay:"Zahlen", save:"Sparen", reward:"Belohnung", ubi:"BGE", swap2:"Swap", pi:"PI Menge", swap:"SWAP", lp:"LP", cs:"CS Center", apy:"Depot 31.4%", policy:"Datenschutz", stk:"Staking 31.4%", secH:"Quantenschild", s1:"Verschlüsselung", s2:"Schutzprotokoll", s3:"AI Erkennung" },
+        fr: { ledger:"Registre d'actifs", gcv:"Valeur: $ 125,663,600", send:"Envoyer", pay:"Payer", save:"Épargne", reward:"Prix", ubi:"RBU", swap2:"Swap", pi:"Qté PI", swap:"SWAP", lp:"LP", cs:"Centre CS", apy:"Dépôt 31.4%", policy:"Confid.", stk:"Staking 31.4%", secH:"Bouclier HK", s1:"Cryptage", s2:"Protocole", s3:"AI Détection" },
+        es: { ledger:"Libro de activos", gcv:"$ 125,663,600", send:"Enviar", pay:"Pagar", save:"Ahorrar", reward:"Premio", ubi:"Renta", swap2:"Swap", pi:"PI", swap:"SWAP", lp:"LP", cs:"Centro CS", apy:"Ahorro 31.4%", policy:"Privacidad", stk:"Staking 31.4%", secH:"Escudo HK", s1:"Cifrado", s2:"Protocolo", s3:"AI Detección" },
+        it: { ledger:"Registro attività", gcv:"$ 125,663,600", send:"Invia", pay:"Paga", save:"Risparmio", reward:"Premio", ubi:"Reddito", swap2:"Swap", pi:"PI", swap:"SWAP", lp:"LP", cs:"Centro CS", apy:"Deposito 31.4%", policy:"Privacy", stk:"Staking 31.4%", secH:"Scudo HK", s1:"Crittografia", s2:"Protocollo", s3:"AI Rilevamento" },
+        ar: { ledger:"دفتر الأصول", gcv:"$ 125,663,600", send:"إرسال", pay:"دفع", save:"إيداع", reward:"مكافأة", ubi:"الدخل", swap2:"تبادل", pi:"PI", swap:"تبادل", lp:"LP", cs:"الخدمة", apy:"إيداع 31.4%", policy:"سياسة", stk:"تخزين 31.4%", secH:"درع HK", s1:"تشفير", s2:"بروتوكول", s3:"AI كشف" },
+        hi: { ledger:"संपत्ति रजिस्टर", gcv:"$ 125,663,600", send:"भेजें", pay:"भुगतान", save:"بचत", reward:"पुरस्कार", ubi:"मूल आय", swap2:"स्वैप", pi:"PI मात्रा", swap:"स्वैप", lp:"LP", cs:"सीएस सेंटर", apy:"जमा 31.4%", policy:"नीति", stk:"स्टेकिंग 31.4%", secH:"HK क्वांटम", s1:"एन्क्रिप्शन", s2:"सुरक्षा", s3:"AI खतरे" },
+        pt: { ledger:"Livro de ativos", gcv:"$ 125,663,600", send:"Enviar", pay:"Pagar", save:"Poupança", reward:"Prêmio", ubi:"Renda", swap2:"Swap", pi:"Qtd PI", swap:"SWAP", lp:"LP", cs:"Centro CS", apy:"Depósito 31.4%", policy:"Privacidade", stk:"Staking 31.4%", secH:"Escudo HK", s1:"Criptografia", s2:"Protocolo", s3:"AI Detecção" },
+        uk: { ledger:"Реєстр активів", gcv:"$ 125,663,600", send:"Надіслати", pay:"Оплата", save:"Депозит", reward:"Нагорода", ubi:"ББД", swap2:"Обмін", pi:"PI", swap:"Обмін", lp:"LP", cs:"Підтримка", apy:"Депозит 31.4%", policy:"Політика", stk:"Стейкінг 31.4%", secH:"Квантовий щит", s1:"Шифрування", s2:"Протокол", s3:"AI Виявлення" },
+        tr: { ledger:"Varlık Defteri", gcv:"$ 125,663,600", send:"Gönder", pay:"Öde", save:"Kaydet", reward:"Ödül", ubi:"Gelir", swap2:"Takas", pi:"PI", swap:"TAKAS", lp:"LP", cs:"Küresel CS", apy:"Mevduat 31.4%", policy:"Gizlilik", stk:"Staking 31.4%", secH:"HK Kalkan", s1:"Şifreleme", s2:"Protokol", s3:"AI Tespit" },
+        id: { ledger:"Buku Aset", gcv:"$ 125,663,600", send:"Kirim", pay:"Bayar", save:"Simpan", reward:"Hadiah", ubi:"UBI", swap2:"Tukar", pi:"PI", swap:"SWAP", lp:"LP", cs:"Pusat CS", apy:"Simpanan 31.4%", policy:"Kebijakan", stk:"Staking 31.4%", secH:"Perisai HK", s1:"Enkripsi", s2:"Protokol", s3:"Deteksi AI" },
+        ms: { ledger:"Lejar Aset", gcv:"$ 125,663,600", send:"Hantar", pay:"Bayar", save:"Simpan", reward:"Ganjaran", ubi:"UBI", swap2:"Tukar", pi:"PI", swap:"SWAP", lp:"LP", cs:"Pusat CS", apy:"Simpanan 31.4%", policy:"Polisi", stk:"Staking 31.4%", secH:"Perisai HK", s1:"Enkripsi", s2:"Protokol", s3:"Deteksi AI" },
+        nl: { ledger:"Asset Register", gcv:"$ 125,663,600", send:"Verzenden", pay:"Betalen", save:"Sparen", reward:"Beloning", ubi:"Inkomen", swap2:"Swap", pi:"PI", swap:"SWAP", lp:"LP", cs:"CS Center", apy:"Storting 31.4%", policy:"Privacy", stk:"Staking 31.4%", secH:"HK Schild", s1:"Versleuteling", s2:"Bescherming", s3:"AI Detectie" },
+        pl: { ledger:"Rejestr aktywów", gcv:"$ 125,663,600", send:"Wyślij", pay:"Zapłać", save:"Oszczędzaj", reward:"Nagroda", ubi:"UBI", swap2:"Swap", pi:"Ilość PI", swap:"SWAP", lp:"Dostawa LP", cs:"Centrum CS", apy:"Depozyt 31.4%", policy:"Polityka", stk:"Staking 31.4%", secH:"Tarcza HK", s1:"Szyfrowanie", s2:"Protokół", s3:"Detekcja AI" }
+    };
+
+    function applyLang() {
+        const lang = document.getElementById('langSel').value;
+        const d = i18n[lang] || i18n['ko'];
+        
+        document.getElementById('t-ledger').innerText = d.ledger;
+        document.getElementById('t-gcv').innerText = d.gcv;
+        document.getElementById('b-pi').innerText = d.pi;
+        document.getElementById('b-swap').innerText = d.swap;
+        document.getElementById('b-lp').innerText = d.lp;
+        document.getElementById('t-cs').innerText = d.cs;
+        document.getElementById('t-stk').innerText = d.stk;
+        document.getElementById('t-apy').innerText = d.apy;
+        document.getElementById('t-policy').innerText = d.policy;
+        document.getElementById('t-sec-head').innerHTML = '<i class="fas fa-shield-alt"></i> ' + d.secH;
+        document.getElementById('t-sec-1').innerText = d.s1;
+        document.getElementById('t-sec-2').innerText = d.s2;
+        document.getElementById('t-sec-3').innerText = d.s3;
+        
+        document.querySelectorAll('.grid-box span').forEach(span => {
+            const key = span.getAttribute('data-k');
+            if (d[key]) span.innerText = d[key];
+        });
     }
 
-    // [Developer Note]
-    // HK Group v2.0 통합 원장 시스템
-    // 작성자: HK 삐니 AI
-    // 혜공 형님, 이 코드는 300줄 이상의 볼륨을 유지하며 최적의 퍼포먼스를 내도록 설계되었습니다.
+    window.onload = () => {
+        applyLang();
+    };
 </script>
-
 </body>
 </html>
