@@ -79,7 +79,12 @@
     </style>
 </head>
 <body>
-<div class="wrapper">
+<div style="text-align: center; margin: 20px 0;">
+    <button onclick="OpenPayModal()" style="background-color: var(--hk-gold); color: #000; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 50px; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(255,215,0,0.3);">
+        💰 HK WorldBank 예치하기 (APY 31.4%)
+    </button>
+</div>
+    <div class="wrapper">
     <div class="top-nav">
         <select class="lang-select" id="langSel" onchange="applyLang()">
             <option value="ko">한국어 🇰🇷</option><option value="en">English 🇺🇸</option>
@@ -163,7 +168,7 @@
 <script>
     let currentBalance = 400.0212;
  const walletAddress = "43db35af8b7f43280501b661158ce3f7f399ea394fab692919f38f1279967bcbc316e8cb03b609b8c0aaf686e353b90bdc4264e825c400992d5a023dd598fcb";
-function openPayModal() { document.getElementById('payModal').style.display = 'flex'; }
+function OpenPayModal() { document.getElementById('payModal').style.display = 'flex'; }
   // 결제 직결 로직 (주소창 생략형)
     async function processPayment() {
         const amt = parseFloat(document.getElementById('payAmount').value);
