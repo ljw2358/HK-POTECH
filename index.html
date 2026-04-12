@@ -254,5 +254,41 @@ function openPayModal() { document.getElementById('payModal').style.display = 'f
         applyLang();
     };
 </script>
+    <script src="https://sdk.minepi.com/pi-sdk.js">
+    <script>
+        // HK WorldBank 실시간 구동 엔진
+        const pi = window.Pi;
+        pi.init({ version: "2.0", sandbox: true });
+
+        let currentBalance = 400.0212; // 시작 잔액
+        const annualRate = 0.314; // 형님의 31.4% 이율
+        const secondRate = (annualRate / 365 / 24 / 3600); 
+
+        setInterval(() => {
+            currentBalance += currentBalance * secondRate;
+            // 사진 속 코드 패턴을 보니 'b-pi'가 잔액 표시 ID인 것 같네요!
+            const display = document.getElementById('b-pi'); 
+            if(display) {
+                display.innerText = currentBalance.toFixed(8);
+            }
+        }, 1000);
+
+        // 예치 버튼용 함수
+        async function startStaking() {
+            try {
+                await pi.createPayment({
+                    amount: 100,
+                    memo: "HK WorldBank Staking Test",
+                    metadata: { type: "staking" }
+                }, {
+                    onReadyForServerCompletion: (paymentId, txid) => { 
+                        alert("형님! 100개 입금 확인됐습니다!");
+                        currentBalance += 100;
+                    }
+                });
+            } catch (err) { alert("지갑을 확인해주세요!"); }
+        }
+    </script>
+
 </body>
 </html>
