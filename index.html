@@ -1,10 +1,9 @@
-출발 언어영어도착 언어한국어번역하기
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK | Global Asset Ledger</title>
+    <title>HK WORLD BANK | PC Asset Ledger</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -17,31 +16,42 @@
             --card-gray: #161616;
         }
         body { 
-            background-color: var(--bg-black); 
+            background-color: #f3f4f6; /* PC 배경색 (라이트 그레이) */
             color: white; 
             font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
+            padding: 20px;
         }
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
-        /* 형광 그린 글로우 효과 */
+        /* PC 중앙 화면 컨테이너 (깔끔하게 확장) */
+        .pc-container {
+            max-width: 1000px; /* PC에 맞춘 확장된 너비 */
+            margin: 0 auto;
+            background-color: var(--bg-black);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 40px;
+        }
+
+        /* 형광 그린 글로우 효과 (더 세련되게) */
         .gcv-border {
             border: 1px solid var(--gcv-green);
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
             border-radius: 50px;
         }
         
-        /* 카드 디자인 */
+        /* 카드 디자인 (PC에 맞춰 확장) */
         .hk-card {
             background: linear-gradient(145deg, #1e1e1e, #111111);
             border: 1px solid #333;
             border-radius: 24px;
         }
 
-        /* 애니메이션 점멸 효과 (양자 방패 가동 중) */
+        /* 애니메이션 점멸 효과 (보안 가동 중) */
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background-color: var(--gcv-green);
             border-radius: 50%;
             display: inline-block;
@@ -53,146 +63,135 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* 다국어 선택기 커스텀 */
-        .lang-selector {
-            background: #222;
-            border: 1px solid var(--pi-gold);
-            color: var(--pi-gold);
-            border-radius: 8px;
-            font-size: 12px;
-            padding: 4px 8px;
+        /* 유튜브/틱톡 테두리 (깨끗하게) */
+        .social-btn {
+            border: 2px solid #555; /* 깔끔한 그레이 테두리 */
+            border-radius: 12px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .social-btn:hover {
+            border-color: #999;
+            background-color: #222;
         }
     </style>
 </head>
-<body class="max-w-md mx-auto min-h-screen flex flex-col">
+<body class="min-h-screen flex items-center justify-center">
 
-    <nav class="flex justify-between items-center p-6">
-        <div class="text-xs text-gray-500">U+ 2:08 <i class="fa-solid fa-signal"></i></div>
-        <select class="lang-selector">
-            <option>한국어 🇰🇷</option>
-            <option>English 🇺🇸</option>
-            <option>简体中文 🇨🇳</option>
-            <option>العربية 🇸🇦</option>
-            <option>हिन्दी 🇮🇳</option>
-            <option>Español 🇪🇸</option>
-            <option>Português 🇧🇷</option>
-            <option>Українська 🇺🇦</option>
-            <option>日本語 🇯🇵</option>
-            <option>Русский 🇷🇺</option>
-            <option>Tiếng Việt 🇻🇳</option>
-            <option>ไทย 🇹🇭</option>
-            <option>Deutsch 🇩🇪</option>
-            <option>Français 🇫🇷</option>
-            <option>Italiano 🇮🇹</option>
-            <option>Polski 🇵🇱</option>
-            <option>Türkçe 🇹🇷</option>
-            <option>Melayu 🇲🇾</option>
-            <option>Filipino 🇵🇭</option>
-            <option>Persian 🇮🇷</option>
-        </select>
-    </nav>
+    <main class="pc-container flex flex-col">
 
-    <header class="text-center px-6">
-        <h1 class="orbitron text-4xl font-bold tracking-tighter text-yellow-400 mb-1">HK WORLD BANK</h1>
-        <p class="text-gray-400 text-xs font-light">MAIN ASSET CONSOLIDATED LEDGER</p>
-    </header>
+        <header class="text-center mb-16 relative">
+            <h1 class="orbitron text-5xl font-bold tracking-tighter text-yellow-400 mb-2">HK WORLD BANK</h1>
+            <p class="text-gray-400 text-sm font-light">MAIN ASSET CONSOLIDATED LEDGER | PC EDITION</p>
+            
+            <div class="absolute top-0 right-0 p-2 text-xs text-gray-600">🇰🇷 (KR) | NO-LANG-TRANS</div>
+        </header>
 
-    <section class="mt-10 px-6 text-center">
-        <div class="mb-2">
-            <span class="orbitron text-6xl font-extrabold italic">400.0212</span>
-            <span class="text-2xl text-yellow-500 font-bold ml-1">Pi</span>
-        </div>
-        <div class="inline-block gcv-border px-6 py-2">
-            <span class="text-sm font-bold text-green-400">가치 평가: $ 125,663,600 (GCV)</span>
-        </div>
-    </section>
+        <section class="mb-16 flex flex-col items-center gap-10">
+            <div class="flex items-end gap-3 hk-card p-10 w-full justify-center">
+                <span class="orbitron text-8xl font-extrabold italic text-white">1,000,000,000.0000</span>
+                <span class="text-4xl text-yellow-500 font-bold mb-2">Pi</span>
+            </div>
+            
+            <div class="inline-block gcv-border px-10 py-3">
+                <span class="text-lg font-bold text-green-400">가치 평가: $ 314,159,200,000 (GCV)</span>
+            </div>
+        </section>
 
-    <section class="grid grid-cols-3 gap-6 px-8 mt-12 text-center">
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-blue-600/40 transition">
-                <i class="fa-solid fa-paper-plane text-blue-400 text-xl"></i>
+        <section class="grid grid-cols-6 gap-10 px-10 mb-16 text-center">
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-blue-600 transition">
+                <div class="w-20 h-20 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-600/40 transition">
+                    <i class="fa-solid fa-paper-plane text-blue-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">송금</span>
             </div>
-            <span class="text-xs">송금</span>
-        </div>
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-orange-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-orange-600/40 transition">
-                <i class="fa-solid fa-cart-shopping text-orange-400 text-xl"></i>
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-orange-600 transition">
+                <div class="w-20 h-20 bg-orange-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-orange-600/40 transition">
+                    <i class="fa-solid fa-cart-shopping text-orange-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">결제</span>
             </div>
-            <span class="text-xs">결제</span>
-        </div>
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-pink-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-pink-600/40 transition">
-                <i class="fa-solid fa-piggy-bank text-pink-400 text-xl"></i>
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-pink-600 transition">
+                <div class="w-20 h-20 bg-pink-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-pink-600/40 transition">
+                    <i class="fa-solid fa-piggy-bank text-pink-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">예치 (12%)</span>
             </div>
-            <span class="text-xs">예치 (12%)</span>
-        </div>
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-red-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-red-600/40 transition">
-                <i class="fa-solid fa-gift text-red-400 text-xl"></i>
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-red-600 transition">
+                <div class="w-20 h-20 bg-red-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-red-600/40 transition">
+                    <i class="fa-solid fa-gift text-red-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">보상</span>
             </div>
-            <span class="text-xs">보상</span>
-        </div>
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-purple-600/40 transition">
-                <i class="fa-solid fa-scale-balanced text-purple-400 text-xl"></i>
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-purple-600 transition">
+                <div class="w-20 h-20 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-purple-600/40 transition">
+                    <i class="fa-solid fa-scale-balanced text-purple-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">기본소득</span>
             </div>
-            <span class="text-xs">기본소득</span>
-        </div>
-        <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-14 h-14 bg-cyan-600/20 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-cyan-600/40 transition">
-                <i class="fa-solid fa-arrows-rotate text-cyan-400 text-xl"></i>
+            <div class="flex flex-col items-center group cursor-pointer p-4 hk-card hover:border-cyan-600 transition">
+                <div class="w-20 h-20 bg-cyan-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-cyan-600/40 transition">
+                    <i class="fa-solid fa-arrows-rotate text-cyan-400 text-3xl"></i>
+                </div>
+                <span class="text-sm font-bold">스왑</span>
             </div>
-            <span class="text-xs">스왑</span>
-        </div>
-    </section>
+        </section>
 
-    <section class="px-6 mt-10">
-        <div class="hk-card p-5">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-sm font-bold text-yellow-400">유동성 풀 (LP) 스테이킹</h3>
-                <span class="text-[10px] bg-yellow-400/10 text-yellow-400 px-2 py-1 rounded">연 15% ~ 50%</span>
+        <section class="px-10 mb-16">
+            <div class="hk-card p-10 flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-2">유동성 풀 (LP) 스테이킹</h3>
+                    <p class="text-sm text-gray-400 font-light">연 <span class="text-yellow-400 font-bold">15% ~ 50%</span> 보장 | V23 자동 연동 대기</p>
+                </div>
+                <div class="flex gap-4">
+                    <button class="bg-white text-black text-sm font-bold px-8 py-4 rounded-xl hover:bg-gray-200">PI 수량</button>
+                    <button class="bg-yellow-400 text-black text-sm font-bold px-8 py-4 rounded-xl hover:bg-yellow-500">SWAP</button>
+                    <button class="bg-green-500 text-black text-sm font-bold px-8 py-4 rounded-xl hover:bg-green-600">LP 공급</button>
+                </div>
             </div>
-            <div class="grid grid-cols-3 gap-3">
-                <button class="bg-white text-black text-xs font-bold py-3 rounded-xl hover:bg-gray-200">PI 수량</button>
-                <button class="bg-yellow-400 text-black text-xs font-bold py-3 rounded-xl hover:bg-yellow-500">SWAP</button>
-                <button class="bg-green-500 text-black text-xs font-bold py-3 rounded-xl hover:bg-green-600">LP 공급</button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="px-6 mt-6 mb-10">
-        <button class="w-full bg-red-600 text-white font-bold py-4 rounded-2xl text-lg shadow-lg shadow-red-900/20 mb-4 transition active:scale-95">
-            글로벌 고객지원센터
-        </button>
-        <div class="flex gap-4">
-            <button class="flex-1 bg-[#1a1a1a] border border-gray-700 py-3 rounded-xl text-sm flex items-center justify-center">
-                <i class="fa-solid fa-robot mr-2 text-green-400"></i>AI 챗봇
+        <section class="px-10 mb-16 grid grid-cols-2 gap-10 items-center">
+            <button class="w-full bg-red-600 text-white font-bold py-6 rounded-2xl text-2xl shadow-xl shadow-red-900/30 transition active:scale-95">
+                글로벌 고객지원센터
             </button>
-            <button class="flex-1 bg-[#1a1a1a] border border-gray-700 py-3 rounded-xl text-sm flex items-center justify-center">
-                <i class="fa-solid fa-file-lines mr-2 text-blue-400"></i>FAQ
-            </button>
-        </div>
-    </section>
-
-    <footer class="mt-auto px-8 pb-10">
-        <div class="flex justify-center gap-10 mb-8">
-            <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="text-red-500 text-2xl"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="text-white text-2xl"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-        
-        <div class="border-t border-gray-800 pt-6">
-            <div class="flex items-center mb-2">
-                <div class="status-dot mr-2"></div>
-                <span class="text-xs font-bold text-green-400 orbitron">HK QUANTUM SHIELD ACTIVE</span>
+            <div class="flex gap-6">
+                <button class="flex-1 bg-[#1a1a1a] border border-gray-700 py-6 rounded-xl text-lg flex items-center justify-center">
+                    <i class="fa-solid fa-robot mr-3 text-green-400"></i>AI 챗봇
+                </button>
+                <button class="flex-1 bg-[#1a1a1a] border border-gray-700 py-6 rounded-xl text-lg flex items-center justify-center">
+                    <i class="fa-solid fa-file-lines mr-3 text-blue-400"></i>FAQ
+                </button>
             </div>
-            <ul class="text-[10px] text-gray-500 space-y-1 font-light">
-                <li>• 양자 암호화 보안 프로토콜 24/7 가동 중</li>
-                <li>• V23 프로토콜 및 오픈 메인넷 자동 연동 대기</li>
-                <li>• AI 실시간 위협 탐지 및 자산 보호 중</li>
-                <li>• <span class="text-yellow-600">SAFE-CUSTODY FEE: 10% (QUANTUM SHIELD)</span></li>
-            </ul>
-        </div>
-    </footer>
+        </section>
+
+        <footer class="mt-auto px-10 pb-10 border-t border-gray-800 pt-10 grid grid-cols-3 gap-10 items-start">
+            
+            <div class="flex flex-col gap-4">
+                <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="social-btn flex items-center gap-4 px-6 py-4">
+                    <i class="fa-brands fa-youtube text-red-500 text-3xl"></i>
+                    <span class="text-sm font-bold">Hyekong2025 YouTube</span>
+                </a>
+                <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="social-btn flex items-center gap-4 px-6 py-4">
+                    <i class="fa-brands fa-tiktok text-white text-3xl"></i>
+                    <span class="text-sm font-bold">hyekong2025 TikTok</span>
+                </a>
+            </div>
+            
+            <div class="col-span-2 hk-card p-6 flex items-start gap-4">
+                <div class="status-dot mt-1"></div>
+                <div>
+                    <span class="text-lg font-bold text-green-400 orbitron">HK QUANTUM SHIELD ACTIVE</span>
+                    <ul class="text-xs text-gray-500 space-y-1 font-light mt-3">
+                        <li>• 양자 암호화 보안 프로토콜 24/7 가동 중</li>
+                        <li>• V23 프로토콜 및 오픈 메인넷 자동 연동 대기</li>
+                        <li>• AI 실시간 위협 탐지 및 자산 보호 중</li>
+                        <li>• <span class="text-yellow-600 font-bold">SAFE-CUSTODY FEE: 10% (QUANTUM SHIELD)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+    </main>
 
 </body>
 </html>
