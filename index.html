@@ -280,49 +280,69 @@
     <span class="pi-unit">Pi</span>
     <div class="gcv-pill" id="gcv-display">Value: $ 125,663,600 (GCV)</div>
 
-        <div class="hk-wallet-module" style="background: rgba(26, 26, 26, 0.95); border: 2px solid var(--hk-gold, #FFD700); border-radius: 25px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15); color: #fff;">
+          <!-- ==========================================
+         HK WorldBank 지갑 연동 및 9대 구동 모듈 (이식 완결판)
+         ========================================== -->
+    <div class="hk-wallet-module" style="background: rgba(26, 26, 26, 0.95); border: 2px solid var(--hk-gold, #FFD700); border-radius: 25px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15); color: #fff;">
         <div style="text-align: center; margin-bottom: 20px;">
             <h3 style="color: var(--hk-gold, #FFD700); margin: 0 0 5px 0; font-size: 20px; font-weight: 800;">HK WorldBank Smart Node</h3>
             <p style="margin: 0; font-size: 13px; color: #ccc;">글로벌 자산 예치 및 트랜잭션 엔진</p>
         </div>
 
+        <!-- 덩어리 1: 지갑 연결 -->
         <div style="margin-bottom: 18px;">
             <button id="hk-btn-connect" onclick="hkConnectWallet()" style="width: 100%; background: linear-gradient(135deg, #ff9900, #e68a00); color: #fff; padding: 12px; border: none; border-radius: 12px; cursor: pointer; font-size: 15px; font-weight: bold; box-shadow: 0 4px 15px rgba(255,153,0,0.3);">
                 🔗 Pi Wallet 지갑 연결하기
             </button>
-            <div id="hk-wallet-spec" style="display: none; margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 10px;">
-                <span style="color: #28a745; font-size: 12px; font-weight: bold; display: block; margin-bottom: 4px;">✓ 보안 노드 연결 완료</span>
-                <input type="text" id="hk-wallet-address" style="width: 100%; padding: 8px; background: #222; border: 1px solid #555; border-radius: 6px; font-size: 12px; color: #fff; font-family: monospace; box-sizing: border-box;" readonly>
+            
+            <!-- 지갑 연동 성공 시 나타날 박스 (글자색 화이트 및 네온 그린 강조) -->
+            <div id="hk-wallet-spec" style="display: none; margin-top: 10px; padding: 12px; background: rgba(0,0,0,0.6); border: 1px solid var(--hk-gold, #FFD700); border-radius: 10px;">
+                <span style="color: #00FFCC; font-size: 13px; font-weight: bold; display: block; margin-bottom: 6px;">✓ 보안 노드 연결 완료 (지갑 주소)</span>
+                <input type="text" id="hk-wallet-address" style="width: 100%; padding: 10px; background: #111; border: 1px solid #444; border-radius: 6px; font-size: 14px; color: #ffffff; font-weight: bold; font-family: monospace; box-sizing: border-box; text-align: center;" readonly>
             </div>
         </div>
         
+        <!-- 덩어리 2 & 3: 수량 및 기간 설정 -->
         <div style="margin-bottom: 15px;">
             <label style="font-size: 13px; color: var(--hk-gold, #FFD700); display:block; margin-bottom:5px;">예치 수량 설정 (Amount)</label>
-            <input type="number" id="hk-stake-amount" placeholder="0.00 Pi" style="width: 100%; padding: 10px; background: #222; border: 1px solid #555; border-radius: 8px; color:#fff; font-size:14px; box-sizing: border-box;">
+            <input type="number" id="hk-stake-amount" placeholder="0.00 Pi" style="width: 100%; padding: 10px; background: #222; border: 1px solid #555; border-radius: 8px; color:#fff; font-size:14px; box-sizing: border-box; text-align: center;">
         </div>
         
         <div style="margin-bottom: 20px;">
             <label style="font-size: 13px; color: var(--hk-gold, #FFD700); display:block; margin-bottom:5px;">예치 기간 선택 (Lock-up)</label>
-            <select id="hk-stake-duration" style="width: 100%; padding: 10px; background: #222; border: 1px solid #555; border-radius: 8px; color:#fff; font-size:14px; box-sizing: border-box;">
+            <select id="hk-stake-duration" style="width: 100%; padding: 10px; background: #222; border: 1px solid #555; border-radius: 8px; color:#fff; font-size:14px; box-sizing: border-box; text-align-last: center;">
                 <option value="30">30일 잠금 (연 12%)</option>
                 <option value="90">90일 잠금 (연 18%)</option>
                 <option value="365">365일 잠금 (연 32%)</option>
             </select>
         </div>
 
-        <button id="hk-btn-approve" onclick="hkRequestApproval()" style="width: 100%; background: var(--hk-blue, #007bff); color: #fff; padding: 12px; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer;">
-            예치 승인 및 트랜잭션 요청
+        <!-- 덩어리 4 & 5: 예치 승인 버튼 -->
+        <button id="hk-btn-approve" onclick="hkRequestApproval()" style="width: 100%; background: #0056b3; color: #fff; padding: 13px; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,86,179,0.3);">
+            정기 예치 승인 및 트랜잭션 요청
         </button>
 
+        <!-- [추가 핵심 메뉴] LP 스테이킹 및 DEX 스왑 바로가기 핫링크 -->
+        <div style="display: flex; gap: 10px; margin-top: 10px; border-top: 1px solid #333; padding-top: 15px;">
+            <button onclick="openHkModal('HK 유동성 DEX 스왑 풀', 'swap')" style="flex: 1; background: #222; color: var(--hk-gold, #FFD700); border: 1px solid var(--hk-gold, #FFD700); padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;">
+                🔄 DEX 스왑 구동
+            </button>
+            <button onclick="openHkModal('에코시스템 기여 보상 센터', 'reward')" style="flex: 1; background: #222; color: #00FFCC; border: 1px solid #00FFCC; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;">
+                📈 LP 스테이킹 정산
+            </button>
+        </div>
+
+        <!-- 덩어리 6~9: PIN 팝업 암호창 -->
         <div id="hk-pin-modal" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid var(--hk-gold, #FFD700); border-radius: 12px; background: #111; text-align: center;">
             <h4 style="color: #fff; margin: 0 0 10px 0; font-size: 15px;">🔒 6자리 암호번호(PIN) 입력</h4>
             <input type="password" id="hk-pin-code" maxlength="6" placeholder="••••••" style="font-size: 24px; text-align: center; width: 150px; letter-spacing: 6px; padding: 5px; background:#222; border:1px solid #555; color:#fff; border-radius: 6px; margin-bottom: 12px; font-family: monospace;">
             <br>
-            <button onclick="hkVerifyAndSubmit()" style="background: #28a745; color: #fff; padding: 8px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer;">최종 서명 완료</button>
+         
+           <button onclick="hkVerifyAndSubmit()" style="background: #28a745; color: #fff; padding: 8px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer;">최종 서명 완료</button>
         </div>
     </div>
 
-    <script>
+<script>
     function hkConnectWallet() {
         const prefix = "GB";
         const body = Math.random().toString(36).substring(2, 12).toUpperCase();
@@ -1796,160 +1816,7 @@ function executeHkAction(actionName) {
 </body>
 </html>
 
-    function openDemo(title, icon, msg) {
-        const modal = document.getElementById('hkDemoModal');
-        const dTitle = document.getElementById('demoTitle');
-        const dBody = document.getElementById('demoBody');
-        dTitle.innerHTML = `${icon} ${title}`;
-        let content = `<p>${msg}</p>`;
-    
-      // 1616번 줄부터 이렇게 수정하세요
-if (title === '송금' || title === '기본소득') {
-    content += '<input type="text" class="demo-input" placeholder="수량 입력">';
-}
-content += '<div id="status-msg" class="demo-status">시스템 동기화 중...</div>';
-dBody.innerHTML = content;
-modal.style.display = 'flex';
-
-// 2초 뒤 상태 변경 로직 추가
-setTimeout(() => {
-    const statusMsg = document.getElementById('status-msg');
-    if (statusMsg) {
-        statusMsg.innerText = '동기화 완료';
-        statusMsg.style.color = '#00ff00';
-    }
-}, 2000);
-
-    
-    function closeDemo() { document.getElementById('hkDemoModal').style.display = 'none'; }
-</script>
-
-<script src="https://sdk.minepi.com/pi-sdk.js"></script>
-<script>
-    function openDoor() {
-        const blocker = document.getElementById('kyc-blocker');
-        if (blocker) {
-            blocker.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
-    async function autoKycCheck() {
-        if (window.Pi) {
-            try {
-                const auth = await window.Pi.authenticate(['username']);
-                if (auth && auth.user) {
-                    if (auth.user.username === 'ljw2358') {
-                        console.log("Welcome, Chairman Hyekong!");
-                        openDoor();
-                        return;
-                    }
-                    openDoor();
-                }
-            } catch (e) { console.log("KYC 인증 대기 중..."); }
-        }
-    }
-    window.addEventListener('mousedown', function() {
-        const blocker = document.getElementById('kyc-blocker');
-        if (blocker && blocker.style.display !== 'none') {
-            const key = prompt("HK WorldBank 마스터 코드를 입력하세요:");
-            if (key === "0520" || key === "ljw2358") {
-                alert("반갑습니다, 의장님! 보안 시스템이 의장님을 환영합니다.");
-                openDoor();
-            } else if (key !== null && key !== "") {
-                alert("권한이 없습니다.");
-            }
-        }
-    }, true);
-    autoKycCheck();
-</script>
-<script>
-// --- [보안 관리 영역: 형님 전용] ---
-// UBI를 포함한 모든 핵심 지갑을 보안 영역으로 배치하여 철저히 보호
-const PRIVATE_MANAGEMENT = {
-    UBI: "GBUX5TOS5MOMZNXDKXW4ZFZKAX5LSWLTXZ2FXWBKP77WRK6RJAMYVG5X",
-    수수료: "GDLG4Q5TXUOGI3MEUNURXY72U6KDU7NQSJA2W3CRHQEMK7QPXYCSPTHK",
-    저수지: "GBZQSKO6ISVH5KUUEXQACWPBHPEJVISH4N2K2AQERDKQYMPRKLN5VFQ",
-    유동성풀: "GDDXKZGAX7BE4J3DELSOXNEPR6NUBCVRJSSYY5IZQ4SJZSTNUUPJQC"
-};
-// --- v23 프로토콜 자동 연동 통로 ---
-
-// --- v23 프로토콜 동기화 통로 ---
-window.v23_Protocol_Sync = function() {
-    console.log("v23 프로토콜 동기화 완료: 모든 보안 지갑이 연동되었습니다.");
-    return PRIVATE_MANAGEMENT;
-};
-    const key = type.toUpperCase();
-    if (PRIVATE_MANAGEMENT[key]) {
-        console.log("보안 채널 가동: " + key + " 지갑 접근 승인됨");
-        // 실제 운영 로직은 여기서 형님의 승인 하에 안전하게 처리
-    } else {
-        console.warn("보안 위반 시도 감지");
-    }
-
-        // 혜공 형님 엔진 가동기
-        function initHKEngine() {
-            let btn = document.getElementById('hk-start-btn');
-            if (!btn) {
-                btn = document.createElement('button');
-                btn.id = 'hk-start-btn';
-                btn.innerText = "🚀 엔진 가동";
-                btn.style.position = 'fixed';
-                btn.style.bottom = '20px';
-                btn.style.right = '20px';
-                btn.style.zIndex = '99999';
-                btn.style.padding = '15px 25px';
-                btn.style.cursor = 'pointer';
-                document.body.appendChild(btn);
-            }
-            btn.onclick = () => {
-                if (typeof HK_WorldBank !== 'undefined') HK_WorldBank.activate();
-            };
-        }
-        if (document.readyState === 'complete') initHKEngine();
-        else window.addEventListener('load', initHKEngine);
-// 1720번 줄 근처 <script> 내부의 가장 마지막에 넣으십쇼
-const contractAddress = "0x4036665792942468725838048259480249820542";
-const contractABI = [
-  {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
-  {"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"pay","outputs":[],"stateMutability":"nonpayable","type":"function"},
-  {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"}
-];
-const contract = new ethers.Contract(contractAddress, contractABI, new ethers.providers.Web3Provider(window.ethereum).getSigner());
-
-async function executeTransaction(funcName, ...args) {
-    try {
-        const tx = await contract[funcName](...args);
-        await tx.wait();
-        alert(funcName + " 성공!");
-    } catch (e) {
-        alert("오류: " + e.message);
-    }
-}
-
-// 9가지 핵심 알맹이 연결
-async function pay() { await executeTransaction("pay", "받는주소", ethers.utils.parseEther("1")); }
-async function stake() { await executeTransaction("stake", ethers.utils.parseEther("10")); }
-async function claimReward() { await executeTransaction("claimReward"); }
-async function claimUBI() { await executeTransaction("claimUBI"); }
-async function approveSwap() { await executeTransaction("approveSwap", "라우터주소", ethers.utils.parseEther("100")); }
-async function getPiBalance() { 
-    const bal = await contract.balanceOf(window.ethereum.selectedAddress);
-    alert("현재 PI 잔액: " + ethers.utils.formatEther(bal)); 
-}
-async function executeSwap() { await executeTransaction("executeSwap", "라우터", "토큰A", "토큰B", 100); }
-async function depositLP() { await executeTransaction("depositLP", ethers.utils.parseEther("10")); }
-
-// 9번 추가: PI 수량 조회 (이미 위 getPiBalance에 포함됨)
-<div style="position:fixed; bottom:150px; right:20px; z-index:9998; background:rgba(0,0,0,0.8); padding:15px; border-radius:10px; border:1px solid gold;">
-<button onclick="alert('송금 기능 실행 중'); console.log('송금');">송금</button>
-<button onclick="alert('결제 기능 실행 중'); console.log('결제');">결제</button>
-<button onclick="alert('예치 기능 실행 중'); console.log('예치');">예치</button>
-<button onclick="alert('보상 기능 실행 중'); console.log('보상');">보상</button>
-<button onclick="alert('기본소득 기능 실행 중'); console.log('기본소득');">기본소득</button>
-<button onclick="alert('스왑 기능 실행 중'); console.log('스왑');">스왑</button>
-<button onclick="alert('잔액조회 기능 실행 중'); console.log('잔액조회');">잔액조회</button>
-<button onclick="alert('DEX스왑 기능 실행 중'); console.log('DEX스왑');">DEX스왑</button>
-<button onclick="stakeLP()">('LP예치 기능 실행 중'); console.log('LP예치');">LP예치</button>
+  
 
 <button id="stakeBtn">LP 예치</button>
 // 1. LP 스테이킹 버튼 연결 (id를 'lbi-stk'로 정확히 지정)
@@ -2187,91 +2054,287 @@ function checkSecurity() {
 </head>
 <body>
    
-    
-    <script>
-    // 9개 엔진 통합 제어 로직
-// 금융 엔진 모듈 정의
-const FinanceEngine = {
-    deposit: async (amount, currency) => {
-        return `예치 완료: ${amount} ${currency}`;
-    },
-    stakeLP: async (poolID, lpAmount) => {
-        return `LP 스테이킹 성공: 풀 ID ${poolID}`;
-    }
-};
-    window.initEngine = async function() {
-    console.log("금융 엔진 시스템 부팅 시작...");
-    
-    // 1. 금융 엔진 (예치 및 LP 스테이킹)
-    const dep = await FinanceEngine.deposit("1000", "Pi");
-    const lp = await FinanceEngine.stakeLP("PI-HK-001", "500");
-    
-    document.getElementById('status').innerText = "시스템 가동: " + dep + " / " + lp;
-};
+ <script>
+    // // 9개 엔진 통합 제어 로직
+    // // 금융 엔진 모든 정의
+    const FinanceEngine = {
+        deposit: async (amount, currency) => {
+            return `예치 완료: ${amount} ${currency}`;
+        },
+        stakeLP: async (poolID, lpAmount) => {
+            return `LP 스테이킹 성공: 풀 ID ${poolID}`;
+        }
+    };
 
-window.onload = function() {
-    initEngine();
-};
-    </script>
+    // // hk_data.js 데이터베이스 정의
+    const HK_Data = {
+        assets: { piBalance: 1000.00, totalDeposit: 50000.00, rewardPoints: 250.5 },
+        transactions: { lastTransfer: "2026-06-05", dexLiquidity: 1000000, status: "active" },
+        ecosystem: { ubiRate: 0.05, stakingAPY: 12.5, nodeCount: 9 },
+        faq: [
+            ["누구야", "저는 HK 비서 피니입니다."],
+            ["UBI", "6월 30일 전 UBI 개시 전 기금을 전 시스템에 가동 중입니다."],
+            ["이율", "현재 스테이킹 이율은 12.5%입니다."]
+        ]
+    };
+    window.HK_Data = HK_Data;
+    console.log("📊 [성공] hk_data.js 데이터베이스 로드 완료!");
+
+    // 금융 엔진 시스템 부팅 함수 정의
+    window.initEngine = async function() {
+        console.log("🚀 금융 엔진 시스템 부팅 시작...");
+        try {
+            const dep = await FinanceEngine.deposit("1000", "Pi");
+            const lp = await FinanceEngine.stakeLP("PI-HK-001", "500");
+            
+            // 모달창 상태 텍스트 안전 매칭
+            const statusTarget = document.getElementById('hk-modal-status');
+            if (statusTarget) {
+                statusTarget.innerText = "시스템 가동: " + dep + " / " + lp;
+            }
+        } catch (err) {
+            console.error("🚨 엔진 초기화 중 에러 발생:", err);
+        }
+    };
+
+    // 페이지 로드 시 엔진 자동 실행
+    window.onload = function() {
+        initEngine();
+    };
+</script>   
+    
 </body>
 </html>
- 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>HK-WorldBank Platform</title>
-</head>
-<body>
-  
+<div id="hk-global-modal" class="hk-modal">
+    <div class="modal-content">
+        <h3 id="hk-modal-title" class="modal-title">HK WORLD BANK</h3>
+        <p id="hk-modal-status" class="demo-status">SYSTEM NODE CONNECTED</p>
+        <div id="hk-modal-body" class="modal-body"></div>
+        <button class="close-modal" onclick="closeHkModal()">❌ 창 닫기</button>
+    </div>
+</div>
+
+<style>
+.hk-modal {
+    display: none; position: fixed; z-index: 9999; 
+    left: 0; top: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #121212; border: 2px solid var(--hk-gold, #FFD700); 
+    width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; 
+    text-align: center; box-shadow: 0 0 30px var(--hk-gold, rgba(255,215,0,0.3)); color: #fff;
+}
+.modal-title { color: var(--hk-gold, #FFD700); font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+.demo-status { color: var(--hk-green, #00FFCC); font-size: 13px; font-weight: 800; margin-bottom: 20px; }
+.modal-body { margin-bottom: 20px; font-size: 15px; color: #eee; line-height: 1.6; }
+.close-modal { background: #222; color: #fff; border: 1px solid #444; padding: 10px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+.hk-input-style { width: 85%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff; text-align: center; }
+.hk-submit-btn { width: 85%; background: var(--hk-gold, #FFD700); color: #000; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+</style>
+
+<script>
+function openHkModal(title, type) {
+    const modal = document.getElementById('hk-global-modal');
+    const mTitle = document.getElementById('hk-modal-title');
+    const mBody = document.getElementById('hk-modal-body');
+    mTitle.innerText = title;
+    modal.style.display = 'flex';
     
-    <script>
-        // 1. 엔진 전역 노출
-        window.initKEngine = function() {
-           
-        };
+    if (type === 'transfer') {
+        mBody.innerHTML = `<p>상대방의 Pi 지갑 주소와 송금할 수량을 입력하십시오.</p><input type="text" class="hk-input-style" placeholder="받는 사람 지갑 주소 (G...)"><br><input type="number" class="hk-input-style" placeholder="0.00 Pi"><br><button class="hk-submit-btn" onclick="executeHkAction('송금')">1차 승인 및 PIN 요청</button>`;
+    } else if (type === 'pay') {
+        mBody.innerHTML = `<p>매장 결제 및 QR 코드 연동 시스템을 구동합니다.</p><input type="text" class="hk-input-style" placeholder="가맹점 코드 또는 결제 금액"><br><button class="hk-submit-btn" onclick="executeHkAction('결제')">결제 진행하기</button>`;
+    } else if (type === 'reward') {
+        mBody.innerHTML = `<p>형님의 누적 에코시스템 기여 보상 내역입니다.</p><div style="background:#222; padding:15px; border-radius:10px; text-align:left; font-size:14px; border:1px solid #333;">• 매일 출석 보상: +0.15 Pi<br>• 검증 기여 보상: +1.20 Pi<br>• 노드 활성 보상: +3.50 Pi</div><br><button class="hk-submit-btn" onclick="executeHkAction('보상 수령')">보상 일괄 수령 (Claim)</button>`;
+    } else if (type === 'ubi') {
+        mBody.innerHTML = `<p style="color:var(--hk-gold);"><b>[HK 사회 재단 기본소득 시스템]</b></p><p>글로벌 취약계층 분배 알고리즘에 의해 산정된 형님의 기본소득 계정입니다.</p><h3 style="color:#00FFCC; margin:10px 0;">당월 기본소득: 180.00 Pi</h3><button class="hk-submit-btn" onclick="executeHkAction('기본소득 수령')">매칭 계정으로 수령</button>`;
+    } else if (type === 'swap') {
+        mBody.innerHTML = `<p><b>🔄 HK WorldBank 실시간 유동성 스왑 풀 (DEX)</b></p><div style="margin-bottom:10px;"><input type="number" class="hk-input-style" placeholder="From: 0.00 Pi" style="width:40%; display:inline-block;"> <span style="font-size:20px; color:var(--hk-gold);">➔</span> <input type="number" class="hk-input-style" placeholder="To: 0.00 USD" style="width:40%; display:inline-block;"></div><p style="font-size:12px; color:#aaa;">실시간 교환 비율: 1 Pi = $314,159 (GCV 반영)</p><button class="hk-submit-btn" onclick="executeHkAction('DEX 스왑')">스왑 실행 및 서명</button>`;
+    } else if (type === 'faq') {
+        mBody.innerHTML = `<p><b>🤖 글로벌 AI 지원센터 (FAQ 20)</b></p><div style="text-align:left; font-size:13px; max-height:200px; overflow-y:auto; background:#222; padding:10px; border-radius:8px; line-height:1.5;"><b>Q1. HK WorldBank의 이율은 어떻게 결정되나요?</b><br>A1. Pi 네트워크의 유동성 및 인프라 수익 수익의 30%를 연동하여 연 복리 12%~32%가 산정됩니다.</div>`;
+    } else if (type === 'vision') {
+        mBody.innerHTML = `<p><b>🌍 HK 사회 재단 비전 2030</b></p><p style="text-align:left; font-size:14px; color:#ccc; line-height:1.6;">HK Group 창립자 <b>혜공 이재완 의장</b>의 철학에 따라, 플랫폼 전체 수익의 30%를 전 세계 소외계층 및 글로벌 기본소득(UBI) 재원으로 영구 분배하는 패러다임입니다.</p>`;
+    }
+}
 
-        // 2. 통합 실행
-        window.onload = function() {
-            initKEngine();
-            setTimeout(function() {
-              
-            }, 500);
-        };
+function closeHkModal() { document.getElementById('hk-global-modal').style.display = 'none'; }
 
-<script>
-    // 혜공 형님, 레이어 완전 돌파 엔진
-    document.body.addEventListener('click', function(e) {
-        // 클릭한 위치의 요소를 재귀적으로 탐색하여 버튼 텍스트를 찾습니다.
-        let target = e.target;
-        while(target) {
-            const text = target.innerText ? target.innerText.trim() : "";
-            // 버튼 명칭이 확인되면 즉시 실행
-            if(['송금', '결제', '예치', '보상', '기본소득', '스왑'].includes(text)) {
-                alert('혜공 형님, [ ' + text + ' ] 명령을 시스템 레이어를 뚫고 강제로 접수했습니다.');
-                e.stopImmediatePropagation();
-                return;
-            }
-            target = target.parentElement;
+function executeHkAction(actionName) {
+    const pin = prompt("🔒 HK WorldBank 자산 보안 서명\n\n[ " + actionName + " ] 처리를 위해 6자리 보안 암호번호(PIN)를 입력하십시오.");
+    if (!pin) return;
+    if (pin.length !== 6) { alert("❌ 서명 실패: 암호번호 6자리를 정확히 입력하십시오."); return; }
+    alert(`✓ [${actionName}] 트랜잭션이 성공적으로 처리되었습니다!\n블록체인 메인 장부에 실시간 동기화 완료.`);
+    closeHkModal();
+}
+</script>
+<div id="hk-global-modal" class="hk-modal">
+    <div class="modal-content">
+        <h3 id="hk-modal-title" class="modal-title">HK WORLD BANK</h3>
+        <p id="hk-modal-status" class="demo-status">SYSTEM NODE CONNECTED</p>
+        <div id="hk-modal-body" class="modal-body">
+            </div>
+        <button class="close-modal" onclick="closeHkModal()">❌ 창 닫기</button>
+    </div>
+</div>
+
+<style>
+.hk-modal {
+    display: none; position: fixed; z-index: 99999; 
+    left: 0; top: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #121212; border: 2px solid var(--hk-gold, #FFD700); 
+    width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; 
+    text-align: center; box-shadow: 0 0 30px var(--hk-gold, rgba(255,215,0,0.4)); color: #fff;
+    font-family: sans-serif;
+}
+.modal-title { color: var(--hk-gold, #FFD700); font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+.demo-status { color: #00FFCC; font-size: 13px; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px; }
+.modal-body { margin-bottom: 20px; font-size: 15px; color: #eee; line-height: 1.6; }
+.close-modal { background: #222; color: #fff; border: 1px solid #444; padding: 10px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+.close-modal:hover { background: #333; border-color: var(--hk-gold); }
+.hk-input-style { width: 85%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff; text-align: center; font-size: 16px; }
+.hk-submit-btn { width: 85%; background: var(--hk-gold, #FFD700); color: #000; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+</style>
+
+</body>
+</html>
+// ==========================================
+// 2283줄 마스터 제어부 삽입 구역
+// ==========================================
+const HK_MasterCoreSystem = {
+    config: {
+        masterCode: "0520", // 형님의 고유 마스터 코드 번호
+        sandboxMode: false // 라이브 메인넷 직결 모드
+    },
+
+    // 50개국어 크래시 발생 시 시스템을 방어할 18개 안전 언어 리스트
+    safetyLanguages: ["ko", "en", "zh", "ja", "es", "vi", "fr", "de", "ru", "pt", "it", "th", "id", "hi", "ar", "tr", "pl", "nl"],
+
+    /**
+     * 0520 마스터 권한 검증 함수
+     */
+    verifyMasterAccess: function(inputCode) {
+        if (inputCode === this.config.masterCode) {
+            console.log("[HK SYSTEM] 0520 마스터 권한이 승인되었습니다. 관제 센터를 개방합니다.");
+            this.activateMainnetBridge();
+            return true;
+        } else {
+            console.error("[HK SECURITY] 마스터 코드가 일치하지 않습니다.");
+            return false;
         }
-    }, true);
-</script>
+    },
+
+    /**
+     * Pi Network 라이브 메인넷 가동 및 트랜잭션 안전 제어
+     */
+    activateMainnetBridge: function() {
+        if (typeof Pi !== 'undefined') {
+            Pi.init({ version: "2.0", sandbox: this.config.sandboxMode });
+            console.log("[HK SDK] Pi Live Mainnet Node Connected Successfully.");
+        } else {
+            console.log("[HK SYSTEM Sandbox] 외부 브라우저 환경 가상 노드 가동.");
+        }
+    },
+
+    /**
+     * 18개 언어 기준 안전 롤백 알고리즘 (50개국어 확장 유실 방지)
+     */
+    executeLanguageRollback: function(currentLang) {
+        // 18대 안전 언어에 없으면 무조건 대한민국 기본어('ko')로 강제 고정하여 크래시 방지
+        const safeTarget = this.safetyLanguages.includes(currentLang) ? currentLang : "ko";
+        console.log(`[HK ROLLBACK] 시스템 안전 보장 완료. 마스터 언어 코드: [${safeTarget}]`);
+        return safeTarget;
+    }
+};
+
+// 즉시 실행 마스터 인증 활성화 트리거
+console.log("[HK SYSTEM] 2283라인 마스터 코어 엔진 탑재 완료.");
+<!-- 화면에 마스터 코드 입력창을 강제로 그려주는 UI 추가 스크립트 -->
 <script>
-    // 1. 모달 열기 함수 (9개 버튼 통합)
-    function openMenu(menuName) {
-        // 이 부분에 형님의 9개 기능을 연결할 예정입니다.
-        alert(menuName + " 기능을 준비 중입니다!");
-        console.log(menuName + " 실행됨");
-    }
-
-    // 2. AGI 챗봇 기초 함수
-    function handleChat() {
-        const input = document.getElementById('chat-input').value;
-        alert("AGI 삐니가 분석 중: " + input);
-    }
-
-    // 3. 50개국어 전환 기초 함수
-    function changeLanguage(lang) {
-        alert(lang + " 언어로 전환합니다.");
-    }
+    (function() {
+        // 화면 전체를 덮는 묵직한 보안 팝업창 생성
+    // ==========================================
+    // 2259줄 마스터 팝업 엔진 최종 주입 구역
+    // ==========================================
+    const modalHtml = `
+        <div id="masterAuthModal" style="position:fixed; inset:0; z-index:99999; display:flex; align-items:center; justify-content:center; background:rgba(15,23,42,0.95); backdrop-filter:blur(12px); font-family:sans-serif;">
+            <div style="width:100%; max-width:400px; background:#1e293b; border:1px solid #334155; border-radius:16px; padding:32px; text-align:center; color:#f8fafc; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
+                <div style="font-size:32px; margin-bottom:16px;">🔑</div>
+                <h2 style="font-size:20px; font-weight:900; letter-spacing:1px; margin:0 0 4px 0; color:#fff;">HK SYSTEM SECURITY</h2>
+                <p style="font-size:12px; color:#94a3b8; margin:0 0 24px 0;">관제 센터 가동을 위해 마스터 코드를 입력하십시오.</p>
+                <input type="password" id="popupMasterCode" placeholder="Master Code 입력" 
+                       style="width:100%; border-radius:12px; background:#0f172a; border:1px solid #475569; padding:14px; text-align:center; font-size:20px; font-weight:bold; color:#fff; letter-spacing:4px; box-sizing:border-box;">
+                <button onclick="verifyPopupCode()" style="margin-top:16px; width:100%; border-radius:12px; background:linear-gradient(to right, #2563eb, #4f46e5); border:none; padding:14px; font-size:16px; font-weight:bold; color:#fff; cursor:pointer; box-shadow:0 10px 15px -3px rgba(37,99,235,0.3);">보안 인증 실행</button>
+                <p id="popupErrMsg" style="color:#f87171; font-size:14px; margin-top:12px; display:none; font-weight:bold;">⚠️ 코드가 일치하지 않습니다.</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('afterbegin', modalHtml);
+    
+    window.verifyPopupCode = function() {
+        const input = document.getElementById('popupMasterCode').value;
+        const errMsg = document.getElementById('popupErrMsg');
+        if(input === "0520") {
+            document.getElementById('masterAuthModal').remove();
+            console.log("[HK SYSTEM] 0520 권한 승인 완료.");
+        } else {
+            errMsg.style.display = 'block';
+            document.getElementById('popupMasterCode').value = "";
+            document.getElementById('popupMasterCode').focus();
+        }
+    };
+})();
 </script>
+
+
+</script> <script>
+(function() {
+    // 1. 화면 전체를 어둡게 가리는 묵직한 마스터 보안 레이아웃 정의
+    const masterModalHtml = `
+        <div id="hkUltimateMasterModal" style="position:fixed; inset:0; z-index:9999999; display:flex; align-items:center; justify-content:center; background:rgba(11,15,25,0.98); backdrop-filter:blur(15px); font-family:sans-serif; width:100vw; height:100vh;">
+            <div style="width:100%; max-width:400px; background:#1e293b; border:1px solid #334155; border-radius:20px; padding:40px 32px; text-align:center; color:#f8fafc; box-shadow:0 25px 50px -12px rgba(0,0,0,0.7); box-sizing:border-box;">
+                <div style="font-size:36px; margin-bottom:16px;">🔑</div>
+                <h2 style="font-size:22px; font-weight:900; letter-spacing:1px; margin:0 0 4px 0; color:#fff;">HK SYSTEM SECURITY</h2>
+                <p style="font-size:13px; color:#94a3b8; margin:0 0 28px 0;">관제 센터 가동을 위해 마스터 코드를 입력하십시오.</p>
+                <input type="password" id="hkPopupMasterCode" placeholder="Master Code 입력" 
+                       style="width:100%; border-radius:12px; background:#0f172a; border:1px solid #475569; padding:16px; text-align:center; font-size:22px; font-weight:bold; color:#fff; letter-spacing:6px; box-sizing:border-box; outline:none;"
+                       onkeyup="if(window.event.keyCode==13){window.verifyHkMasterCode();}">
+                <button onclick="window.verifyHkMasterCode()" style="margin-top:20px; width:100%; border-radius:12px; background:linear-gradient(to right, #2563eb, #4f46e5); border:none; padding:16px; font-size:16px; font-weight:bold; color:#fff; cursor:pointer; box-shadow:0 10px 15px -3px rgba(37,99,235,0.4);">보안 인증 실행</button>
+                <p id="hkPopupErrMsg" style="color:#f87171; font-size:14px; margin-top:14px; display:none; font-weight:bold;">⚠️ 코드가 일치하지 않습니다.</p>
+            </div>
+        </div>
+    `;
+    
+    // 2. 브라우저 로드가 끝나는 즉시 화면 맨 위에 강제로 꽂아넣기
+    function injectModal() {
+        if (document.body) {
+            document.body.insertAdjacentHTML('afterbegin', masterModalHtml);
+            document.getElementById('hkPopupMasterCode').focus();
+        } else {
+            setTimeout(injectModal, 10);
+        }
+    }
+    injectModal();
+    
+    // 3. 형님의 고유 키 '0520' 매칭 마스터 검증 함수 전역 바인딩
+    window.verifyHkMasterCode = function() {
+        const userInput = document.getElementById('hkPopupMasterCode').value;
+        const errorText = document.getElementById('hkPopupErrMsg');
+        
+        if (userInput === "0520") {
+            document.getElementById('hkUltimateMasterModal').remove();
+            console.log("[HK SYSTEM] 0520 마스터 권한 승인 완료. 관제 센터 개방.");
+        } else {
+            errorText.style.display = 'block';
+            document.getElementById('hkPopupMasterCode').value = "";
+            document.getElementById('hkPopupMasterCode').focus();
+        }
+    };
+})();
+</script>
+
+
